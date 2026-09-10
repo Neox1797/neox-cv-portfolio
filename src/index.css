@@ -1,0 +1,218 @@
+:root {
+  /* Dark Theme (Default - Cyber DevOps) */
+  --bg-dark-primary: #07090e;
+  --bg-dark-secondary: #0d111a;
+  --bg-dark-card: rgba(18, 24, 38, 0.7);
+  --bg-dark-card-hover: rgba(28, 37, 58, 0.8);
+  --text-dark-primary: #f3f4f6;
+  --text-dark-secondary: #9ca3af;
+  --text-dark-muted: #6b7280;
+  --border-dark: rgba(255, 255, 255, 0.08);
+  --border-dark-highlight: rgba(56, 189, 248, 0.3);
+
+  /* Light Theme (Minimal Executive) */
+  --bg-light-primary: #f8fafc;
+  --bg-light-secondary: #f1f5f9;
+  --bg-light-card: rgba(255, 255, 255, 0.85);
+  --bg-light-card-hover: rgba(255, 255, 255, 0.98);
+  --text-light-primary: #0f172a;
+  --text-light-secondary: #475569;
+  --text-light-muted: #64748b;
+  --border-light: rgba(0, 0, 0, 0.08);
+  --border-light-highlight: rgba(14, 165, 233, 0.4);
+
+  /* Brand Accents */
+  --cyan-main: #38bdf8;
+  --cyan-glow: rgba(56, 189, 248, 0.25);
+  --violet-main: #8b5cf6;
+  --violet-glow: rgba(139, 92, 246, 0.25);
+  --emerald-main: #10b981;
+  --emerald-glow: rgba(16, 185, 129, 0.25);
+  --amber-main: #f59e0b;
+}
+
+/* Default Theme Variables */
+[data-theme='dark'] {
+  --bg-primary: var(--bg-dark-primary);
+  --bg-secondary: var(--bg-dark-secondary);
+  --bg-card: var(--bg-dark-card);
+  --bg-card-hover: var(--bg-dark-card-hover);
+  --text-primary: var(--text-dark-primary);
+  --text-secondary: var(--text-dark-secondary);
+  --text-muted: var(--text-dark-muted);
+  --border: var(--border-dark);
+  --border-highlight: var(--border-dark-highlight);
+  --glass-bg: rgba(13, 17, 26, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --nav-bg: rgba(7, 9, 14, 0.85);
+}
+
+[data-theme='light'] {
+  --bg-primary: var(--bg-light-primary);
+  --bg-secondary: var(--bg-light-secondary);
+  --bg-card: var(--bg-light-card);
+  --bg-card-hover: var(--bg-light-card-hover);
+  --text-primary: var(--text-light-primary);
+  --text-secondary: var(--text-light-secondary);
+  --text-muted: var(--text-light-muted);
+  --border: var(--border-light);
+  --border-highlight: var(--border-light-highlight);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --nav-bg: rgba(248, 250, 252, 0.85);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan-main);
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-highlight);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.3), 0 0 20px 0 var(--cyan-glow);
+}
+
+/* Gradients and Effects */
+.gradient-text-cyan-violet {
+  background: linear-gradient(135deg, var(--cyan-main) 0%, var(--violet-main) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-emerald-cyan {
+  background: linear-gradient(135deg, var(--emerald-main) 0%, var(--cyan-main) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glowing-avatar {
+  position: relative;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--cyan-main), var(--violet-main), var(--emerald-main));
+  animation: spinGlow 8s linear infinite;
+}
+
+@keyframes spinGlow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* Pulsing Status Dot */
+.pulse-emerald {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--emerald-main);
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulseEmerald 2s infinite;
+}
+
+@keyframes pulseEmerald {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+/* Terminal Font */
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Code Badge */
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 20px;
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--cyan-main);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  transition: all 0.2s ease;
+}
+
+.tech-badge:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: var(--cyan-main);
+}
+
+/* Utility Animations */
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

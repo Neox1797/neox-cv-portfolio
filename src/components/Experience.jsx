@@ -1,0 +1,233 @@
+import React, { useState } from 'react';
+import { Briefcase, GraduationCap, Calendar, MapPin, ChevronDown, ChevronUp, CheckCircle2 } from 'lucide-react';
+
+export default function Experience() {
+  const [activeSection, setActiveSection] = useState('work'); // 'work' or 'education'
+  const [expandedItems, setExpandedItems] = useState({ 0: true });
+
+  const toggleExpand = (idx) => {
+    setExpandedItems((prev) => ({ ...prev, [idx]: !prev[idx] }));
+  };
+
+  const workExperience = [
+    {
+      company: 'Encontrack SA de CV',
+      role: 'Ingeniero de Software / AMS & Cloud',
+      period: 'Actualidad',
+      location: 'Querétaro, MX (Híbrido)',
+      highlights: [
+        'Mantenimiento y optimización de aplicaciones empresariales en PHP, Angular y Java Spring Boot.',
+        'Administración y despliegue de infraestructuras en AWS Linux Red Hat y supervisión con Apache Tomcat.',
+        'Creación de APIs REST con Express para consumo interno seguro mediante métodos GET, POST y PATCH.',
+        'Gestión de repositorios y flujo de ramificaciones en AWS CodeCommit bajo metodologías Agile Kanban.',
+        'Implementación y mantenimiento de pipelines de integración y despliegue continuo (CI/CD).'
+      ],
+      techs: ['AWS EC2/S3', 'Linux Red Hat', 'Spring Boot', 'Angular', 'PHP', 'Express', 'Kanban']
+    },
+    {
+      company: 'INDRA Software Labs',
+      role: 'Analista Programador COBOL II Mainframe',
+      period: 'Enero 2022 - Junio 2022',
+      location: 'CDMX (Home Office)',
+      highlights: [
+        'Mantenimiento y optimización de programas COBOL en sistemas Mainframe/Host para el sector bancario.',
+        'Certificación Scrum Developer Certified (SDC®) avalada por SCRUMstudy aplicada en proyectos ágiles.'
+      ],
+      techs: ['COBOL II', 'Mainframe / Host', 'Scrum SDC®', 'Bank Systems']
+    },
+    {
+      company: 'GRUPO CEFI SC',
+      role: 'Soporte e Infraestructura TI',
+      period: 'Mayo 2019 - Enero 2022',
+      location: 'Querétaro, MX',
+      highlights: [
+        'Supervisión y mantenimiento de infraestructuras TI en agencias automotrices bajo estándares de Volkswagen.',
+        'Administración de Directorio Activo en Windows Server, diseño e instalación de Racks y soporte técnico.'
+      ],
+      techs: ['Windows Server', 'Active Directory', 'Redes & Racks', 'Soporte TI']
+    },
+    {
+      company: 'BackLab Agency',
+      role: 'Desarrollador Web Frontend',
+      period: 'Diciembre 2020 - Enero 2021',
+      location: 'EDOMEX (Remote)',
+      highlights: [
+        'Maquetación web responsive para bufete de abogados utilizando Bootstrap y JavaScript.',
+        'Integración de PHPMailer y gestión de dominios y servidores mediante cPanel.'
+      ],
+      techs: ['Bootstrap', 'JavaScript', 'PHPMailer', 'cPanel']
+    },
+    {
+      company: 'Automotriz Zumpango S.A. de C.V.',
+      role: 'Auxiliar de Sistemas y Practicante',
+      period: '2017 - 2018',
+      location: 'Zumpango, EDOMEX',
+      highlights: [
+        'Desarrollo de página web en PHP y JS para agencia Volkswagen Zumpango.',
+        'Creación de portal cautivo Hotspot para clientes y administración de respaldos en servidores File Server.'
+      ],
+      techs: ['PHP', 'JavaScript', 'File Server', 'Hotspot Portal']
+    }
+  ];
+
+  const educationList = [
+    {
+      institution: 'Universidad Bancaria de México (UBAM)',
+      degree: 'Ingeniería en Sistemas Computacionales',
+      period: '2015 - 2019',
+      location: 'Teoloyucan, EDOMEX',
+      details: 'Formación académica orientada a arquitectura de software, bases de datos relacionales y Programación Orientada a Objetos (POO).'
+    },
+    {
+      institution: 'CDC Centro Integrador San Miguel',
+      degree: 'Técnico en Reparación de Celulares (Básico & Avanzado)',
+      period: '2018',
+      location: 'Zumpango, EDOMEX',
+      details: 'Diagnóstico por hardware y software, micro-soldadura y mantenimiento correctivo a dispositivos móviles.'
+    },
+    {
+      institution: 'Preparatoria Oficial Anexa a la Normal',
+      degree: 'Preparatoria General',
+      period: '2012 - 2015',
+      location: 'Zumpango, EDOMEX',
+      details: 'Formación general con énfasis en ciencias exactas, análisis lógico y habilidades comunicativas.'
+    }
+  ];
+
+  return (
+    <section id="experience" style={{ padding: '80px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '8px' }}>
+        TRAYECTORIA Y FORMACIÓN
+      </div>
+      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '32px' }}>
+        Experiencia Profesional & Educación
+      </h2>
+
+      {/* Switcher Tabs */}
+      <div style={{ display: 'flex', gap: '16px', marginBottom: '40px' }}>
+        <button
+          onClick={() => setActiveSection('work')}
+          style={{
+            padding: '12px 24px',
+            borderRadius: '12px',
+            border: activeSection === 'work' ? '1px solid var(--cyan-main)' : '1px solid var(--border)',
+            background: activeSection === 'work' ? 'rgba(56, 189, 248, 0.15)' : 'var(--bg-card)',
+            color: activeSection === 'work' ? 'var(--cyan-main)' : 'var(--text-secondary)',
+            fontWeight: '700',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}
+        >
+          <Briefcase size={18} />
+          <span>Experiencia Laboral</span>
+        </button>
+
+        <button
+          onClick={() => setActiveSection('education')}
+          style={{
+            padding: '12px 24px',
+            borderRadius: '12px',
+            border: activeSection === 'education' ? '1px solid var(--violet-main)' : '1px solid var(--border)',
+            background: activeSection === 'education' ? 'rgba(139, 92, 246, 0.15)' : 'var(--bg-card)',
+            color: activeSection === 'education' ? 'var(--violet-main)' : 'var(--text-secondary)',
+            fontWeight: '700',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}
+        >
+          <GraduationCap size={18} />
+          <span>Educación Académica</span>
+        </button>
+      </div>
+
+      {/* Work Timeline */}
+      {activeSection === 'work' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {workExperience.map((item, idx) => (
+            <div key={idx} className="glass-panel" style={{ padding: '24px', position: 'relative', overflow: 'hidden' }}>
+              
+              {/* Header Bar */}
+              <div
+                onClick={() => toggleExpand(idx)}
+                style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', gap: '12px' }}
+              >
+                <div>
+                  <div style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+                    {item.role}
+                  </div>
+                  <div style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--cyan-main)', marginTop: '2px' }}>
+                    {item.company}
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                  <div style={{ textAlign: 'right' }}>
+                    <div style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--emerald-main)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <Calendar size={14} />
+                      {item.period}
+                    </div>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
+                      <MapPin size={12} />
+                      {item.location}
+                    </div>
+                  </div>
+                  <button style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }}>
+                    {expandedItems[idx] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Collapsible Details */}
+              {expandedItems[idx] && (
+                <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid var(--border)' }}>
+                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '20px' }}>
+                    {item.highlights.map((h, i) => (
+                      <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.92rem', color: 'var(--text-secondary)' }}>
+                        <CheckCircle2 size={16} color="var(--cyan-main)" style={{ marginTop: '3px', flexShrink: 0 }} />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Tech Badges */}
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    {item.techs.map((t, i) => (
+                      <span key={i} className="tech-badge">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Education List */}
+      {activeSection === 'education' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {educationList.map((edu, idx) => (
+            <div key={idx} className="glass-panel" style={{ padding: '24px' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: '12px' }}>
+                <div>
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--text-primary)' }}>{edu.degree}</h3>
+                  <div style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--violet-main)' }}>{edu.institution}</div>
+                </div>
+                <div>
+                  <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--emerald-main)' }}>{edu.period}</span>
+                </div>
+              </div>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6' }}>{edu.details}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
