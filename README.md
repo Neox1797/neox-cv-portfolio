@@ -1,16 +1,125 @@
-# React + Vite
+# 🚀 Edgar J. Vargas | Interactive CV & Cloud/DevOps Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+[![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![Docker](https://img.shields.io/badge/Docker-MultiStage-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Nginx](https://img.shields.io/badge/Nginx-Alpine-009639?style=for-the-badge&logo=nginx&logoColor=white)](https://nginx.org/)
 
-Currently, two official plugins are available:
+Portafolio web profesional e interactivo de **Edgar J. Vargas Montiel** (*Ingeniero de Software, Desarrollador Fullstack & Especialista Cloud / DevOps*). Diseñado con estética de alto impacto (*Cyber DevOps UI / Glassmorphism*), consola de comandos virtual, persistencia en la nube con Supabase PostgreSQL y empaquetado mediante contenedores OCI con Docker y Podman.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🌟 Características Principales
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 💻 **Terminal Virtual DevOps (`neox@devops-aws:~$`)**: Consola interactiva en tiempo real donde reclutadores y visitantes pueden ejecutar comandos (`help`, `about`, `skills`, `exp`, `projects`, `certs`, `contact`, `clear`).
+- 🎨 **UI/UX Cyber DevOps & Glassmorphism**: Interfaz moderna con temas **Modo Oscuro** (predeterminado) y **Modo Claro**, animaciones fluidas y micro-interacciones.
+- ⚡ **Backend Cloud con Supabase (PostgreSQL)**: Persistencia en la nube para mensajes de contacto recibidos desde el sitio web con políticas de seguridad **RLS (Row Level Security)**.
+- 🛡️ **Protección Anti-Spam de 3 Capas**:
+  1. *Rate Limiting / Cooldown* (3 minutos entre envíos por cliente).
+  2. *Honeypot invisible* (detección y descarte automático de bots).
+  3. *Botón submit inhabilitado* con spinner de carga durante el proceso de guardado.
+- 🐳 **Docker & Podman Native**: Incluye `Dockerfile` Multi-Stage (`Node.js 20` ➔ `Nginx Alpine`), `nginx.conf` con compresión Gzip y `docker-compose.yml`.
+- 💼 **Portafolio Filtrable & Línea de Tiempo**: Filtro de proyectos por categorías (Frontend, Fullstack, Cloud) y experiencia laboral detallada (Encontrack, INDRA, Grupo CEFI, etc.).
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## 🛠️ Stack Tecnológico
+
+| Capa | Tecnologías Utilizadas |
+| :--- | :--- |
+| **Frontend** | React 18, Vite, Lucide Icons, Canvas Confetti, HTML5, CSS3 Tokens |
+| **Backend & Base de Datos** | Supabase (PostgreSQL Cloud), REST API, Row Level Security (RLS) |
+| **DevOps & Infraestructura** | Docker, Podman, Nginx Alpine, Docker Compose, Git |
+| **Cloud & Entornos** | AWS Cloud (EC2, S3, CodeCommit), Linux Red Hat / Ubuntu |
+
+---
+
+## 🚀 Inicio Rápido (Desarrollo Local)
+
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/Neox1797/neox-cv-portfolio.git
+cd neox-cv-portfolio
+```
+
+### 2. Instalar dependencias
+```bash
+npm install
+```
+
+### 3. Configurar variables de entorno
+Crea un archivo `.env` en la raíz del proyecto basado en `.env.example`:
+```env
+VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=tu_anon_key_aqui
+```
+
+### 4. Iniciar servidor de desarrollo
+```bash
+npm run dev
+```
+Abre `http://localhost:5173` en tu navegador.
+
+---
+
+## 🐳 Despliegue con Docker / Podman
+
+### Con Docker Compose
+```bash
+# Compilar e iniciar el contenedor en segundo plano
+docker compose up -d --build
+
+# El sitio estará servido en Nginx en http://localhost:8080
+```
+
+### Con Podman (Red Hat / RHEL Native)
+```bash
+# Compilar la imagen OCI
+podman build -t neox-portfolio .
+
+# Ejecutar el contenedor
+podman run -d -p 8080:80 --name neox_cv neox-portfolio
+```
+
+---
+
+## 🗄️ Esquema de Base de Datos (Supabase SQL)
+
+Para crear la tabla de mensajes y aplicar políticas RLS en Supabase, ejecuta el siguiente script en el **SQL Editor**:
+
+```sql
+-- Crear tabla de mensajes de contacto
+CREATE TABLE public.contact_messages (
+    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    subject TEXT,
+    message TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Permisos PostgreSQL para rol público
+GRANT ALL ON TABLE public.contact_messages TO anon, authenticated;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated;
+
+-- Habilitar Row Level Security (RLS)
+ALTER TABLE public.contact_messages ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Permitir insercion publica"
+ON public.contact_messages FOR INSERT
+TO anon, authenticated
+WITH CHECK (true);
+```
+
+---
+
+## 👨‍💻 Autor & Contacto
+
+**Edgar J. Vargas Montiel**  
+*Ingeniero en Sistemas Computacionales | Software Engineer & Cloud/DevOps Specialist*
+
+- 🌐 **LinkedIn**: [linkedin.com/in/edgar-vargas-465437200](https://www.linkedin.com/in/edgar-vargas-465437200)
+- 🐙 **GitHub**: [@Neox1797](https://github.com/Neox1797)
+- ✉️ **Correo**: edgar.vmontiel@gmail.com
+- 💬 **WhatsApp**: [+52 55 8475 2143](https://wa.me/+525584752143)
