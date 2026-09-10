@@ -53,6 +53,7 @@ export default function Contact() {
               email: formData.email,
               subject: formData.subject || 'Sin Asunto',
               message: formData.message,
+              environment: import.meta.env.MODE || 'production',
               created_at: new Date().toISOString()
             }
           ]);
