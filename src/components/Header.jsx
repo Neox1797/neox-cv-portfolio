@@ -61,7 +61,7 @@ export default function Header({ theme, toggleTheme, onDownloadCV }) {
             <div style={{ fontWeight: '800', fontSize: '1.1rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
               Edgar J. Vargas
               <span className="pulse-emerald" title="Disponible para nuevos proyectos / Open to Work"></span>
-              {import.meta.env.DEV && (
+              {(import.meta.env.DEV || import.meta.env.VITE_VERCEL_ENV === 'preview') && (
                 <span style={{ fontSize: '0.65rem', padding: '2px 8px', borderRadius: '12px', background: 'rgba(139, 92, 246, 0.2)', color: 'var(--violet-main)', border: '1px solid rgba(139, 92, 246, 0.4)', fontWeight: '700', letterSpacing: '0.5px' }}>
                   DEV PREVIEW
                 </span>

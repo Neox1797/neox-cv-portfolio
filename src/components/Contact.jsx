@@ -45,6 +45,11 @@ export default function Contact() {
 
     if (isSupabaseConfigured && supabase) {
       try {
+        const currentEnv =
+          import.meta.env.VITE_VERCEL_ENV === 'preview' ? 'development' :
+          import.meta.env.VITE_VERCEL_ENV === 'production' ? 'production' :
+          (import.meta.env.DEV ? 'development' : import.meta.env.MODE);
+
         const { error } = await supabase
           .from('contact_messages')
           .insert([
@@ -53,7 +58,7 @@ export default function Contact() {
               email: formData.email,
               subject: formData.subject || 'Sin Asunto',
               message: formData.message,
-              environment: import.meta.env.MODE || 'production',
+              environment: currentEnv,
               created_at: new Date().toISOString()
             }
           ]);
