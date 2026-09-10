@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  neox-portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: neox_cv_portfolio
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
