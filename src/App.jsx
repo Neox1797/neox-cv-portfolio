@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useTheme } from './hooks/useTheme';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -14,15 +15,15 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
-  const [theme, setTheme] = useState('dark');
+  const themeState = useTheme();
 
+  // Scroll to top on page refresh or initial load
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleDownloadCV = () => {
     confetti({
@@ -33,7 +34,7 @@ export default function App() {
 
     // Triggers download or preview of CV PDF
     const link = document.createElement('a');
-    link.href = '/assets/img/certificados/EDGAR_VARGAS.pdf'; // Or direct PDF if available in assets
+    link.href = '/assets/img/certificados/EDGAR_VARGAS.pdf';
     link.target = '_blank';
     link.download = 'CV_Edgar_Vargas_Software_DevOps.pdf';
     document.body.appendChild(link);
@@ -43,7 +44,7 @@ export default function App() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Header theme={theme} toggleTheme={toggleTheme} onDownloadCV={handleDownloadCV} />
+      <Header themeState={themeState} onDownloadCV={handleDownloadCV} />
       <main style={{ flex: 1 }}>
         <Hero onDownloadCV={handleDownloadCV} />
         <About />

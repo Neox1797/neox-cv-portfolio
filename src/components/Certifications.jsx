@@ -78,15 +78,15 @@ export default function Certifications() {
   ];
 
   return (
-    <section id="certifications" style={{ padding: '80px 24px', maxWidth: '1100px', margin: '0 auto' }}>
-      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '8px' }}>
+    <section id="certifications" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         ACREDITACIONES OFICIALES
       </div>
-      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '32px' }}>
+      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '20px' }}>
         Cursos & Certificaciones
       </h2>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
         {certs.map((c, idx) => (
           <div key={idx} className="glass-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>

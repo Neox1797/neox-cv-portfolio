@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, MessageSquare, Globe, CheckCircle2, Copy, ExternalLink, ArrowRight, ShieldAlert, Database, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, Globe, CheckCircle2, Copy, ExternalLink, ShieldAlert, Database, Loader2, Clock, Building2, Briefcase, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { supabase, isSupabaseConfigured } from '../supabaseClient';
+import { LinkedinIcon } from './Icons';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '', honeypot: '' });
@@ -47,8 +48,8 @@ export default function Contact() {
       try {
         const currentEnv =
           import.meta.env.VITE_VERCEL_ENV === 'preview' ? 'development' :
-          import.meta.env.VITE_VERCEL_ENV === 'production' ? 'production' :
-          (import.meta.env.DEV ? 'development' : import.meta.env.MODE);
+            import.meta.env.VITE_VERCEL_ENV === 'production' ? 'production' :
+              (import.meta.env.DEV ? 'development' : import.meta.env.MODE);
 
         const { error } = await supabase
           .from('contact_messages')
@@ -98,16 +99,16 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" style={{ padding: '80px 24px 100px', maxWidth: '1100px', margin: '0 auto' }}>
-      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '8px' }}>
+    <section id="contact" style={{ padding: '40px 24px 60px', maxWidth: '1100px', margin: '0 auto' }}>
+      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         CANALES DIRECTOS Y MENSAJERÍA
       </div>
-      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '32px' }}>
+      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '20px' }}>
         Información de Contacto
       </h2>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px', marginBottom: '60px' }}>
-        
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: '24px' }}>
+
         {/* Left Column: Direct Info */}
         <div className="glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <h3 style={{ fontSize: '1.3rem', fontWeight: '700', color: 'var(--text-primary)' }}>
@@ -118,7 +119,7 @@ export default function Contact() {
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            
+
             {/* Email Card */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '14px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
               <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(56, 189, 248, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cyan-main)' }}>
@@ -140,15 +141,48 @@ export default function Contact() {
             {/* Phone Card */}
             <a
               href="tel:5584752143"
-              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '14px', padding: '14px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'inherit' }}
+              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '14px', padding: '14px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'inherit', transition: 'all 0.2s ease' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--emerald-main)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border)';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
             >
               <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--emerald-main)' }}>
                 <Phone size={20} />
               </div>
-              <div>
+              <div style={{ flex: 1 }}>
                 <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Teléfono Directo</div>
                 <div style={{ fontWeight: '700', fontSize: '0.95rem', color: 'var(--text-primary)' }}>+52 55 8475 2143</div>
               </div>
+            </a>
+
+            {/* LinkedIn Profile Card */}
+            <a
+              href="https://www.linkedin.com/in/edgar-vargas-465437200"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '14px', padding: '14px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'inherit', transition: 'all 0.2s ease' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--cyan-main)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border)';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
+            >
+              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(56, 189, 248, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cyan-main)' }}>
+                <LinkedinIcon size={20} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Red Profesional</div>
+                <div style={{ fontWeight: '700', fontSize: '0.95rem', color: 'var(--text-primary)' }}>LinkedIn / Edgar Vargas</div>
+              </div>
+              <ExternalLink size={16} color="var(--text-muted)" />
             </a>
 
             {/* Location Card */}
@@ -166,7 +200,7 @@ export default function Contact() {
 
           {/* WhatsApp Direct CTA */}
           <a
-            href="https://wa.me/+525584752143?text=Hola%20Edgar,%20quisiera%20ponerme%20en%20contacto%20contigo"
+            href="https://wa.me/+525584752143?text=Hola%20Edgar,%20vi%20tu%20portafolio%20y%20me%20gustaria%20platicar%20contigo"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -185,7 +219,7 @@ export default function Contact() {
             }}
           >
             <MessageSquare size={18} />
-            <span>Enviar mensaje directo por WhatsApp</span>
+            <span>Enviar WhatsApp Directo</span>
           </a>
         </div>
 
@@ -299,7 +333,7 @@ export default function Contact() {
 
               <div>
                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
-                  Asunto
+                  Asunto del Mensaje
                 </label>
                 <input
                   type="text"
@@ -370,50 +404,94 @@ export default function Contact() {
 
       </div>
 
-      {/* Google Maps iFrame */}
-      <div className="glass-panel" style={{ overflow: 'hidden', padding: '8px', marginBottom: '60px' }}>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119501.13226840018!2d-100.48025793178795!3d20.612122843817115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d35b8fdc5b9255%3A0x97b094aa561b832f!2sSantiago%20de%20Quer%C3%A9taro%2C%20Qro.!5e0!3m2!1ses-419!2smx!4v1657632908893!5m2!1ses-419!2smx"
-          style={{ width: '100%', height: '280px', border: 'none', borderRadius: '12px' }}
-          allowFullScreen=""
-          loading="lazy"
-          title="Ubicación Querétaro"
-        ></iframe>
-      </div>
-
-      {/* Hosting & Redirection Strategy Box */}
-      <div className="glass-panel" style={{ padding: '32px', borderLeft: '4px solid var(--cyan-main)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-          <Globe size={22} color="var(--cyan-main)" />
-          <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-            Guía de Alojamiento Gratuito y Redirección
+      {/* Recruiter Summary & Location Card */}
+      <div className="glass-panel" style={{ padding: '24px', position: 'relative' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+          <Sparkles size={18} color="var(--cyan-main)" />
+          <h3 style={{ fontSize: '1.1rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+            Ficha de Disponibilidad para Reclutadores & TI
           </h3>
         </div>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '16px', lineHeight: '1.6' }}>
-          Para publicar esta nueva página web y hacer que la antigua (<code>neoxdevops.atwebpages.com</code>) redirija automáticamente a la nueva:
-        </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px' }}>
-          <div style={{ padding: '16px', borderRadius: '10px', background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
-            <h4 style={{ color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>1. Opción Hosting Gratuito (Vercel / Netlify)</h4>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-              Subes tu código a GitHub y lo conectas a Vercel.com o Netlify.com. Es 100% gratis, incluye SSL HTTPS automático y CDN ultra rápido.
-            </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', alignItems: 'center' }}>
+          
+          {/* Recruiter Key Information */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <CheckCircle2 size={16} color="var(--emerald-main)" />
+              <span style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
+                <strong>Estado:</strong> <span style={{ color: 'var(--emerald-main)', fontWeight: '700' }}>Open to Work / Disponible</span>
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <Building2 size={16} color="var(--cyan-main)" />
+              <span style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
+                <strong>Modalidad:</strong> Remoto 100% / Híbrido (Querétaro)
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <Clock size={16} color="var(--violet-main)" />
+              <span style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
+                <strong>Zona Horaria:</strong> CST (UTC-6) · Horario México
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <Briefcase size={16} color="var(--amber-main)" />
+              <span style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
+                <strong>Incorporación:</strong> Inmediata / 2 Semanas
+              </span>
+            </div>
+
+            {/* Badges */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '6px' }}>
+              <span className="tech-badge">Full-time</span>
+              <span className="tech-badge">Software Engineer</span>
+              <span className="tech-badge">Inglés B1/B2 (Técnico & Laboral)</span>
+            </div>
+
           </div>
 
-          <div style={{ padding: '16px', borderRadius: '10px', background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
-            <h4 style={{ color: 'var(--violet-main)', fontWeight: '700', marginBottom: '6px' }}>2. Opción GitHub Pages</h4>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-              Puedes alojarlo gratis como <code>neox1797.github.io/cv</code> ejecutando <code>npm run build</code> y publicándolo directamente en tu cuenta de GitHub.
-            </p>
+          {/* Location Map Preview */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                <MapPin size={16} color="var(--cyan-main)" />
+                Santiago de Querétaro, Qro.
+              </div>
+              <a
+                href="https://maps.google.com/?q=Santiago+de+Querétaro,+Qro."
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontSize: '0.78rem',
+                  color: 'var(--cyan-main)',
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}
+              >
+                <Globe size={13} />
+                Abrir Maps ↗
+              </a>
+            </div>
+
+            <div style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--border)', height: '150px' }}>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119501.13226840018!2d-100.48025793178795!3d20.612122843817115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d35b8fdc5b9255%3A0x97b094aa561b832f!2sSantiago%20de%20Quer%C3%A9taro%2C%20Qro.!5e0!3m2!1ses-419!2smx!4v1657632908893!5m2!1ses-419!2smx"
+                style={{ width: '100%', height: '100%', border: 'none', filter: 'contrast(102%) brightness(98%)' }}
+                allowFullScreen=""
+                loading="lazy"
+                title="Ubicación Querétaro"
+              ></iframe>
+            </div>
           </div>
 
-          <div style={{ padding: '16px', borderRadius: '10px', background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
-            <h4 style={{ color: 'var(--emerald-main)', fontWeight: '700', marginBottom: '6px' }}>3. Redirección desde Hosting Antiguo</h4>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-              Reemplazas el archivo <code>index.html</code> en <code>atwebpages.com</code> con una etiqueta Meta Refresh y script que redirija en 0 segundos a tu nueva URL.
-            </p>
-          </div>
         </div>
       </div>
 

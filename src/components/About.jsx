@@ -19,16 +19,16 @@ export default function About() {
   ];
 
   return (
-    <section id="about" style={{ padding: '80px 24px', maxWidth: '1100px', margin: '0 auto' }}>
-      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '8px' }}>
+    <section id="about" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         PRESENTACIÓN PROFESIONAL
       </div>
-      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '32px' }}>
+      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '20px' }}>
         Sobre Mí & Enfoque Técnico
       </h2>
 
       {/* Metrics Row */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '24px' }}>
         {metrics.map((m, idx) => (
           <div key={idx} className="glass-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
             <div style={{
@@ -67,7 +67,7 @@ export default function About() {
             Soy un profesional enfocado en superar constantes retos técnicos y expandir los horizontes tecnológicos adquiridos en mi formación académica y experiencia corporativa.
           </p>
           <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}>
-            Me destaco por mi capacidad para intervenir en soluciones técnicas críticas, administración de entornos en la nube (AWS), desarrollo backend con Spring Boot/PHP, maquetación ágil frontend en Angular y React, y soporte integral de infraestructura con metodología Scrum / Agile.
+            Me destaco por mi capacidad para intervenir en soluciones técnicas críticas, desarrollo backend con Spring Boot/PHP, maquetación ágil frontend en Angular y React, integración de microservicios y soporte continuo con metodología Scrum / Agile.
           </p>
         </div>
 

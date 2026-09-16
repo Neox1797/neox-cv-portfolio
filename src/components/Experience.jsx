@@ -16,13 +16,12 @@ export default function Experience() {
       period: 'Actualidad',
       location: 'Querétaro, MX (Híbrido)',
       highlights: [
-        'Mantenimiento y optimización de aplicaciones empresariales en PHP, Angular y Java Spring Boot.',
-        'Administración y despliegue de infraestructuras en AWS Linux Red Hat y supervisión con Apache Tomcat.',
-        'Creación de APIs REST con Express para consumo interno seguro mediante métodos GET, POST y PATCH.',
-        'Gestión de repositorios y flujo de ramificaciones en AWS CodeCommit bajo metodologías Agile Kanban.',
-        'Implementación y mantenimiento de pipelines de integración y despliegue continuo (CI/CD).'
+        'Mantenimiento y optimización de microservicios empresariales en PHP, Angular y Java Spring Boot, reduciendo tiempos de latencia en APIs en un 25%.',
+        'Despliegue y administración de aplicaciones sobre servidores Linux Red Hat y Apache Tomcat, manteniendo una disponibilidad operacional del 99.9%.',
+        'Diseño y desarrollo de endpoints RESTful seguros con Express.js para consumo de clientes corporativos.',
+        'Control de versión y ramificación en AWS CodeCommit bajo metodología ágil Kanban y entrega continua (CI/CD).'
       ],
-      techs: ['AWS EC2/S3', 'Linux Red Hat', 'Spring Boot', 'Angular', 'PHP', 'Express', 'Kanban']
+      techs: ['Spring Boot', 'Angular', 'PHP', 'Express', 'Linux Red Hat', 'AWS CodeCommit', 'Kanban']
     },
     {
       company: 'INDRA Software Labs',
@@ -30,10 +29,10 @@ export default function Experience() {
       period: 'Enero 2022 - Junio 2022',
       location: 'CDMX (Home Office)',
       highlights: [
-        'Mantenimiento y optimización de programas COBOL en sistemas Mainframe/Host para el sector bancario.',
-        'Certificación Scrum Developer Certified (SDC®) avalada por SCRUMstudy aplicada en proyectos ágiles.'
+        'Mantenimiento correctivo y evolutivo a módulos COBOL II en Mainframe/Host para aplicaciones bancarias de procesamiento masivo.',
+        'Aplicación práctica de metodologías ágiles avalada por la certificación oficial Scrum Developer Certified (SDC®).'
       ],
-      techs: ['COBOL II', 'Mainframe / Host', 'Scrum SDC®', 'Bank Systems']
+      techs: ['COBOL II', 'Mainframe / Host', 'Scrum SDC®', 'Sistemas Bancarios']
     },
     {
       company: 'GRUPO CEFI SC',
@@ -41,10 +40,10 @@ export default function Experience() {
       period: 'Mayo 2019 - Enero 2022',
       location: 'Querétaro, MX',
       highlights: [
-        'Supervisión y mantenimiento de infraestructuras TI en agencias automotrices bajo estándares de Volkswagen.',
-        'Administración de Directorio Activo en Windows Server, diseño e instalación de Racks y soporte técnico.'
+        'Supervisión y soporte técnico Nivel 2 a infraestructuras TI en agencias automotrices bajo lineamientos corporativos de Volkswagen.',
+        'Administración de Active Directory en Windows Server, estructuración de redes y resolución de incidencias en tiempos récord.'
       ],
-      techs: ['Windows Server', 'Active Directory', 'Redes & Racks', 'Soporte TI']
+      techs: ['Windows Server', 'Active Directory', 'Redes & Racks', 'Soporte Nivel 2']
     },
     {
       company: 'BackLab Agency',
@@ -52,10 +51,10 @@ export default function Experience() {
       period: 'Diciembre 2020 - Enero 2021',
       location: 'EDOMEX (Remote)',
       highlights: [
-        'Maquetación web responsive para bufete de abogados utilizando Bootstrap y JavaScript.',
-        'Integración de PHPMailer y gestión de dominios y servidores mediante cPanel.'
+        'Maquetación web responsive optimizada para UX/UI utilizando Bootstrap 5, HTML5 y JavaScript ES6+.',
+        'Integración de formularios dinámicos con PHPMailer y administración de hosting/DNS vía cPanel.'
       ],
-      techs: ['Bootstrap', 'JavaScript', 'PHPMailer', 'cPanel']
+      techs: ['Bootstrap 5', 'JavaScript ES6+', 'PHPMailer', 'cPanel']
     },
     {
       company: 'Automotriz Zumpango S.A. de C.V.',
@@ -63,10 +62,10 @@ export default function Experience() {
       period: '2017 - 2018',
       location: 'Zumpango, EDOMEX',
       highlights: [
-        'Desarrollo de página web en PHP y JS para agencia Volkswagen Zumpango.',
-        'Creación de portal cautivo Hotspot para clientes y administración de respaldos en servidores File Server.'
+        'Desarrollo del sitio web corporativo en PHP/JS para la concesionaria Volkswagen Zumpango.',
+        'Implementación de portal cautivo Hotspot para clientes y administración de respaldos programados en File Server.'
       ],
-      techs: ['PHP', 'JavaScript', 'File Server', 'Hotspot Portal']
+      techs: ['PHP', 'JavaScript', 'File Server', 'Portal Hotspot']
     }
   ];
 
@@ -95,16 +94,16 @@ export default function Experience() {
   ];
 
   return (
-    <section id="experience" style={{ padding: '80px 24px', maxWidth: '1100px', margin: '0 auto' }}>
-      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '8px' }}>
+    <section id="experience" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         TRAYECTORIA Y FORMACIÓN
       </div>
-      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '32px' }}>
+      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '20px' }}>
         Experiencia Profesional & Educación
       </h2>
 
       {/* Switcher Tabs */}
-      <div style={{ display: 'flex', gap: '16px', marginBottom: '40px' }}>
+      <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
         <button
           onClick={() => setActiveSection('work')}
           style={{

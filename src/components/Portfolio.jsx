@@ -9,60 +9,60 @@ export default function Portfolio() {
   const projects = [
     {
       id: 1,
-      title: 'Página Web Modo Oscuro / Claro',
+      title: 'Plataforma E-COMMERCE',
+      category: 'fullstack',
+      image: '/assets/img/portfolio/portfolio-3.jpg',
+      description: 'Tienda en línea interactiva con catálogo dinámico de productos, carrito de compras y diseño 100% adaptativo.',
+      demoUrl: 'https://neox1797.github.io/ecommerce/index.html',
+      repoUrl: 'https://github.com/Neox1797/ecommerce',
+      tags: ['JavaScript', 'HTML5', 'E-Commerce', 'Responsive UX']
+    },
+    {
+      id: 2,
+      title: 'App Clima Local (OpenWeather API)',
+      category: 'fullstack',
+      image: '/assets/img/portfolio/portfolio-6.jpeg',
+      description: 'Aplicación web interactiva para consulta del pronóstico meteorológico consumiendo la API REST de OpenWeather.',
+      demoUrl: 'https://github.com/Neox1797/Clima',
+      repoUrl: 'https://github.com/Neox1797/Clima',
+      tags: ['REST API', 'JavaScript ES6+', 'JSON', 'CSS Flexbox']
+    },
+    {
+      id: 3,
+      title: 'Motor de Tematización Día / Noche',
       category: 'frontend',
       image: '/assets/img/portfolio/portfolio-2.gif',
-      description: 'Implementación interactiva de cambio de tema en tiempo real con JavaScript ES6+, localStorage y CSS3.',
+      description: 'Implementación interactiva de cambio de tema en tiempo real con JavaScript ES6+, localStorage y CSS3 variables.',
       demoUrl: 'https://neox1797.github.io/modooscuro/',
       repoUrl: 'https://github.com/Neox1797/modooscuro',
       tags: ['JavaScript', 'CSS3', 'HTML5', 'LocalStorage']
     },
     {
-      id: 2,
+      id: 4,
       title: 'Frontend HAVE ABOGADOS',
       category: 'frontend',
       image: '/assets/img/portfolio/portfolio-1.jpg',
-      description: 'Sitio corporativo maquetado para bufete legal utilizando Bootstrap, JavaScript y PHPMailer.',
+      description: 'Sitio web corporativo maquetado para bufete legal utilizando Bootstrap, JavaScript y PHPMailer.',
       demoUrl: '#',
       repoUrl: '#',
       tags: ['Bootstrap', 'PHPMailer', 'JavaScript', 'cPanel']
     },
     {
-      id: 3,
-      title: 'Plataforma E-COMMERCE',
-      category: 'fullstack',
-      image: '/assets/img/portfolio/portfolio-3.jpg',
-      description: 'Tienda en línea interactiva con catálogo de productos, carrito de compras y diseño adaptativo.',
-      demoUrl: 'https://neox1797.github.io/ecommerce/index.html',
-      repoUrl: 'https://github.com/Neox1797/ecommerce',
-      tags: ['JavaScript', 'HTML5', 'E-Commerce', 'Responsive']
-    },
-    {
-      id: 4,
-      title: 'App Clima Local',
-      category: 'fullstack',
-      image: '/assets/img/portfolio/portfolio-6.jpeg',
-      description: 'Aplicación web para consulta del pronóstico meteorológico consumiendo OpenWeather API.',
-      demoUrl: 'https://github.com/Neox1797/Clima',
-      repoUrl: 'https://github.com/Neox1797/Clima',
-      tags: ['REST API', 'JavaScript', 'JSON', 'CSS Flexbox']
-    },
-    {
       id: 5,
-      title: 'Lista de Tareas Interactiva',
+      title: 'Gestor de Tareas Interactivo',
       category: 'frontend',
       image: '/assets/img/portfolio/portfolio-4.png',
-      description: 'Gestor de tareas (To-Do List) con persistencia de datos y Bootstrap 5.',
+      description: 'Aplicación para gestión de tareas (To-Do List) con persistencia de datos y Bootstrap 5.',
       demoUrl: 'https://github.com/Neox1797/ListaTareasBV5',
       repoUrl: 'https://github.com/Neox1797/ListaTareasBV5',
       tags: ['Bootstrap 5', 'JavaScript', 'CRUD']
     },
     {
       id: 6,
-      title: 'Calculadora Web',
+      title: 'Calculadora Web Dinámica',
       category: 'frontend',
       image: '/assets/img/portfolio/portfolio-5.jpeg',
-      description: 'Calculadora funcional para operaciones matemáticas rápidas desarrollada con Bootstrap 5.',
+      description: 'Calculadora funcional para operaciones matemáticas rápidas desarrollada con manipulación de DOM en JS.',
       demoUrl: 'https://github.com/Neox1797/calculadoraBV5',
       repoUrl: 'https://github.com/Neox1797/calculadoraBV5',
       tags: ['Bootstrap 5', 'JavaScript', 'DOM']
@@ -72,16 +72,16 @@ export default function Portfolio() {
   const filteredProjects = filter === 'all' ? projects : projects.filter((p) => p.category === filter);
 
   return (
-    <section id="portfolio" style={{ padding: '80px 24px', maxWidth: '1100px', margin: '0 auto' }}>
-      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '8px' }}>
+    <section id="portfolio" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         PORTAFOLIO DE PROYECTOS
       </div>
-      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '32px' }}>
+      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '20px' }}>
         Trabajos & Desarrollos Destacados
       </h2>
 
       {/* Filter Tabs */}
-      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '32px' }}>
+      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '20px' }}>
         {[
           { id: 'all', label: 'Todos los Proyectos' },
           { id: 'frontend', label: 'Frontend & UI' },

@@ -114,6 +114,17 @@ WITH CHECK (true);
 
 ---
 
+## 📚 Documentación Técnica (`docs/`)
+
+Para guías paso a paso detalladas, consulta la carpeta [`docs/`](./docs/):
+
+1. 📱 [**01. Guía de Notificaciones por Telegram Bot**](./docs/01-GUIA-TELEGRAM-BOT.md): Cómo crear el bot en Telegram y recibir alertas push por Supabase Webhooks.
+2. 🌐 [**02. Guía de Despliegue CI/CD en Vercel**](./docs/02-DESPLIEGUE-VERCEL-CI-CD.md): Manejo de ramas `develop` (Preview) vs `master` (Production), Speed Insights & Analytics.
+3. 🐳 [**03. Guía de Contenedores Docker & Podman**](./docs/03-DOCKER-PODMAN-GUIA.md): Construcción Multi-Stage con Nginx Alpine y manifiestos para Kubernetes/RHEL.
+4. 🗄️ [**04. Guía de Administración de Supabase & SQL**](./docs/04-MANEJO-SUPABASE.md): Esquema de tablas, políticas RLS y mantenimiento automático con `pg_cron`.
+
+---
+
 ## 👨‍💻 Autor & Contacto
 
 **Edgar J. Vargas Montiel**  

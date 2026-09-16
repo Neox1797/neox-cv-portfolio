@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, ArrowDown, Code2, Cloud, Server, Sparkles, Mail, Phone } from 'lucide-react';
+import { MessageSquare, ArrowDown, Code2, Cloud, Server, Sparkles, Mail, Phone, FileText } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, InstagramIcon } from './Icons';
 
 export default function Hero({ onDownloadCV }) {
   const roles = [
     'Ingeniero de Software',
-    'Especialista AMS & AWS Cloud',
+    'Ingeniero de Software & AMS',
     'Desarrollador Fullstack (Angular/React/PHP)',
     'Administrador de Servidores Linux / Red Hat',
     'Scrum Certified Developer (SDC®)'
@@ -28,15 +28,15 @@ export default function Hero({ onDownloadCV }) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '120px 24px 60px',
+        padding: '90px 24px 36px',
         position: 'relative',
-        background: 'radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.08) 0%, rgba(139, 92, 246, 0.05) 40%, transparent 80%)'
+        background: 'var(--hero-radial)'
       }}
     >
       <div style={{ maxWidth: '1100px', width: '100%', display: 'flex', flexWrap: 'wrap-reverse', alignItems: 'center', justifyContent: 'space-between', gap: '40px' }}>
         
         {/* Left Column: Text & Intro */}
-        <div style={{ flex: '1 1 500px' }} className="fade-in-up">
+        <div style={{ flex: '1 1 500px' }}>
           
           {/* Badge */}
           <div style={{
@@ -78,11 +78,41 @@ export default function Hero({ onDownloadCV }) {
           </div>
 
           <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', maxWidth: '580px', marginBottom: '32px', lineHeight: 1.7 }}>
-            Ingeniero en Sistemas Computacionales enfocado en arquitectura en la nube (AWS Cloud), desarrollo web integral (PHP, Angular, Java Spring, React) y optimización de infraestructura Linux. Apasionado por resolver problemas complejos y mejorar la eficiencia tecnológica de las organizaciones.
+            Ingeniero en Sistemas Computacionales enfocado en desarrollo web integral (PHP, Angular, Java Spring, React), integración de microservicios y soluciones tecnológicas de Software & AMS. Apasionado por resolver problemas complejos y mejorar la eficiencia tecnológica de las organizaciones.
           </p>
 
           {/* Action CTA Buttons */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '40px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginBottom: '40px' }}>
+            <button
+              onClick={onDownloadCV}
+              style={{
+                background: 'linear-gradient(135deg, var(--cyan-main), var(--violet-main))',
+                color: '#ffffff',
+                border: 'none',
+                padding: '12px 22px',
+                borderRadius: '12px',
+                fontWeight: '700',
+                fontSize: '0.9rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                boxShadow: '0 4px 15px var(--cyan-glow)',
+                transition: 'transform 0.2s ease, boxShadow 0.2s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 6px 20px var(--cyan-glow)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 15px var(--cyan-glow)';
+              }}
+            >
+              <FileText size={18} />
+              <span>Descargar CV PDF</span>
+            </button>
+
             <a
               href="https://wa.me/+525584752143?text=Hola%20Edgar,%20vi%20tu%20portafolio%20y%20me%20gustaria%20platicar%20contigo"
               target="_blank"
@@ -91,12 +121,13 @@ export default function Hero({ onDownloadCV }) {
                 textDecoration: 'none',
                 background: 'linear-gradient(135deg, #25D366, #128C7E)',
                 color: '#ffffff',
-                padding: '12px 24px',
+                padding: '12px 22px',
                 borderRadius: '12px',
                 fontWeight: '700',
+                fontSize: '0.9rem',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '10px',
+                gap: '8px',
                 boxShadow: '0 4px 15px rgba(37, 211, 102, 0.3)',
                 transition: 'transform 0.2s ease'
               }}
@@ -104,7 +135,7 @@ export default function Hero({ onDownloadCV }) {
               onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(0)')}
             >
               <MessageSquare size={18} />
-              <span>Contactar por WhatsApp</span>
+              <span>WhatsApp</span>
             </a>
 
             <a
@@ -114,19 +145,20 @@ export default function Hero({ onDownloadCV }) {
                 background: 'var(--bg-card)',
                 color: 'var(--text-primary)',
                 border: '1px solid var(--border-highlight)',
-                padding: '12px 24px',
+                padding: '12px 20px',
                 borderRadius: '12px',
                 fontWeight: '600',
+                fontSize: '0.9rem',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '10px',
+                gap: '8px',
                 transition: 'all 0.2s ease'
               }}
               onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-card-hover)')}
               onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--bg-card)')}
             >
               <Server size={18} color="var(--cyan-main)" />
-              <span>Probar Terminal Cloud</span>
+              <span>Terminal Cloud</span>
             </a>
           </div>
 
@@ -206,10 +238,10 @@ export default function Hero({ onDownloadCV }) {
             boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
             backdropFilter: 'blur(10px)'
           }}>
-            <Cloud size={24} color="var(--cyan-main)" />
+            <Code2 size={24} color="var(--cyan-main)" />
             <div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Especialidad</div>
-              <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-primary)' }}>AWS & DevOps</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Enfoque</div>
+              <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-primary)' }}>Software & Fullstack</div>
             </div>
           </div>
         </div>

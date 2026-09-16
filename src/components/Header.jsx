@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Terminal, Menu, X, CheckCircle2, FileText, Send } from 'lucide-react';
+import { Sun, Moon, Clock, Menu, X } from 'lucide-react';
 
-export default function Header({ theme, toggleTheme, onDownloadCV }) {
+export default function Header({ themeState, theme, toggleTheme }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const mode = themeState?.mode || 'auto';
+  const effectiveTheme = themeState?.effectiveTheme || theme || 'dark';
+  const currentTimeText = themeState?.currentTimeText || '';
+  const userTimeZone = themeState?.userTimeZone || '';
+  const cycleThemeMode = themeState?.cycleThemeMode || toggleTheme;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +30,17 @@ export default function Header({ theme, toggleTheme, onDownloadCV }) {
     { name: 'Contacto', href: '#contact' },
   ];
 
+  const getThemeTitle = () => {
+    const tzStr = userTimeZone ? ` - ${userTimeZone}` : '';
+    if (mode === 'auto') {
+      return `Modo Horario Automático: ${effectiveTheme === 'light' ? 'Día ☀️' : 'Noche 🌙'} (${currentTimeText} hs${tzStr}). Clic para cambiar a Modo Día.`;
+    }
+    if (mode === 'light') {
+      return 'Modo Día activo. Clic para cambiar a Modo Noche.';
+    }
+    return 'Modo Noche activo. Clic para volver a Modo Horario Automático (Zona Horaria Local).';
+  };
+
   return (
     <header
       style={{
@@ -33,48 +50,48 @@ export default function Header({ theme, toggleTheme, onDownloadCV }) {
         right: 0,
         zIndex: 1000,
         backgroundColor: isScrolled ? 'var(--nav-bg)' : 'transparent',
-        backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-        borderBottom: isScrolled ? '1px solid var(--border)' : 'none',
-        transition: 'all 0.3s ease',
-        padding: isScrolled ? '12px 24px' : '20px 24px',
+        backdropFilter: isScrolled ? 'blur(16px)' : 'none',
+        WebkitBackdropFilter: isScrolled ? 'blur(16px)' : 'none',
+        borderBottom: isScrolled ? '1px solid var(--border)' : '1px solid transparent',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        padding: isScrolled ? '6px 20px' : '10px 20px',
+        boxShadow: isScrolled ? 'var(--shadow-card)' : 'none'
       }}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         
-        {/* Brand / Logo */}
+        {/* Ultra Minimal Single-Line Brand */}
         <a href="#hero" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '10px',
+            width: '30px',
+            height: '30px',
+            borderRadius: '8px',
             background: 'linear-gradient(135deg, var(--cyan-main), var(--violet-main))',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#fff',
-            fontWeight: 'bold',
-            boxShadow: '0 4px 12px var(--cyan-glow)'
+            color: '#ffffff',
+            fontWeight: '800',
+            fontSize: '0.82rem',
+            boxShadow: '0 2px 8px var(--cyan-glow)',
+            letterSpacing: '0.5px'
           }}>
             EV
           </div>
-          <div>
-            <div style={{ fontWeight: '800', fontSize: '1.1rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontWeight: '800', fontSize: '0.92rem', color: 'var(--text-primary)', letterSpacing: '-0.2px' }}>
               Edgar J. Vargas
-              <span className="pulse-emerald" title="Disponible para nuevos proyectos / Open to Work"></span>
-              {(import.meta.env.DEV || import.meta.env.VITE_VERCEL_ENV === 'preview') && (
-                <span style={{ fontSize: '0.65rem', padding: '2px 8px', borderRadius: '12px', background: 'rgba(139, 92, 246, 0.2)', color: 'var(--violet-main)', border: '1px solid rgba(139, 92, 246, 0.4)', fontWeight: '700', letterSpacing: '0.5px' }}>
-                  DEV PREVIEW
-                </span>
-              )}
-            </div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--cyan-main)', fontFamily: 'JetBrains Mono, monospace' }}>
-              Software Engineer & Cloud
-            </div>
+            </span>
+            <span style={{ color: 'var(--text-muted)', opacity: 0.4, fontSize: '0.85rem' }}>/</span>
+            <span style={{ fontSize: '0.74rem', color: 'var(--cyan-main)', fontFamily: 'JetBrains Mono, monospace', fontWeight: '500' }}>
+              Software Engineer
+            </span>
+            <span className="pulse-emerald" style={{ width: '7px', height: '7px', marginLeft: '2px' }} title="Disponible para nuevos proyectos"></span>
           </div>
         </a>
 
-        {/* Desktop Navigation */}
-        <nav style={{ display: 'none', alignItems: 'center', gap: '20px' }} className="desktop-nav">
+        {/* Center Desktop Navigation */}
+        <nav style={{ display: 'none', alignItems: 'center', gap: '16px' }} className="desktop-nav">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -82,9 +99,10 @@ export default function Header({ theme, toggleTheme, onDownloadCV }) {
               style={{
                 color: 'var(--text-secondary)',
                 textDecoration: 'none',
-                fontSize: '0.9rem',
+                fontSize: '0.82rem',
                 fontWeight: '500',
                 transition: 'color 0.2s ease',
+                letterSpacing: '0.2px'
               }}
               onMouseEnter={(e) => (e.target.style.color = 'var(--cyan-main)')}
               onMouseLeave={(e) => (e.target.style.color = 'var(--text-secondary)')}
@@ -94,80 +112,52 @@ export default function Header({ theme, toggleTheme, onDownloadCV }) {
           ))}
         </nav>
 
-        {/* Action Controls */}
+        {/* Right Action Controls: Minimal Theme Selector */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           
-          {/* Open To Work Badge */}
-          <div style={{
-            display: 'none',
-            alignItems: 'center',
-            gap: '6px',
-            padding: '6px 12px',
-            borderRadius: '20px',
-            background: 'rgba(16, 185, 129, 0.1)',
-            border: '1px solid rgba(16, 185, 129, 0.3)',
-            color: 'var(--emerald-main)',
-            fontSize: '0.78rem',
-            fontWeight: '600'
-          }} className="open-work-badge">
-            <CheckCircle2 size={14} />
-            Available
-          </div>
-
-          {/* Theme Toggle */}
+          {/* Theme Selector Button */}
           <button
-            onClick={toggleTheme}
-            title={theme === 'dark' ? 'Cambiar a Modo Claro' : 'Cambiar a Modo Oscuro'}
+            onClick={cycleThemeMode}
+            title={getThemeTitle()}
             style={{
               background: 'var(--bg-card)',
               border: '1px solid var(--border)',
-              borderRadius: '10px',
-              padding: '8px 12px',
+              borderRadius: '20px',
+              padding: '6px 14px',
               color: 'var(--text-primary)',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
+              gap: '6px',
               transition: 'all 0.2s ease',
+              boxShadow: 'var(--shadow-card)',
             }}
             onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--cyan-main)')}
             onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
           >
-            {theme === 'dark' ? <Sun size={18} color="var(--amber-main)" /> : <Moon size={18} color="var(--violet-main)" />}
+            {mode === 'auto' && (
+              <>
+                <Clock size={15} color="var(--cyan-main)" />
+                <span style={{ fontSize: '0.75rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  Auto <span style={{ opacity: 0.8 }}>({currentTimeText})</span>
+                </span>
+              </>
+            )}
+            {mode === 'light' && (
+              <>
+                <Sun size={15} color="var(--amber-main)" />
+                <span style={{ fontSize: '0.75rem', fontWeight: '600' }}>Día ☀️</span>
+              </>
+            )}
+            {mode === 'dark' && (
+              <>
+                <Moon size={15} color="var(--violet-main)" />
+                <span style={{ fontSize: '0.75rem', fontWeight: '600' }}>Noche 🌙</span>
+              </>
+            )}
           </button>
 
-          {/* Download CV CTA */}
-          <button
-            onClick={onDownloadCV}
-            style={{
-              background: 'linear-gradient(135deg, var(--cyan-main), var(--violet-main))',
-              border: 'none',
-              borderRadius: '10px',
-              padding: '8px 16px',
-              color: '#ffffff',
-              fontWeight: '600',
-              fontSize: '0.85rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              boxShadow: '0 4px 14px var(--cyan-glow)',
-              transition: 'transform 0.2s ease, box-shadow 0.2s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 6px 20px var(--cyan-glow)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 14px var(--cyan-glow)';
-            }}
-          >
-            <FileText size={16} />
-            <span>CV PDF</span>
-          </button>
-
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             style={{
@@ -176,9 +166,11 @@ export default function Header({ theme, toggleTheme, onDownloadCV }) {
               color: 'var(--text-primary)',
               cursor: 'pointer',
               display: 'flex',
-              alignItems: 'center'
+              alignItems: 'center',
+              padding: '4px'
             }}
             className="mobile-toggle"
+            aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -218,11 +210,10 @@ export default function Header({ theme, toggleTheme, onDownloadCV }) {
         </div>
       )}
 
-      {/* Media query styling in line using global style sheet rules */}
+      {/* Responsive Media Query Styles */}
       <style>{`
-        @media (min-width: 850px) {
+        @media (min-width: 880px) {
           .desktop-nav { display: flex !important; }
-          .open-work-badge { display: flex !important; }
           .mobile-toggle { display: none !important; }
         }
       `}</style>

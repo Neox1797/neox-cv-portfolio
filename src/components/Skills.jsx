@@ -46,16 +46,16 @@ export default function Skills() {
   const filteredSkills = activeTab === 'all' ? skillItems : skillItems.filter((s) => s.category === activeTab);
 
   return (
-    <section id="skills" style={{ padding: '80px 24px', maxWidth: '1100px', margin: '0 auto' }}>
-      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '8px' }}>
+    <section id="skills" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         DOMINIO TÉCNICO Y PASATIEMPOS
       </div>
-      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '32px' }}>
+      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '20px' }}>
         Matriz de Habilidades & Stack
       </h2>
 
       {/* Category Tabs */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '32px' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px' }}>
         {categories.map((cat) => (
           <button
             key={cat.id}
@@ -78,7 +78,7 @@ export default function Skills() {
       </div>
 
       {/* Skill Progress Bars Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginBottom: '60px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px', marginBottom: '32px' }}>
         {filteredSkills.map((sk, idx) => (
           <div key={idx} className="glass-card" style={{ padding: '20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
