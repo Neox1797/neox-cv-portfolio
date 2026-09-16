@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal as TerminalIcon, Play, RefreshCw, Copy, Check } from 'lucide-react';
+import { Play, RefreshCw, Copy, Check } from 'lucide-react';
 import { FadeInSection } from './MotionWrapper';
+import { getEnvironmentInfo } from '../utils/envHelper';
 
 function TypewriterLine({ text, type }) {
   const [displayedText, setDisplayedText] = useState(type === 'input' ? text : '');
@@ -52,6 +53,7 @@ export default function DevOpsTerminal() {
           type: 'output',
           text: `Comandos disponibles:
   • help         : Muestra esta ayuda
+  • env          : Diagnóstico del entorno activo (Local / Develop / Master)
   • about        : Resumen profesional de Edgar
   • skills       : Habilidades principales (AWS, Linux, Angular, Spring)
   • exp          : Experiencia laboral reciente
@@ -61,6 +63,21 @@ export default function DevOpsTerminal() {
   • clear        : Limpiar la pantalla`
         });
         break;
+
+      case 'env':
+      case 'sys': {
+        const env = getEnvironmentInfo();
+        newHistory.push({
+          type: 'output',
+          text: `🌐 DIAGNÓSTICO DE ENTORNO DE DESPLIEGUE:
+  • Entorno   : ${env.fullLabel} ${env.icon}
+  • Rama Git  : ${env.branch}
+  • Vercel Env: ${env.vercelEnv}
+  • Commit SHA: ${env.commitSha}
+  • Detalles  : ${env.description}`
+        });
+        break;
+      }
 
       case 'about':
         newHistory.push({
@@ -157,7 +174,7 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
     }
   };
 
-  const quickCmds = ['help', 'about', 'skills', 'exp', 'projects', 'certs', 'contact', 'clear'];
+  const quickCmds = ['help', 'env', 'about', 'skills', 'exp', 'projects', 'certs', 'contact', 'clear'];
 
   const copyTerminalOutput = () => {
     const textToCopy = history.map(h => h.text).join('\n');

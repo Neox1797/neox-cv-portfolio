@@ -11,6 +11,8 @@ import Portfolio from './components/Portfolio';
 import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import EnvironmentBadge from './components/EnvironmentBadge';
+import { logEnvironmentToConsole } from './utils/envHelper';
 import confetti from 'canvas-confetti';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Analytics } from '@vercel/analytics/react';
@@ -22,12 +24,13 @@ export default function App() {
   const orbY1 = useTransform(scrollY, [0, 3000], [0, 180]);
   const orbY2 = useTransform(scrollY, [0, 3000], [0, -180]);
 
-  // Scroll to top on page refresh or initial load
+  // Scroll to top on page refresh or initial load & log environment
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
     window.scrollTo(0, 0);
+    logEnvironmentToConsole();
   }, []);
 
   const handleDownloadCV = () => {
@@ -66,6 +69,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <EnvironmentBadge />
       <SpeedInsights />
       <Analytics />
     </div>
