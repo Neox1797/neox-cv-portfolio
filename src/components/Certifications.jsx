@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShieldCheck, ExternalLink, Award } from 'lucide-react';
+import { FadeInSection, StaggerContainer, StaggerItem, SpotlightCard } from './MotionWrapper';
 
 export default function Certifications() {
   const certs = [
@@ -78,7 +79,7 @@ export default function Certifications() {
   ];
 
   return (
-    <section id="certifications" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="certifications" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         ACREDITACIONES OFICIALES
       </div>
@@ -86,72 +87,75 @@ export default function Certifications() {
         Cursos & Certificaciones
       </h2>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+      <StaggerContainer style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
         {certs.map((c, idx) => (
-          <div key={idx} className="glass-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <span style={{
-                  padding: '4px 10px',
-                  borderRadius: '20px',
-                  background: 'rgba(255,255,255,0.06)',
-                  color: c.color,
-                  border: `1px solid ${c.color}40`,
-                  fontSize: '0.75rem',
-                  fontWeight: '700'
-                }}>
-                  {c.badge}
-                </span>
-                <ShieldCheck size={18} color="var(--emerald-main)" />
+          <StaggerItem key={idx}>
+            <SpotlightCard className="glass-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                  <span style={{
+                    padding: '4px 10px',
+                    borderRadius: '20px',
+                    background: 'rgba(255,255,255,0.06)',
+                    color: c.color,
+                    border: `1px solid ${c.color}40`,
+                    fontSize: '0.75rem',
+                    fontWeight: '700'
+                  }}>
+                    {c.badge}
+                  </span>
+                  <ShieldCheck size={18} color="var(--emerald-main)" />
+                </div>
+
+                <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '4px', color: 'var(--text-primary)' }}>
+                  {c.title}
+                </h3>
+
+                <div style={{ fontSize: '0.88rem', fontWeight: '600', color: 'var(--cyan-main)', marginBottom: '8px' }}>
+                  {c.institution}
+                </div>
+
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '20px' }}>
+                  {c.code}
+                </div>
               </div>
 
-              <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '4px', color: 'var(--text-primary)' }}>
-                {c.title}
-              </h3>
-
-              <div style={{ fontSize: '0.88rem', fontWeight: '600', color: 'var(--cyan-main)', marginBottom: '8px' }}>
-                {c.institution}
-              </div>
-
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '20px' }}>
-                {c.code}
-              </div>
-            </div>
-
-            <a
-              href={c.verifyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                textDecoration: 'none',
-                background: 'rgba(255,255,255,0.05)',
-                border: '1px solid var(--border)',
-                color: 'var(--text-primary)',
-                padding: '10px 14px',
-                borderRadius: '10px',
-                fontSize: '0.85rem',
-                fontWeight: '600',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                transition: 'all 0.2s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--cyan-main)';
-                e.currentTarget.style.color = 'var(--cyan-main)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'var(--border)';
-                e.currentTarget.style.color = 'var(--text-primary)';
-              }}
-            >
-              <ExternalLink size={14} />
-              Verificar Certificado
-            </a>
-          </div>
+              <a
+                href={c.verifyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  textDecoration: 'none',
+                  background: 'rgba(255,255,255,0.05)',
+                  border: '1px solid var(--border)',
+                  color: 'var(--text-primary)',
+                  padding: '10px 14px',
+                  borderRadius: '10px',
+                  fontSize: '0.85rem',
+                  fontWeight: '600',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--cyan-main)';
+                  e.currentTarget.style.color = 'var(--cyan-main)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--border)';
+                  e.currentTarget.style.color = 'var(--text-primary)';
+                }}
+              >
+                <ExternalLink size={14} />
+                Verificar Certificado
+              </a>
+            </SpotlightCard>
+          </StaggerItem>
         ))}
-      </div>
-    </section>
+      </StaggerContainer>
+    </FadeInSection>
   );
 }
+

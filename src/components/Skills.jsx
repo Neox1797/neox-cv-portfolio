@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Code, Server, Cloud, Database, Heart, BookOpen, Music, Shield, Dumbbell, Plane, Cpu } from 'lucide-react';
+import { FadeInSection, StaggerContainer, StaggerItem, AnimatedProgressBar } from './MotionWrapper';
 
 export default function Skills() {
   const [activeTab, setActiveTab] = useState('all');
@@ -46,7 +47,7 @@ export default function Skills() {
   const filteredSkills = activeTab === 'all' ? skillItems : skillItems.filter((s) => s.category === activeTab);
 
   return (
-    <section id="skills" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="skills" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         DOMINIO TÉCNICO Y PASATIEMPOS
       </div>
@@ -78,35 +79,26 @@ export default function Skills() {
       </div>
 
       {/* Skill Progress Bars Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px', marginBottom: '32px' }}>
+      <StaggerContainer key={activeTab} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px', marginBottom: '32px' }}>
         {filteredSkills.map((sk, idx) => (
-          <div key={idx} className="glass-card" style={{ padding: '20px' }}>
+          <StaggerItem key={sk.name} className="glass-card" style={{ padding: '20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
               <span style={{ fontWeight: '600', fontSize: '0.95rem', color: 'var(--text-primary)' }}>{sk.name}</span>
               <span style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--cyan-main)' }}>{sk.pct}%</span>
             </div>
-            <div style={{ width: '100%', height: '8px', background: 'rgba(255, 255, 255, 0.08)', borderRadius: '4px', overflow: 'hidden' }}>
-              <div
-                style={{
-                  width: `${sk.pct}%`,
-                  height: '100%',
-                  background: `linear-gradient(90deg, ${sk.color}, var(--cyan-main))`,
-                  borderRadius: '4px',
-                  transition: 'width 1s ease-out'
-                }}
-              ></div>
-            </div>
-          </div>
+            <AnimatedProgressBar pct={sk.pct} color={sk.color} />
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
+
 
       {/* Hobbies / Soft Skills Sub-section */}
       <h3 style={{ fontSize: '1.4rem', fontWeight: '700', marginBottom: '24px', color: 'var(--text-primary)' }}>
         Pasatiempos & Desarrollo Personal
       </h3>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
+      <StaggerContainer style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
         {hobbies.map((hob, idx) => (
-          <div key={idx} className="glass-card" style={{ padding: '20px', display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <StaggerItem key={idx} className="glass-card" style={{ padding: '20px', display: 'flex', alignItems: 'center', gap: '14px' }}>
             <div style={{
               width: '44px',
               height: '44px',
@@ -123,9 +115,9 @@ export default function Skills() {
               <div style={{ fontWeight: '700', fontSize: '0.92rem', color: 'var(--text-primary)' }}>{hob.name}</div>
               <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{hob.desc}</div>
             </div>
-          </div>
+          </StaggerItem>
         ))}
-      </div>
-    </section>
+      </StaggerContainer>
+    </FadeInSection>
   );
 }

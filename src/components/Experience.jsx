@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Briefcase, GraduationCap, Calendar, MapPin, ChevronDown, ChevronUp, CheckCircle2 } from 'lucide-react';
+import { FadeInSection, StaggerContainer, StaggerItem } from './MotionWrapper';
 
 export default function Experience() {
   const [activeSection, setActiveSection] = useState('work'); // 'work' or 'education'
@@ -94,7 +95,7 @@ export default function Experience() {
   ];
 
   return (
-    <section id="experience" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="experience" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         TRAYECTORIA Y FORMACIÓN
       </div>
@@ -145,9 +146,9 @@ export default function Experience() {
 
       {/* Work Timeline */}
       {activeSection === 'work' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <StaggerContainer style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           {workExperience.map((item, idx) => (
-            <div key={idx} className="glass-panel" style={{ padding: '24px', position: 'relative', overflow: 'hidden' }}>
+            <StaggerItem key={idx} className="glass-panel" style={{ padding: '24px', position: 'relative', overflow: 'hidden' }}>
               
               {/* Header Bar */}
               <div
@@ -203,16 +204,16 @@ export default function Experience() {
                 </div>
               )}
 
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       )}
 
       {/* Education List */}
       {activeSection === 'education' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <StaggerContainer style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           {educationList.map((edu, idx) => (
-            <div key={idx} className="glass-panel" style={{ padding: '24px' }}>
+            <StaggerItem key={idx} className="glass-panel" style={{ padding: '24px' }}>
               <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: '12px' }}>
                 <div>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--text-primary)' }}>{edu.degree}</h3>
@@ -223,10 +224,10 @@ export default function Experience() {
                 </div>
               </div>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6' }}>{edu.details}</p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       )}
-    </section>
+    </FadeInSection>
   );
 }

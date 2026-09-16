@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from './hooks/useTheme';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -16,6 +17,10 @@ import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
   const themeState = useTheme();
+
+  const { scrollY } = useScroll();
+  const orbY1 = useTransform(scrollY, [0, 3000], [0, 180]);
+  const orbY2 = useTransform(scrollY, [0, 3000], [0, -180]);
 
   // Scroll to top on page refresh or initial load
   useEffect(() => {
@@ -43,9 +48,14 @@ export default function App() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+      {/* Background Ambient Glowing Orbs with Scroll Parallax */}
+      <motion.div className="ambient-orb-1" style={{ y: orbY1 }} aria-hidden="true" />
+      <motion.div className="ambient-orb-2" style={{ y: orbY2 }} aria-hidden="true" />
+
       <Header themeState={themeState} onDownloadCV={handleDownloadCV} />
-      <main style={{ flex: 1 }}>
+
+      <main style={{ flex: 1, position: 'relative', zIndex: 1 }}>
         <Hero onDownloadCV={handleDownloadCV} />
         <About />
         <DevOpsTerminal />
@@ -61,3 +71,4 @@ export default function App() {
     </div>
   );
 }
+

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { ExternalLink, Eye, Layers } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { GithubIcon } from './Icons';
+import { FadeInSection, StaggerContainer, StaggerItem, SpotlightCard } from './MotionWrapper';
 
 export default function Portfolio() {
   const [filter, setFilter] = useState('all');
@@ -72,7 +74,7 @@ export default function Portfolio() {
   const filteredProjects = filter === 'all' ? projects : projects.filter((p) => p.category === filter);
 
   return (
-    <section id="portfolio" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="portfolio" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         PORTAFOLIO DE PROYECTOS
       </div>
@@ -108,145 +110,158 @@ export default function Portfolio() {
       </div>
 
       {/* Projects Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '28px' }}>
+      <StaggerContainer key={filter} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '28px' }}>
         {filteredProjects.map((p) => (
-          <div key={p.id} className="glass-card" style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-            
-            {/* Image Preview Container */}
-            <div style={{ position: 'relative', height: '200px', overflow: 'hidden', background: '#111827' }}>
-              <img
-                src={p.image}
-                alt={p.title}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
-                onMouseEnter={(e) => (e.target.style.transform = 'scale(1.08)')}
-                onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
-              />
-              <button
-                onClick={() => setActiveModalImg(p.image)}
-                title="Ampliar vista previa"
-                style={{
-                  position: 'absolute',
-                  top: '12px',
-                  right: '12px',
-                  background: 'rgba(0,0,0,0.6)',
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  color: '#fff',
-                  borderRadius: '50%',
-                  width: '36px',
-                  height: '36px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  backdropFilter: 'blur(4px)'
-                }}
-              >
-                <Eye size={18} />
-              </button>
-            </div>
+          <StaggerItem key={p.id}>
+            <SpotlightCard className="glass-card" style={{ overflow: 'hidden', height: '100%' }}>
+              
+              {/* Image Preview Container */}
+              <div style={{ position: 'relative', height: '200px', overflow: 'hidden', background: '#111827' }}>
+                <img
+                  src={p.image}
+                  alt={p.title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                  onMouseEnter={(e) => (e.target.style.transform = 'scale(1.08)')}
+                  onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
+                />
+                <button
+                  onClick={() => setActiveModalImg(p.image)}
+                  title="Ampliar vista previa"
+                  style={{
+                    position: 'absolute',
+                    top: '12px',
+                    right: '12px',
+                    background: 'rgba(0,0,0,0.6)',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    color: '#fff',
+                    borderRadius: '50%',
+                    width: '36px',
+                    height: '36px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    backdropFilter: 'blur(4px)',
+                    zIndex: 5
+                  }}
+                >
+                  <Eye size={18} />
+                </button>
+              </div>
 
-            {/* Content Container */}
-            <div style={{ padding: '24px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <div>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: '800', marginBottom: '8px', color: 'var(--text-primary)' }}>
-                  {p.title}
-                </h3>
-                <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginBottom: '16px', lineHeight: '1.5' }}>
-                  {p.description}
-                </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '20px' }}>
-                  {p.tags.map((t, idx) => (
-                    <span key={idx} className="tech-badge">
-                      {t}
-                    </span>
-                  ))}
+              {/* Content Container */}
+              <div style={{ padding: '24px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: '800', marginBottom: '8px', color: 'var(--text-primary)' }}>
+                    {p.title}
+                  </h3>
+                  <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginBottom: '16px', lineHeight: '1.5' }}>
+                    {p.description}
+                  </p>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '20px' }}>
+                    {p.tags.map((t, idx) => (
+                      <span key={idx} className="tech-badge">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+
+                {/* Links */}
+                <div style={{ display: 'flex', gap: '12px', paddingTop: '16px', borderTop: '1px solid var(--border)' }}>
+                  {p.demoUrl !== '#' && (
+                    <a
+                      href={p.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        flex: 1,
+                        textDecoration: 'none',
+                        background: 'rgba(56, 189, 248, 0.1)',
+                        color: 'var(--cyan-main)',
+                        border: '1px solid rgba(56, 189, 248, 0.3)',
+                        padding: '8px 12px',
+                        borderRadius: '8px',
+                        fontSize: '0.85rem',
+                        fontWeight: '600',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '6px'
+                      }}
+                    >
+                      <ExternalLink size={14} />
+                      Live Demo
+                    </a>
+                  )}
+
+                  {p.repoUrl !== '#' && (
+                    <a
+                      href={p.repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        flex: 1,
+                        textDecoration: 'none',
+                        background: 'var(--bg-card)',
+                        color: 'var(--text-primary)',
+                        border: '1px solid var(--border)',
+                        padding: '8px 12px',
+                        borderRadius: '8px',
+                        fontSize: '0.85rem',
+                        fontWeight: '600',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '6px'
+                      }}
+                    >
+                      <GithubIcon size={14} />
+                      Código
+                    </a>
+                  )}
+                </div>
+
               </div>
 
-              {/* Links */}
-              <div style={{ display: 'flex', gap: '12px', paddingTop: '16px', borderTop: '1px solid var(--border)' }}>
-                {p.demoUrl !== '#' && (
-                  <a
-                    href={p.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      flex: 1,
-                      textDecoration: 'none',
-                      background: 'rgba(56, 189, 248, 0.1)',
-                      color: 'var(--cyan-main)',
-                      border: '1px solid rgba(56, 189, 248, 0.3)',
-                      padding: '8px 12px',
-                      borderRadius: '8px',
-                      fontSize: '0.85rem',
-                      fontWeight: '600',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '6px'
-                    }}
-                  >
-                    <ExternalLink size={14} />
-                    Live Demo
-                  </a>
-                )}
-
-                {p.repoUrl !== '#' && (
-                  <a
-                    href={p.repoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      flex: 1,
-                      textDecoration: 'none',
-                      background: 'var(--bg-card)',
-                      color: 'var(--text-primary)',
-                      border: '1px solid var(--border)',
-                      padding: '8px 12px',
-                      borderRadius: '8px',
-                      fontSize: '0.85rem',
-                      fontWeight: '600',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '6px'
-                    }}
-                  >
-                    <GithubIcon size={14} />
-                    Código
-                  </a>
-                )}
-              </div>
-
-            </div>
-
-          </div>
+            </SpotlightCard>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
 
-      {/* Image Modal Lightbox */}
-      {activeModalImg && (
-        <div
-          onClick={() => setActiveModalImg(null)}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 2000,
-            background: 'rgba(0,0,0,0.85)',
-            backdropFilter: 'blur(8px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '24px'
-          }}
-        >
-          <img
-            src={activeModalImg}
-            alt="Preview"
-            style={{ maxWidth: '90vw', maxHeight: '85vh', borderRadius: '12px', border: '2px solid var(--cyan-main)' }}
-          />
-        </div>
-      )}
-    </section>
+      {/* Image Modal Lightbox with Spring Animation */}
+      <AnimatePresence>
+        {activeModalImg && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveModalImg(null)}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 2000,
+              background: 'rgba(0,0,0,0.85)',
+              backdropFilter: 'blur(8px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '24px'
+            }}
+          >
+            <motion.img
+              initial={{ scale: 0.82, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.82, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 320 }}
+              src={activeModalImg}
+              alt="Preview"
+              style={{ maxWidth: '90vw', maxHeight: '85vh', borderRadius: '12px', border: '2px solid var(--cyan-main)', boxShadow: '0 20px 50px rgba(0,0,0,0.8)' }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </FadeInSection>
   );
 }
+

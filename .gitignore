@@ -26,3 +26,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Documentation (ignored in git, kept locally)
+docs/
+

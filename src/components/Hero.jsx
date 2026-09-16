@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { MessageSquare, ArrowDown, Code2, Cloud, Server, Sparkles, Mail, Phone, FileText } from 'lucide-react';
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { GithubIcon, LinkedinIcon, InstagramIcon } from './Icons';
+import { FadeInSection } from './MotionWrapper';
 
 export default function Hero({ onDownloadCV }) {
   const roles = [
@@ -13,10 +15,16 @@ export default function Hero({ onDownloadCV }) {
 
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
 
+  const { scrollY } = useScroll();
+  const parallaxY = useTransform(scrollY, [0, 600], [0, 75]);
+  const parallaxYRight = useTransform(scrollY, [0, 600], [0, 110]);
+  const parallaxOpacity = useTransform(scrollY, [0, 500], [1, 0.55]);
+
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 3000);
+    }, 3200);
     return () => clearInterval(interval);
   }, []);
 
@@ -33,10 +41,11 @@ export default function Hero({ onDownloadCV }) {
         background: 'var(--hero-radial)'
       }}
     >
-      <div style={{ maxWidth: '1100px', width: '100%', display: 'flex', flexWrap: 'wrap-reverse', alignItems: 'center', justifyContent: 'space-between', gap: '40px' }}>
+      <FadeInSection style={{ maxWidth: '1100px', width: '100%', display: 'flex', flexWrap: 'wrap-reverse', alignItems: 'center', justifyContent: 'space-between', gap: '40px' }}>
         
         {/* Left Column: Text & Intro */}
-        <div style={{ flex: '1 1 500px' }}>
+        <motion.div style={{ flex: '1 1 500px', y: parallaxY, opacity: parallaxOpacity }}>
+
           
           {/* Badge */}
           <div style={{
@@ -63,18 +72,29 @@ export default function Hero({ onDownloadCV }) {
           {/* Animated Typed Role */}
           <div style={{
             height: '40px',
-            fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)',
+            fontSize: 'clamp(1.05rem, 2.3vw, 1.45rem)',
             fontWeight: '600',
             color: 'var(--text-secondary)',
             marginBottom: '24px',
             display: 'flex',
             alignItems: 'center',
-            gap: '10px'
+            gap: '10px',
+            position: 'relative',
+            overflow: 'hidden'
           }}>
-            <Code2 size={24} color="var(--cyan-main)" />
-            <span style={{ color: 'var(--cyan-main)', transition: 'all 0.4s ease' }}>
-              {roles[currentRoleIndex]}
-            </span>
+            <Code2 size={24} color="var(--cyan-main)" style={{ flexShrink: 0 }} />
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={currentRoleIndex}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -14 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                style={{ color: 'var(--cyan-main)', whiteSpace: 'nowrap' }}
+              >
+                {roles[currentRoleIndex]}
+              </motion.span>
+            </AnimatePresence>
           </div>
 
           <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', maxWidth: '580px', marginBottom: '32px', lineHeight: 1.7 }}>
@@ -205,12 +225,13 @@ export default function Hero({ onDownloadCV }) {
             ))}
           </div>
 
-        </div>
+        </motion.div>
 
         {/* Right Column: Profile Image with Glow */}
-        <div style={{ flex: '0 0 320px', display: 'flex', justifyContent: 'center', position: 'relative' }}>
+        <motion.div style={{ flex: '0 0 320px', display: 'flex', justifyContent: 'center', position: 'relative', y: parallaxYRight }} className="desktop-avatar-parallax">
           <div className="glowing-avatar" style={{ width: '280px', height: '280px' }}>
             <img
+
               src="/assets/img/me.jpeg"
               alt="Edgar J. Vargas Montiel"
               style={{
@@ -244,9 +265,11 @@ export default function Hero({ onDownloadCV }) {
               <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-primary)' }}>Software & Fullstack</div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-      </div>
+
+      </FadeInSection>
+
 
       {/* Scroll Down Indicator */}
       <a

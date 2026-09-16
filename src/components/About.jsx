@@ -1,5 +1,6 @@
 import React from 'react';
 import { User, Calendar, MapPin, Globe, Mail, Phone, Award, Briefcase, Code, ShieldCheck } from 'lucide-react';
+import { FadeInSection, StaggerContainer, StaggerItem } from './MotionWrapper';
 
 export default function About() {
   const metrics = [
@@ -19,7 +20,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="about" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         PRESENTACIÓN PROFESIONAL
       </div>
@@ -28,9 +29,9 @@ export default function About() {
       </h2>
 
       {/* Metrics Row */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+      <StaggerContainer style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '24px' }}>
         {metrics.map((m, idx) => (
-          <div key={idx} className="glass-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <StaggerItem key={idx} className="glass-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
             <div style={{
               width: '50px',
               height: '50px',
@@ -51,15 +52,15 @@ export default function About() {
                 {m.label}
               </div>
             </div>
-          </div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
 
       {/* Bio and Personal Details */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}>
+      <StaggerContainer style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}>
         
         {/* Bio text */}
-        <div className="glass-panel" style={{ padding: '32px' }}>
+        <StaggerItem className="glass-panel" style={{ padding: '32px' }}>
           <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '16px', color: 'var(--cyan-main)' }}>
             Perfil de Ingeniería de Software
           </h3>
@@ -69,10 +70,10 @@ export default function About() {
           <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}>
             Me destaco por mi capacidad para intervenir en soluciones técnicas críticas, desarrollo backend con Spring Boot/PHP, maquetación ágil frontend en Angular y React, integración de microservicios y soporte continuo con metodología Scrum / Agile.
           </p>
-        </div>
+        </StaggerItem>
 
         {/* Quick Details Table */}
-        <div className="glass-panel" style={{ padding: '32px' }}>
+        <StaggerItem className="glass-panel" style={{ padding: '32px' }}>
           <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '20px', color: 'var(--violet-main)' }}>
             Datos Personales
           </h3>
@@ -85,9 +86,10 @@ export default function About() {
               </div>
             ))}
           </div>
-        </div>
+        </StaggerItem>
 
-      </div>
-    </section>
+      </StaggerContainer>
+    </FadeInSection>
   );
 }
+

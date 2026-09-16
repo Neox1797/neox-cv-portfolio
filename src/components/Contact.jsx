@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Send, MessageSquare, Globe, CheckCircle2, Copy, Ex
 import confetti from 'canvas-confetti';
 import { supabase, isSupabaseConfigured } from '../supabaseClient';
 import { LinkedinIcon } from './Icons';
+import { FadeInSection, StaggerContainer, StaggerItem } from './MotionWrapper';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '', honeypot: '' });
@@ -99,7 +100,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" style={{ padding: '40px 24px 60px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="contact" style={{ padding: '40px 24px 60px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         CANALES DIRECTOS Y MENSAJERÍA
       </div>
@@ -107,10 +108,10 @@ export default function Contact() {
         Información de Contacto
       </h2>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: '24px' }}>
+      <StaggerContainer style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: '24px' }}>
 
         {/* Left Column: Direct Info */}
-        <div className="glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <StaggerItem className="glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <h3 style={{ fontSize: '1.3rem', fontWeight: '700', color: 'var(--text-primary)' }}>
             ¿Tienes alguna propuesta o duda?
           </h3>
@@ -221,10 +222,10 @@ export default function Contact() {
             <MessageSquare size={18} />
             <span>Enviar WhatsApp Directo</span>
           </a>
-        </div>
+        </StaggerItem>
 
         {/* Right Column: Contact Form */}
-        <div className="glass-panel" style={{ padding: '32px' }}>
+        <StaggerItem className="glass-panel" style={{ padding: '32px' }}>
           <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '20px', color: 'var(--text-primary)' }}>
             Envía un Mensaje por Correo
           </h3>
@@ -400,9 +401,9 @@ export default function Contact() {
             </form>
           )}
 
-        </div>
+        </StaggerItem>
 
-      </div>
+      </StaggerContainer>
 
       {/* Recruiter Summary & Location Card */}
       <div className="glass-panel" style={{ padding: '24px', position: 'relative' }}>
@@ -448,38 +449,14 @@ export default function Contact() {
 
             {/* Badges */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '6px' }}>
-              <span className="tech-badge">Full-time</span>
-              <span className="tech-badge">Software Engineer</span>
-              <span className="tech-badge">Inglés B1/B2 (Técnico & Laboral)</span>
+              <span className="tech-badge">Java Spring</span>
+              <span className="tech-badge">Angular</span>
+              <span className="tech-badge">PHP</span>
+              <span className="tech-badge">AWS Linux</span>
+              <span className="tech-badge">Scrum SDC®</span>
             </div>
 
           </div>
-
-          {/* Location Map Preview */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-primary)' }}>
-                <MapPin size={16} color="var(--cyan-main)" />
-                Santiago de Querétaro, Qro.
-              </div>
-              <a
-                href="https://maps.google.com/?q=Santiago+de+Querétaro,+Qro."
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  fontSize: '0.78rem',
-                  color: 'var(--cyan-main)',
-                  textDecoration: 'none',
-                  fontWeight: '600',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px'
-                }}
-              >
-                <Globe size={13} />
-                Abrir Maps ↗
-              </a>
-            </div>
 
             <div style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--border)', height: '150px' }}>
               <iframe
@@ -491,10 +468,8 @@ export default function Contact() {
               ></iframe>
             </div>
           </div>
-
         </div>
-      </div>
 
-    </section>
+    </FadeInSection>
   );
 }

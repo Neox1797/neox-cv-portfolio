@@ -1,7 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Terminal as TerminalIcon, Play, RefreshCw, Copy, Check } from 'lucide-react';
+import { FadeInSection } from './MotionWrapper';
+
+function TypewriterLine({ text, type }) {
+  const [displayedText, setDisplayedText] = useState(type === 'input' ? text : '');
+
+  useEffect(() => {
+    if (type === 'input') {
+      setDisplayedText(text);
+      return;
+    }
+
+    let i = 0;
+    const speed = 10;
+    setDisplayedText('');
+    const timer = setInterval(() => {
+      if (i < text.length) {
+        setDisplayedText(text.slice(0, i + 1));
+        i++;
+      } else {
+        clearInterval(timer);
+      }
+    }, speed);
+
+    return () => clearInterval(timer);
+  }, [text, type]);
+
+  return (
+    <div style={{ color: type === 'input' ? 'var(--cyan-main)' : 'var(--text-secondary)', whiteSpace: 'pre-wrap' }}>
+      {displayedText}
+    </div>
+  );
+}
 
 export default function DevOpsTerminal() {
+
   const [history, setHistory] = useState([
     { type: 'output', text: '⚡ Bienvenido a la consola interactiva de Edgar J. Vargas (DevOps & Software Engineer)' },
     { type: 'output', text: 'Escribe "help" o presiona uno de los comandos rápidos a continuación:' }
@@ -134,7 +167,7 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
   };
 
   return (
-    <section id="terminal" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="terminal" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px', textAlign: 'center' }}>
         CLOUDSHELL & DEVOPS INTERACTIVO
       </div>
@@ -160,116 +193,138 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
           borderBottom: '1px solid rgba(255,255,255,0.08)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ff5f56', display: 'inline-block' }}></span>
-            <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ffbd2e', display: 'inline-block' }}></span>
-            <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#27c93f', display: 'inline-block' }}></span>
-            <span style={{ marginLeft: '12px', fontSize: '0.85rem', color: '#9ca3af', fontFamily: 'JetBrains Mono, monospace', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <TerminalIcon size={14} color="var(--cyan-main)" />
-              neox@aws-cloud-us-east-1:~ (zsh)
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ef4444' }}></div>
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#f59e0b' }}></div>
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#10b981' }}></div>
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginLeft: '8px', fontFamily: 'JetBrains Mono, monospace' }}>
+              bash - neox@devops-aws:~
             </span>
           </div>
 
-          <button
-            onClick={copyTerminalOutput}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: '#9ca3af',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              fontSize: '0.75rem'
-            }}
-            title="Copiar texto de la terminal"
-          >
-            {copied ? <Check size={14} color="var(--emerald-main)" /> : <Copy size={14} />}
-            <span>{copied ? 'Copiado' : 'Copiar'}</span>
-          </button>
-        </div>
-
-        {/* Terminal Quick Chips */}
-        <div style={{
-          background: '#0d111a',
-          padding: '8px 16px',
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '8px',
-          borderBottom: '1px solid rgba(255,255,255,0.05)'
-        }}>
-          <span style={{ fontSize: '0.75rem', color: '#6b7280', alignSelf: 'center', marginRight: '4px' }}>Comandos rápidos:</span>
-          {quickCmds.map((cmd) => (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <button
-              key={cmd}
-              onClick={() => commandHandler(cmd)}
+              onClick={copyTerminalOutput}
+              title="Copiar contenido de terminal"
               style={{
-                background: 'rgba(56, 189, 248, 0.1)',
-                border: '1px solid rgba(56, 189, 248, 0.25)',
-                color: 'var(--cyan-main)',
-                padding: '3px 10px',
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid var(--border)',
                 borderRadius: '6px',
+                padding: '4px 8px',
+                color: 'var(--text-secondary)',
                 fontSize: '0.75rem',
-                fontFamily: 'JetBrains Mono, monospace',
                 cursor: 'pointer',
-                transition: 'all 0.2s ease'
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px'
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(56, 189, 248, 0.25)')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(56, 189, 248, 0.1)')}
             >
-              $ {cmd}
+              {copied ? <Check size={14} color="var(--emerald-main)" /> : <Copy size={14} />}
+              <span>{copied ? 'Copiado' : 'Copiar Log'}</span>
             </button>
-          ))}
+            <button
+              onClick={() => commandHandler('clear')}
+              title="Limpiar pantalla"
+              style={{
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid var(--border)',
+                borderRadius: '6px',
+                padding: '4px 8px',
+                color: 'var(--text-secondary)',
+                fontSize: '0.75rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
+            >
+              <RefreshCw size={14} />
+              <span>Clear</span>
+            </button>
+          </div>
         </div>
 
-        {/* Terminal Output Body */}
+        {/* Terminal Body */}
         <div style={{
           padding: '20px',
           minHeight: '260px',
-          maxHeight: '400px',
+          maxHeight: '380px',
           overflowY: 'auto',
           fontFamily: 'JetBrains Mono, monospace',
-          fontSize: '0.88rem',
+          fontSize: '0.85rem',
           lineHeight: '1.6',
-          color: '#e5e7eb'
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '8px'
         }}>
           {history.map((item, idx) => (
-            <div key={idx} style={{ marginBottom: '8px', whiteSpace: 'pre-wrap' }}>
-              {item.type === 'input' ? (
-                <span style={{ color: 'var(--cyan-main)', fontWeight: 'bold' }}>{item.text}</span>
-              ) : (
-                <span style={{ color: '#d1d5db' }}>{item.text}</span>
-              )}
-            </div>
+            <TypewriterLine key={idx} text={item.text} type={item.type} />
           ))}
 
-          {/* Active Input Line */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '12px' }}>
-            <span style={{ color: 'var(--emerald-main)', fontWeight: 'bold' }}>neox@devops-aws:~$</span>
+
+          {/* Prompt Input Line */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px' }}>
+            <span style={{ color: 'var(--emerald-main)', fontWeight: '700' }}>neox@devops-aws:~$</span>
             <input
               type="text"
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="escribe un comando (ej: help)..."
+              placeholder="Escribe 'help'..."
               style={{
+                flex: 1,
                 background: 'transparent',
                 border: 'none',
-                outline: 'none',
-                color: '#ffffff',
+                color: 'var(--text-primary)',
                 fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '0.88rem',
-                flex: 1
+                fontSize: '0.85rem',
+                outline: 'none'
               }}
-              autoComplete="off"
             />
+          </div>
+        </div>
+
+        {/* Terminal Footer Quick Command Buttons */}
+        <div style={{
+          background: '#0d111a',
+          padding: '10px 18px',
+          borderTop: '1px solid rgba(255,255,255,0.06)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          flexWrap: 'wrap'
+        }}>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '600', marginRight: '4px' }}>RÁPIDOS:</span>
+          {quickCmds.map((cmd) => (
+            <button
+              key={cmd}
+              onClick={() => commandHandler(cmd)}
+              style={{
+                background: 'rgba(56, 189, 248, 0.08)',
+                border: '1px solid rgba(56, 189, 248, 0.2)',
+                borderRadius: '6px',
+                padding: '4px 10px',
+                color: 'var(--cyan-main)',
+                fontSize: '0.75rem',
+                fontFamily: 'JetBrains Mono, monospace',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(56, 189, 248, 0.2)')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(56, 189, 248, 0.08)')}
+            >
+              {cmd}
+            </button>
+          ))}
+          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Presiona Enter para ejecutar</span>
             <button
               onClick={() => commandHandler(inputVal)}
               style={{
                 background: 'var(--cyan-main)',
                 border: 'none',
                 borderRadius: '4px',
-                padding: '4px 8px',
-                color: '#000',
+                width: '24px',
+                height: '24px',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -281,6 +336,6 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
           </div>
         </div>
       </div>
-    </section>
+    </FadeInSection>
   );
 }
