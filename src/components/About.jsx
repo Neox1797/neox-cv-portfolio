@@ -20,22 +20,22 @@ export default function About() {
   ];
 
   return (
-    <FadeInSection id="about" style={{ padding: '36px 20px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="about" style={{ padding: '48px 16px 32px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         PRESENTACIÓN PROFESIONAL
       </div>
-      <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '20px' }}>
         Sobre Mí & Enfoque Técnico
       </h2>
 
       {/* Metrics Row */}
-      <StaggerContainer className="about-metrics-grid" style={{ display: 'grid', gap: '14px', marginBottom: '24px' }}>
+      <StaggerContainer className="about-metrics-grid" style={{ display: 'grid', gap: '12px', marginBottom: '24px' }}>
         {metrics.map((m, idx) => (
-          <StaggerItem key={idx} className="glass-card" style={{ padding: '18px 20px', display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div style={{
-              width: '46px',
-              height: '46px',
-              borderRadius: '12px',
+          <StaggerItem key={idx} className="glass-card about-metric-card" style={{ padding: '16px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="about-metric-icon" style={{
+              width: '42px',
+              height: '42px',
+              borderRadius: '10px',
               background: 'rgba(255, 255, 255, 0.05)',
               display: 'flex',
               alignItems: 'center',
@@ -46,10 +46,10 @@ export default function About() {
               {m.icon}
             </div>
             <div>
-              <div style={{ fontSize: '1.6rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: 1 }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: 1.1 }}>
                 {m.value}
               </div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
+              <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', marginTop: '4px', lineHeight: 1.3 }}>
                 {m.label}
               </div>
             </div>
@@ -58,34 +58,34 @@ export default function About() {
       </StaggerContainer>
 
       {/* Bio and Personal Details */}
-      <StaggerContainer className="about-details-grid" style={{ display: 'grid', gap: '24px' }}>
+      <StaggerContainer className="about-details-grid" style={{ display: 'grid', gap: '20px' }}>
         
         {/* Bio text */}
-        <StaggerItem className="glass-panel" style={{ padding: '28px' }}>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '16px', color: 'var(--cyan-main)' }}>
+        <StaggerItem className="glass-panel about-panel" style={{ padding: '24px' }}>
+          <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '14px', color: 'var(--cyan-main)' }}>
             Perfil de Ingeniería de Software
           </h3>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '16px', lineHeight: '1.7', fontSize: '0.95rem' }}>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '14px', lineHeight: '1.65', fontSize: '0.92rem' }}>
             Soy un profesional enfocado en superar constantes retos técnicos y expandir los horizontes tecnológicos adquiridos en mi formación académica y experiencia corporativa.
           </p>
-          <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', fontSize: '0.95rem' }}>
+          <p style={{ color: 'var(--text-secondary)', lineHeight: '1.65', fontSize: '0.92rem' }}>
             Me destaco por mi capacidad para intervenir en soluciones técnicas críticas, desarrollo backend con Spring Boot/PHP, maquetación ágil frontend en Angular y React, integración de microservicios y soporte continuo con metodología Scrum / Agile.
           </p>
         </StaggerItem>
 
         {/* Quick Details Table */}
-        <StaggerItem className="glass-panel" style={{ padding: '28px' }}>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '20px', color: 'var(--violet-main)' }}>
+        <StaggerItem className="glass-panel about-panel" style={{ padding: '24px' }}>
+          <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '18px', color: 'var(--violet-main)' }}>
             Datos Personales
           </h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {personalData.map((item, idx) => (
-              <div key={idx} style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '6px', paddingBottom: '10px', borderBottom: '1px solid var(--border)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <div key={idx} className="about-detail-row" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '4px', paddingBottom: '10px', borderBottom: '1px solid var(--border)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <div style={{ color: 'var(--cyan-main)', flexShrink: 0 }}>{item.icon}</div>
-                  <span style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>{item.label}:</span>
+                  <span style={{ fontSize: '0.84rem', color: 'var(--text-muted)', fontWeight: '500' }}>{item.label}:</span>
                 </div>
-                <div style={{ fontSize: '0.88rem', fontWeight: '600', color: 'var(--text-primary)', wordBreak: 'break-word', textAlign: 'right' }}>
+                <div className="about-detail-val" style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)', wordBreak: 'break-word' }}>
                   {item.val}
                 </div>
               </div>
@@ -98,17 +98,38 @@ export default function About() {
       {/* Responsive Breakpoint Styles */}
       <style>{`
         .about-metrics-grid {
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         }
         .about-details-grid {
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         }
-        @media (max-width: 500px) {
+        @media (max-width: 520px) {
+          .about-panel {
+            padding: 18px 16px !important;
+          }
           .about-metrics-grid {
             grid-template-columns: repeat(2, 1fr) !important;
           }
+          .about-metric-card {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            padding: 14px 12px !important;
+          }
+          .about-metric-icon {
+            width: 36px !important;
+            height: 36px !important;
+          }
           .about-details-grid {
             grid-template-columns: 1fr !important;
+          }
+          .about-detail-row {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 2px !important;
+          }
+          .about-detail-val {
+            text-align: left !important;
+            padding-left: 24px;
           }
         }
       `}</style>

@@ -329,37 +329,75 @@ export default function Hero({ onDownloadCV }) {
 
 
       {/* Scroll Down Indicator */}
-      <a
+      <motion.a
         href="#about"
+        className="scroll-down-indicator"
         style={{
           position: 'absolute',
-          bottom: '16px',
+          bottom: '24px',
           left: '50%',
           transform: 'translateX(-50%)',
-          color: 'var(--text-muted)',
+          color: 'var(--text-secondary)',
           textDecoration: 'none',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '4px',
-          fontSize: '0.72rem',
-          fontWeight: '500'
+          gap: '6px',
+          fontSize: '0.75rem',
+          fontWeight: '600',
+          letterSpacing: '0.3px',
+          zIndex: 10,
+          transition: 'color 0.2s ease'
         }}
+        whileHover={{ y: 3 }}
       >
         <span>Desliza para explorar</span>
-        <ArrowDown size={14} className="pulse-emerald" style={{ animationDuration: '1.5s' }} />
-      </a>
+        <div style={{
+          width: '32px',
+          height: '32px',
+          borderRadius: '50%',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border-highlight)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: 'var(--shadow-card)'
+        }}>
+          <ArrowDown size={15} color="var(--cyan-main)" className="bounce-arrow" />
+        </div>
+      </motion.a>
 
-      {/* Responsive Styles for Hero */}
+      {/* Responsive & Animation Styles for Hero */}
       <style>{`
         .hero-avatar-frame {
           width: 280px;
           height: 280px;
         }
+        @keyframes bounceArrow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(4px); }
+        }
+        .bounce-arrow {
+          animation: bounceArrow 1.8s ease-in-out infinite;
+        }
+        @media (max-width: 880px) {
+          #hero {
+            padding-top: 90px !important;
+            padding-bottom: 50px !important;
+            min-height: auto !important;
+          }
+          .scroll-down-indicator {
+            position: relative !important;
+            bottom: auto !important;
+            left: auto !important;
+            transform: none !important;
+            margin-top: 32px;
+          }
+        }
         @media (max-width: 480px) {
           .hero-avatar-frame {
-            width: 230px;
-            height: 230px;
+            width: 220px;
+            height: 220px;
           }
           .hero-cta-container {
             flex-direction: column;
@@ -369,6 +407,9 @@ export default function Hero({ onDownloadCV }) {
           }
           .hero-feature-badge {
             padding: 6px 10px !important;
+          }
+          .scroll-down-indicator {
+            display: none !important;
           }
         }
       `}</style>
