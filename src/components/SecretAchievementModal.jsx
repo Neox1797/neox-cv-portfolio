@@ -8,6 +8,7 @@ export default function SecretAchievementModal({ isOpen, onClose, onActivateMatr
 
   useEffect(() => {
     if (isOpen) {
+      document.body.style.overflow = 'hidden';
       // Fire confetti burst
       try {
         confetti({
@@ -27,6 +28,10 @@ export default function SecretAchievementModal({ isOpen, onClose, onActivateMatr
         } catch (e) {}
       }
     }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isOpen]);
 
   const copySecretCommand = () => {

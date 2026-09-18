@@ -8,6 +8,20 @@ export default function MatrixBlackoutOverlay({ isActive, onClose }) {
   useEffect(() => {
     if (!isActive) return;
 
+    // Lock page scrolling on mobile and desktop while overlay is active
+    const origBodyOverflow = document.body.style.overflow;
+    const origHtmlOverflow = document.documentElement.style.overflow;
+    const origBodyTouch = document.body.style.touchAction;
+
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
+
+    const preventTouch = (e) => {
+      e.preventDefault();
+    };
+    window.addEventListener('touchmove', preventTouch, { passive: false });
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -70,6 +84,10 @@ export default function MatrixBlackoutOverlay({ isActive, onClose }) {
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
+      document.body.style.overflow = origBodyOverflow;
+      document.documentElement.style.overflow = origHtmlOverflow;
+      document.body.style.touchAction = origBodyTouch;
+      window.removeEventListener('touchmove', preventTouch);
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('keydown', handleKeyDown);
