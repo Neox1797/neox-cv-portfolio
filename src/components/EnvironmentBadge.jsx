@@ -26,13 +26,13 @@ export default function EnvironmentBadge() {
         <div
           style={{
             marginBottom: '8px',
-            background: 'rgba(15, 23, 42, 0.95)',
+            background: 'var(--glass-bg)',
             backdropFilter: 'blur(12px)',
             border: `1px solid ${env.borderColor}`,
             borderRadius: '12px',
             padding: '14px 16px',
-            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 0, 0, 0.3)',
-            color: '#f8fafc',
+            boxShadow: 'var(--shadow-card)',
+            color: 'var(--text-primary)',
             minWidth: '260px',
             maxWidth: '320px',
             fontSize: '0.82rem',
@@ -49,7 +49,7 @@ export default function EnvironmentBadge() {
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: '#94a3b8',
+                color: 'var(--text-muted)',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -61,16 +61,16 @@ export default function EnvironmentBadge() {
             </button>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', color: '#cbd5e1' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyBetween: 'space-between', gap: '8px' }}>
-              <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', color: 'var(--text-secondary)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+              <span style={{ color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
                 <GitBranch size={13} /> Rama Git:
               </span>
-              <span style={{ fontWeight: '600', fontFamily: 'monospace', color: '#f1f5f9' }}>{env.branch}</span>
+              <span style={{ fontWeight: '600', fontFamily: 'monospace', color: 'var(--text-primary)' }}>{env.branch}</span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span style={{ color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
                 <Server size={13} /> Vercel Env:
               </span>
               <span style={{ fontWeight: '600', fontFamily: 'monospace', color: env.color, textTransform: 'uppercase' }}>
@@ -80,14 +80,14 @@ export default function EnvironmentBadge() {
 
             {env.commitSha && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span style={{ color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <ShieldCheck size={13} /> Commit:
                 </span>
-                <span style={{ fontWeight: '600', fontFamily: 'monospace', color: '#94a3b8' }}>{env.commitSha}</span>
+                <span style={{ fontWeight: '600', fontFamily: 'monospace', color: 'var(--text-muted)' }}>{env.commitSha}</span>
               </div>
             )}
 
-            <div style={{ marginTop: '6px', fontSize: '0.75rem', color: '#94a3b8', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '6px' }}>
+            <div style={{ marginTop: '6px', fontSize: '0.75rem', color: 'var(--text-muted)', borderTop: '1px solid var(--border)', paddingTop: '6px' }}>
               {env.description}
             </div>
           </div>

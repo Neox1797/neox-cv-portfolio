@@ -147,7 +147,7 @@ export default function Certifications() {
                     <span style={{
                       padding: '4px 10px',
                       borderRadius: '20px',
-                      background: 'rgba(255,255,255,0.06)',
+                      background: 'var(--icon-box-bg)',
                       color: c.color,
                       border: `1px solid ${c.color}40`,
                       fontSize: '0.72rem',
@@ -202,7 +202,7 @@ export default function Certifications() {
                   rel="noopener noreferrer"
                   style={{
                     textDecoration: 'none',
-                    background: 'rgba(255,255,255,0.05)',
+                    background: 'var(--icon-box-bg)',
                     border: '1px solid var(--border)',
                     color: 'var(--text-primary)',
                     padding: '8px 12px',

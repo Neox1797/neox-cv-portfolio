@@ -36,7 +36,7 @@ export default function About() {
               width: '42px',
               height: '42px',
               borderRadius: '10px',
-              background: 'rgba(255, 255, 255, 0.05)',
+              background: 'var(--icon-box-bg)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

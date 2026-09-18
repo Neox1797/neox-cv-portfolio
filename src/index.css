@@ -49,12 +49,17 @@
   --text-muted: var(--text-dark-muted);
   --border: var(--border-dark);
   --border-highlight: var(--border-dark-highlight);
-  --glass-bg: rgba(11, 15, 25, 0.8);
+  --glass-bg: rgba(11, 15, 25, 0.85);
   --glass-border: rgba(255, 255, 255, 0.1);
   --nav-bg: rgba(7, 9, 14, 0.88);
   --shadow-card: var(--shadow-dark-card);
   --shadow-card-hover: var(--shadow-dark-hover);
   --hero-radial: radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.12) 0%, rgba(139, 92, 246, 0.08) 40%, transparent 80%);
+  --icon-box-bg: rgba(255, 255, 255, 0.05);
+  --terminal-bg: #0a0d14;
+  --terminal-header-bg: #121722;
+  --terminal-footer-bg: #0d111a;
+  --terminal-border: rgba(56, 189, 248, 0.25);
 }
 
 [data-theme='light'] {
@@ -71,12 +76,17 @@
   --text-muted: var(--text-light-muted);
   --border: var(--border-light);
   --border-highlight: var(--border-light-highlight);
-  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-bg: rgba(255, 255, 255, 0.88);
   --glass-border: rgba(15, 23, 42, 0.08);
   --nav-bg: rgba(248, 250, 252, 0.88);
   --shadow-card: var(--shadow-light-card);
   --shadow-card-hover: var(--shadow-light-hover);
   --hero-radial: radial-gradient(circle at 50% 20%, rgba(14, 165, 233, 0.08) 0%, rgba(124, 58, 237, 0.05) 40%, transparent 80%);
+  --icon-box-bg: rgba(15, 23, 42, 0.04);
+  --terminal-bg: #f8fafc;
+  --terminal-header-bg: #f1f5f9;
+  --terminal-footer-bg: #f1f5f9;
+  --terminal-border: rgba(14, 165, 233, 0.25);
 }
 
 * {

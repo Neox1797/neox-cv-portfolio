@@ -103,7 +103,7 @@ export default function Skills() {
               width: '40px',
               height: '40px',
               borderRadius: '10px',
-              background: 'rgba(255,255,255,0.05)',
+              background: 'var(--icon-box-bg)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

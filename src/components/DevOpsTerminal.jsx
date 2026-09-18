@@ -194,20 +194,20 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
 
       {/* Terminal Container */}
       <div style={{
-        background: '#0a0d14',
+        background: 'var(--terminal-bg)',
         borderRadius: '16px',
-        border: '1px solid rgba(56, 189, 248, 0.25)',
-        boxShadow: '0 20px 50px rgba(0,0,0,0.6), 0 0 25px rgba(56,189,248,0.1)',
+        border: '1px solid var(--terminal-border)',
+        boxShadow: 'var(--shadow-card)',
         overflow: 'hidden'
       }}>
         {/* Terminal Header */}
         <div style={{
-          background: '#121722',
+          background: 'var(--terminal-header-bg)',
           padding: '12px 16px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          borderBottom: '1px solid var(--border)',
           gap: '8px'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
@@ -224,7 +224,7 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
               onClick={copyTerminalOutput}
               title="Copiar contenido de terminal"
               style={{
-                background: 'rgba(255,255,255,0.06)',
+                background: 'var(--icon-box-bg)',
                 border: '1px solid var(--border)',
                 borderRadius: '6px',
                 padding: '4px 8px',
@@ -243,7 +243,7 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
               onClick={() => commandHandler('clear')}
               title="Limpiar pantalla"
               style={{
-                background: 'rgba(255,255,255,0.06)',
+                background: 'var(--icon-box-bg)',
                 border: '1px solid var(--border)',
                 borderRadius: '6px',
                 padding: '4px 8px',
@@ -305,9 +305,9 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
 
         {/* Terminal Footer Quick Command Buttons */}
         <div style={{
-          background: '#0d111a',
+          background: 'var(--terminal-footer-bg)',
           padding: '10px 14px',
-          borderTop: '1px solid rgba(255,255,255,0.06)',
+          borderTop: '1px solid var(--border)',
           display: 'flex',
           alignItems: 'center',
           gap: '6px',
