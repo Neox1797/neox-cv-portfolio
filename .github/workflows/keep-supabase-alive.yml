@@ -16,15 +16,16 @@ jobs:
           SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}"
 
           if [ -z "$SUPABASE_URL" ]; then
-            SUPABASE_URL="https://ygukbilrtdeltdnphwjz.supabase.co"
+            echo "❌ Error: El secret SUPABASE_URL no está configurado en GitHub (Settings -> Secrets and variables -> Actions)."
+            exit 1
           fi
 
           if [ -z "$SUPABASE_ANON_KEY" ]; then
-            SUPABASE_ANON_KEY="sb_publishable_w-g0iNW1Uj85MHVbwLY-0A_E5pqARyY"
+            echo "❌ Error: El secret SUPABASE_ANON_KEY no está configurado en GitHub (Settings -> Secrets and variables -> Actions)."
+            exit 1
           fi
 
           TARGET_URL="${SUPABASE_URL%/}/rest/v1/contact_messages?select=id&limit=1"
-          echo "Pinging target: $TARGET_URL"
 
           HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
             -H "apikey: $SUPABASE_ANON_KEY" \
