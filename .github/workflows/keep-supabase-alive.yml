@@ -6,20 +6,21 @@ on:
     - cron: '0 12 */3 * *'
   workflow_dispatch: # Permite disparo manual desde el tab Actions de GitHub
 
-env:
-  # Usa los Secrets de GitHub si están definidos; si no, usa las llaves del proyecto como respaldo
-  SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://ygukbilrtdeltdnphwjz.supabase.co' }}
-  SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY || 'sb_publishable_w-g0iNW1Uj85MHVbwLY-0A_E5pqARyY' }}
-
 jobs:
   ping-supabase:
     runs-on: ubuntu-latest
     steps:
       - name: Send keep-alive HTTP Ping to Supabase Table
         run: |
+          SUPABASE_URL="${{ secrets.SUPABASE_URL }}"
+          SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}"
+
           if [ -z "$SUPABASE_URL" ]; then
-            echo "❌ Error: SUPABASE_URL no está configurada."
-            exit 1
+            SUPABASE_URL="https://ygukbilrtdeltdnphwjz.supabase.co"
+          fi
+
+          if [ -z "$SUPABASE_ANON_KEY" ]; then
+            SUPABASE_ANON_KEY="sb_publishable_w-g0iNW1Uj85MHVbwLY-0A_E5pqARyY"
           fi
 
           TARGET_URL="${SUPABASE_URL%/}/rest/v1/contact_messages?select=id&limit=1"
