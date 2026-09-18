@@ -227,41 +227,91 @@ export default function Hero({ onDownloadCV }) {
 
         </motion.div>
 
-        {/* Right Column: Profile Image with Glow */}
-        <motion.div style={{ flex: '0 0 320px', display: 'flex', justifyContent: 'center', position: 'relative', y: parallaxYRight }} className="desktop-avatar-parallax">
-          <div className="glowing-avatar" style={{ width: '280px', height: '280px' }}>
-            <img
+        {/* Right Column: Profile Image with Elegant Fixed Glow */}
+        <motion.div
+          style={{
+            flex: '0 0 340px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative',
+            y: parallaxYRight
+          }}
+          className="desktop-avatar-parallax"
+        >
+          {/* Ambient soft glow backdrop */}
+          <div className="avatar-ambient-glow" />
 
+          {/* Top-Left Status Pill */}
+          <div style={{
+            position: 'absolute',
+            top: '-12px',
+            left: '0px',
+            zIndex: 3,
+            background: 'rgba(15, 23, 42, 0.85)',
+            border: '1px solid rgba(16, 185, 129, 0.4)',
+            padding: '6px 14px',
+            borderRadius: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
+            backdropFilter: 'blur(12px)',
+            fontSize: '0.8rem',
+            fontWeight: '600',
+            color: 'var(--text-primary)'
+          }}>
+            <span className="pulse-emerald" />
+            <span>Disponible</span>
+          </div>
+
+          {/* Main Avatar Frame */}
+          <div className="glowing-avatar" style={{ width: '290px', height: '290px', position: 'relative', zIndex: 1 }}>
+            <img
               src="/assets/img/me.jpeg"
               alt="Edgar J. Vargas Montiel"
               style={{
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
+                objectPosition: 'center 15%',
                 borderRadius: '50%',
-                border: '4px solid var(--bg-primary)'
+                border: '4px solid var(--bg-primary)',
+                display: 'block'
               }}
             />
           </div>
 
-          {/* Floating Badge */}
+          {/* Bottom-Right Floating Feature Badge */}
           <div style={{
             position: 'absolute',
-            bottom: '-10px',
-            right: '10px',
-            background: 'var(--bg-card)',
+            bottom: '-12px',
+            right: '-10px',
+            zIndex: 3,
+            background: 'rgba(15, 23, 42, 0.85)',
             border: '1px solid var(--border-highlight)',
             padding: '10px 16px',
-            borderRadius: '14px',
+            borderRadius: '16px',
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
-            boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
-            backdropFilter: 'blur(10px)'
+            boxShadow: '0 12px 28px rgba(0,0,0,0.35)',
+            backdropFilter: 'blur(12px)'
           }}>
-            <Code2 size={24} color="var(--cyan-main)" />
+            <div style={{
+              width: '38px',
+              height: '38px',
+              borderRadius: '10px',
+              background: 'rgba(56, 189, 248, 0.12)',
+              border: '1px solid rgba(56, 189, 248, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <Code2 size={20} color="var(--cyan-main)" />
+            </div>
             <div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Enfoque</div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: '600' }}>Enfoque</div>
               <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-primary)' }}>Software & Fullstack</div>
             </div>
           </div>

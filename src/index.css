@@ -166,13 +166,28 @@ body {
   position: relative;
   border-radius: 50%;
   padding: 4px;
-  background: linear-gradient(135deg, var(--cyan-main), var(--violet-main), var(--emerald-main));
-  animation: spinGlow 8s linear infinite;
+  background: linear-gradient(135deg, var(--cyan-main), var(--violet-main));
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.25), 0 0 70px rgba(139, 92, 246, 0.15);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
 }
 
-@keyframes spinGlow {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+.glowing-avatar:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 0 45px rgba(56, 189, 248, 0.4), 0 0 90px rgba(139, 92, 246, 0.25);
+}
+
+.avatar-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(139, 92, 246, 0.1) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(20px);
 }
 
 /* Pulsing Status Dot */
