@@ -35,7 +35,7 @@ export default function SecretAchievementModal({ isOpen, onClose, onActivateMatr
   }, [isOpen]);
 
   const copySecretCommand = () => {
-    navigator.clipboard.writeText('npx hire-neox --mode=fullstack-ai --level=senior');
+    navigator.clipboard.writeText('npx hire-neox --mode=fullstack-ai');
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
