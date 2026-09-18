@@ -7,8 +7,8 @@ export default function Footer() {
   };
 
   return (
-    <footer style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border)', padding: '16px 24px' }}>
-      <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+    <footer style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border)', padding: '16px 20px' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
         
         <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
           &copy; {new Date().getFullYear()} <strong style={{ color: 'var(--text-primary)' }}>Edgar J. Vargas</strong> · Software Engineer. Todos los derechos reservados.
@@ -28,7 +28,8 @@ export default function Footer() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            transition: 'all 0.2s ease'
+            transition: 'all 0.2s ease',
+            marginLeft: 'auto'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = 'var(--cyan-main)';

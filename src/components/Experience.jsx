@@ -95,29 +95,33 @@ export default function Experience() {
   ];
 
   return (
-    <FadeInSection id="experience" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="experience" style={{ padding: '36px 20px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         TRAYECTORIA Y FORMACIÓN
       </div>
-      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '20px' }}>
         Experiencia Profesional & Educación
       </h2>
 
       {/* Switcher Tabs */}
-      <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
+      <div className="exp-tabs-container" style={{ display: 'flex', gap: '12px', marginBottom: '24px', flexWrap: 'wrap' }}>
         <button
           onClick={() => setActiveSection('work')}
+          className="exp-tab-btn"
           style={{
-            padding: '12px 24px',
+            padding: '10px 18px',
             borderRadius: '12px',
             border: activeSection === 'work' ? '1px solid var(--cyan-main)' : '1px solid var(--border)',
             background: activeSection === 'work' ? 'rgba(56, 189, 248, 0.15)' : 'var(--bg-card)',
             color: activeSection === 'work' ? 'var(--cyan-main)' : 'var(--text-secondary)',
             fontWeight: '700',
+            fontSize: '0.88rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px'
+            justifyContent: 'center',
+            gap: '8px',
+            flex: '1 1 180px'
           }}
         >
           <Briefcase size={18} />
@@ -126,17 +130,21 @@ export default function Experience() {
 
         <button
           onClick={() => setActiveSection('education')}
+          className="exp-tab-btn"
           style={{
-            padding: '12px 24px',
+            padding: '10px 18px',
             borderRadius: '12px',
             border: activeSection === 'education' ? '1px solid var(--violet-main)' : '1px solid var(--border)',
             background: activeSection === 'education' ? 'rgba(139, 92, 246, 0.15)' : 'var(--bg-card)',
             color: activeSection === 'education' ? 'var(--violet-main)' : 'var(--text-secondary)',
             fontWeight: '700',
+            fontSize: '0.88rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px'
+            justifyContent: 'center',
+            gap: '8px',
+            flex: '1 1 180px'
           }}
         >
           <GraduationCap size={18} />
@@ -146,36 +154,37 @@ export default function Experience() {
 
       {/* Work Timeline */}
       {activeSection === 'work' && (
-        <StaggerContainer style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <StaggerContainer style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {workExperience.map((item, idx) => (
-            <StaggerItem key={idx} className="glass-panel" style={{ padding: '24px', position: 'relative', overflow: 'hidden' }}>
+            <StaggerItem key={idx} className="glass-panel" style={{ padding: '20px 24px', position: 'relative', overflow: 'hidden' }}>
               
               {/* Header Bar */}
               <div
                 onClick={() => toggleExpand(idx)}
+                className="exp-header-bar"
                 style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', gap: '12px' }}
               >
                 <div>
-                  <div style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+                  <div style={{ fontSize: '1.1rem', fontWeight: '800', color: 'var(--text-primary)' }}>
                     {item.role}
                   </div>
-                  <div style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--cyan-main)', marginTop: '2px' }}>
+                  <div style={{ fontSize: '0.92rem', fontWeight: '600', color: 'var(--cyan-main)', marginTop: '2px' }}>
                     {item.company}
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                  <div style={{ textAlign: 'right' }}>
-                    <div style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--emerald-main)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <Calendar size={14} />
+                <div className="exp-right-meta" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                  <div className="exp-meta-text" style={{ textAlign: 'right' }}>
+                    <div style={{ fontSize: '0.82rem', fontWeight: '600', color: 'var(--emerald-main)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <Calendar size={13} />
                       {item.period}
                     </div>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
                       <MapPin size={12} />
                       {item.location}
                     </div>
                   </div>
-                  <button style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }}>
+                  <button style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '4px' }}>
                     {expandedItems[idx] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                   </button>
                 </div>
@@ -183,18 +192,18 @@ export default function Experience() {
 
               {/* Collapsible Details */}
               {expandedItems[idx] && (
-                <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid var(--border)' }}>
-                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '20px' }}>
+                <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--border)' }}>
+                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px' }}>
                     {item.highlights.map((h, i) => (
-                      <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.92rem', color: 'var(--text-secondary)' }}>
-                        <CheckCircle2 size={16} color="var(--cyan-main)" style={{ marginTop: '3px', flexShrink: 0 }} />
+                      <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
+                        <CheckCircle2 size={15} color="var(--cyan-main)" style={{ marginTop: '3px', flexShrink: 0 }} />
                         <span>{h}</span>
                       </li>
                     ))}
                   </ul>
 
                   {/* Tech Badges */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                     {item.techs.map((t, i) => (
                       <span key={i} className="tech-badge">
                         {t}
@@ -211,23 +220,40 @@ export default function Experience() {
 
       {/* Education List */}
       {activeSection === 'education' && (
-        <StaggerContainer style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <StaggerContainer style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {educationList.map((edu, idx) => (
-            <StaggerItem key={idx} className="glass-panel" style={{ padding: '24px' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: '12px' }}>
+            <StaggerItem key={idx} className="glass-panel" style={{ padding: '20px 24px' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: '10px', gap: '8px' }}>
                 <div>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--text-primary)' }}>{edu.degree}</h3>
-                  <div style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--violet-main)' }}>{edu.institution}</div>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: '800', color: 'var(--text-primary)' }}>{edu.degree}</h3>
+                  <div style={{ fontSize: '0.92rem', fontWeight: '600', color: 'var(--violet-main)' }}>{edu.institution}</div>
                 </div>
                 <div>
-                  <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--emerald-main)' }}>{edu.period}</span>
+                  <span style={{ fontSize: '0.82rem', fontWeight: '600', color: 'var(--emerald-main)' }}>{edu.period}</span>
                 </div>
               </div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6' }}>{edu.details}</p>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>{edu.details}</p>
             </StaggerItem>
           ))}
         </StaggerContainer>
       )}
+
+      {/* Responsive Styles */}
+      <style>{`
+        @media (max-width: 600px) {
+          .exp-header-bar {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
+          .exp-right-meta {
+            width: 100% !important;
+            justify-content: space-between !important;
+          }
+          .exp-meta-text {
+            text-align: left !important;
+          }
+        }
+      `}</style>
     </FadeInSection>
   );
 }

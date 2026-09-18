@@ -100,40 +100,40 @@ export default function Contact() {
   };
 
   return (
-    <FadeInSection id="contact" style={{ padding: '40px 24px 60px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="contact" style={{ padding: '36px 20px 50px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         CANALES DIRECTOS Y MENSAJERÍA
       </div>
-      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '20px' }}>
         Información de Contacto
       </h2>
 
-      <StaggerContainer style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: '24px' }}>
+      <StaggerContainer className="contact-grid" style={{ display: 'grid', gap: '20px', marginBottom: '24px' }}>
 
         {/* Left Column: Direct Info */}
-        <StaggerItem className="glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-          <h3 style={{ fontSize: '1.3rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+        <StaggerItem className="glass-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <h3 style={{ fontSize: '1.2rem', fontWeight: '700', color: 'var(--text-primary)' }}>
             ¿Tienes alguna propuesta o duda?
           </h3>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6' }}>
             Estoy disponible para oportunidades laborales a tiempo completo, proyectos freelance de desarrollo web/Cloud DevOps o consultoría técnica.
           </p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
 
             {/* Email Card */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '14px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
-              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(56, 189, 248, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cyan-main)' }}>
-                <Mail size={20} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+              <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(56, 189, 248, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cyan-main)', flexShrink: 0 }}>
+                <Mail size={18} />
               </div>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Correo Electrónico</div>
-                <div style={{ fontWeight: '700', fontSize: '0.95rem', color: 'var(--text-primary)' }}>edgar.vmontiel@gmail.com</div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Correo Electrónico</div>
+                <div style={{ fontWeight: '700', fontSize: '0.88rem', color: 'var(--text-primary)', wordBreak: 'break-all' }}>edgar.vmontiel@gmail.com</div>
               </div>
               <button
                 onClick={copyEmailToClipboard}
                 title="Copiar correo"
-                style={{ background: 'none', border: 'none', color: 'var(--cyan-main)', cursor: 'pointer', padding: '4px' }}
+                style={{ background: 'none', border: 'none', color: 'var(--cyan-main)', cursor: 'pointer', padding: '4px', flexShrink: 0 }}
               >
                 {copiedEmail ? <CheckCircle2 size={18} color="var(--emerald-main)" /> : <Copy size={18} />}
               </button>
@@ -142,7 +142,7 @@ export default function Contact() {
             {/* Phone Card */}
             <a
               href="tel:5584752143"
-              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '14px', padding: '14px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'inherit', transition: 'all 0.2s ease' }}
+              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'inherit', transition: 'all 0.2s ease' }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = 'var(--emerald-main)';
                 e.currentTarget.style.transform = 'translateY(-2px)';
@@ -152,12 +152,12 @@ export default function Contact() {
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
-              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--emerald-main)' }}>
-                <Phone size={20} />
+              <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--emerald-main)', flexShrink: 0 }}>
+                <Phone size={18} />
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Teléfono Directo</div>
-                <div style={{ fontWeight: '700', fontSize: '0.95rem', color: 'var(--text-primary)' }}>+52 55 8475 2143</div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Teléfono Directo</div>
+                <div style={{ fontWeight: '700', fontSize: '0.88rem', color: 'var(--text-primary)' }}>+52 55 8475 2143</div>
               </div>
             </a>
 
@@ -166,7 +166,7 @@ export default function Contact() {
               href="https://www.linkedin.com/in/edgar-vargas-465437200"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '14px', padding: '14px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'inherit', transition: 'all 0.2s ease' }}
+              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'inherit', transition: 'all 0.2s ease' }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = 'var(--cyan-main)';
                 e.currentTarget.style.transform = 'translateY(-2px)';
@@ -176,24 +176,24 @@ export default function Contact() {
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
-              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(56, 189, 248, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cyan-main)' }}>
-                <LinkedinIcon size={20} />
+              <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(56, 189, 248, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cyan-main)', flexShrink: 0 }}>
+                <LinkedinIcon size={18} />
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Red Profesional</div>
-                <div style={{ fontWeight: '700', fontSize: '0.95rem', color: 'var(--text-primary)' }}>LinkedIn / Edgar Vargas</div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Red Profesional</div>
+                <div style={{ fontWeight: '700', fontSize: '0.88rem', color: 'var(--text-primary)' }}>LinkedIn / Edgar Vargas</div>
               </div>
-              <ExternalLink size={16} color="var(--text-muted)" />
+              <ExternalLink size={16} color="var(--text-muted)" style={{ flexShrink: 0 }} />
             </a>
 
             {/* Location Card */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '14px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
-              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(139, 92, 246, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--violet-main)' }}>
-                <MapPin size={20} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+              <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(139, 92, 246, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--violet-main)', flexShrink: 0 }}>
+                <MapPin size={18} />
               </div>
               <div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Residencia</div>
-                <div style={{ fontWeight: '700', fontSize: '0.95rem', color: 'var(--text-primary)' }}>Santiago de Querétaro, Qro. Centro</div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Residencia</div>
+                <div style={{ fontWeight: '700', fontSize: '0.88rem', color: 'var(--text-primary)' }}>Santiago de Querétaro, Qro. Centro</div>
               </div>
             </div>
 
@@ -208,7 +208,7 @@ export default function Contact() {
               textDecoration: 'none',
               background: '#25D366',
               color: '#ffffff',
-              padding: '14px',
+              padding: '12px',
               borderRadius: '12px',
               fontWeight: '700',
               textAlign: 'center',
@@ -216,6 +216,7 @@ export default function Contact() {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '10px',
+              fontSize: '0.9rem',
               boxShadow: '0 4px 15px rgba(37, 211, 102, 0.3)'
             }}
           >
@@ -225,8 +226,8 @@ export default function Contact() {
         </StaggerItem>
 
         {/* Right Column: Contact Form */}
-        <StaggerItem className="glass-panel" style={{ padding: '32px' }}>
-          <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '20px', color: 'var(--text-primary)' }}>
+        <StaggerItem className="glass-panel" style={{ padding: '24px' }}>
+          <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '18px', color: 'var(--text-primary)' }}>
             Envía un Mensaje por Correo
           </h3>
 
@@ -470,6 +471,17 @@ export default function Contact() {
           </div>
         </div>
 
+      {/* Responsive Styles for Contact */}
+      <style>{`
+        .contact-grid {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        @media (max-width: 540px) {
+          .contact-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </FadeInSection>
   );
 }

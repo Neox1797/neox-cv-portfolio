@@ -122,8 +122,8 @@ export default function Header({ themeState, theme, toggleTheme }) {
             <span style={{ fontWeight: '800', fontSize: '0.92rem', color: 'var(--text-primary)', letterSpacing: '-0.2px' }}>
               Edgar J. Vargas
             </span>
-            <span style={{ color: 'var(--text-muted)', opacity: 0.4, fontSize: '0.85rem' }}>/</span>
-            <span style={{ fontSize: '0.74rem', color: 'var(--cyan-main)', fontFamily: 'JetBrains Mono, monospace', fontWeight: '500' }}>
+            <span className="brand-sub-role" style={{ color: 'var(--text-muted)', opacity: 0.4, fontSize: '0.85rem' }}>/</span>
+            <span className="brand-sub-role" style={{ fontSize: '0.74rem', color: 'var(--cyan-main)', fontFamily: 'JetBrains Mono, monospace', fontWeight: '500' }}>
               Software Engineer
             </span>
             <span className="pulse-emerald" style={{ width: '7px', height: '7px', marginLeft: '2px' }} title="Disponible para nuevos proyectos"></span>
@@ -172,7 +172,7 @@ export default function Header({ themeState, theme, toggleTheme }) {
 
 
         {/* Right Action Controls: Minimal Theme Selector */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           
           {/* Theme Selector Button */}
           <motion.button
@@ -184,7 +184,7 @@ export default function Header({ themeState, theme, toggleTheme }) {
               background: 'var(--bg-card)',
               border: '1px solid var(--border)',
               borderRadius: '20px',
-              padding: '6px 14px',
+              padding: '6px 12px',
               color: 'var(--text-primary)',
               cursor: 'pointer',
               display: 'flex',
@@ -196,7 +196,7 @@ export default function Header({ themeState, theme, toggleTheme }) {
             {mode === 'auto' && (
               <>
                 <Clock size={15} color="var(--cyan-main)" />
-                <span style={{ fontSize: '0.75rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span className="theme-btn-label" style={{ fontSize: '0.75rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '4px' }}>
                   Auto <span style={{ opacity: 0.8 }}>({currentTimeText})</span>
                 </span>
               </>
@@ -204,13 +204,13 @@ export default function Header({ themeState, theme, toggleTheme }) {
             {mode === 'light' && (
               <>
                 <Sun size={15} color="var(--amber-main)" />
-                <span style={{ fontSize: '0.75rem', fontWeight: '600' }}>Día ☀️</span>
+                <span className="theme-btn-label" style={{ fontSize: '0.75rem', fontWeight: '600' }}>Día ☀️</span>
               </>
             )}
             {mode === 'dark' && (
               <>
                 <Moon size={15} color="var(--violet-main)" />
-                <span style={{ fontSize: '0.75rem', fontWeight: '600' }}>Noche 🌙</span>
+                <span className="theme-btn-label" style={{ fontSize: '0.75rem', fontWeight: '600' }}>Noche 🌙</span>
               </>
             )}
           </motion.button>
@@ -225,7 +225,8 @@ export default function Header({ themeState, theme, toggleTheme }) {
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              padding: '4px'
+              padding: '6px',
+              borderRadius: '8px'
             }}
             className="mobile-toggle"
             aria-label="Toggle Menu"
@@ -248,30 +249,45 @@ export default function Header({ themeState, theme, toggleTheme }) {
               top: '100%',
               left: 0,
               right: 0,
-              background: 'var(--bg-secondary)',
+              background: 'var(--glass-bg)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
               borderBottom: '1px solid var(--border)',
-              padding: '20px',
+              padding: '16px 20px',
               display: 'flex',
               flexDirection: 'column',
-              gap: '16px',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+              gap: '12px',
+              boxShadow: '0 12px 36px rgba(0,0,0,0.5)',
+              maxHeight: 'calc(100vh - 70px)',
+              overflowY: 'auto'
             }}
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                style={{
-                  color: 'var(--text-primary)',
-                  textDecoration: 'none',
-                  fontSize: '1rem',
-                  fontWeight: '500'
-                }}
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    color: isActive ? 'var(--cyan-main)' : 'var(--text-primary)',
+                    background: isActive ? 'rgba(56, 189, 248, 0.1)' : 'transparent',
+                    borderLeft: isActive ? '3px solid var(--cyan-main)' : '3px solid transparent',
+                    textDecoration: 'none',
+                    fontSize: '0.95rem',
+                    fontWeight: isActive ? '700' : '500',
+                    padding: '10px 14px',
+                    borderRadius: '8px',
+                    minHeight: '44px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>
@@ -282,6 +298,12 @@ export default function Header({ themeState, theme, toggleTheme }) {
         @media (min-width: 880px) {
           .desktop-nav { display: flex !important; }
           .mobile-toggle { display: none !important; }
+        }
+        @media (max-width: 640px) {
+          .brand-sub-role { display: none !important; }
+        }
+        @media (max-width: 576px) {
+          .theme-btn-label { display: none !important; }
         }
       `}</style>
     </header>

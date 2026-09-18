@@ -47,28 +47,28 @@ export default function Skills() {
   const filteredSkills = activeTab === 'all' ? skillItems : skillItems.filter((s) => s.category === activeTab);
 
   return (
-    <FadeInSection id="skills" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="skills" style={{ padding: '36px 20px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         DOMINIO TÉCNICO Y PASATIEMPOS
       </div>
-      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '20px' }}>
         Matriz de Habilidades & Stack
       </h2>
 
       {/* Category Tabs */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '20px' }}>
         {categories.map((cat) => (
           <button
             key={cat.id}
             onClick={() => setActiveTab(cat.id)}
             style={{
-              padding: '10px 20px',
+              padding: '8px 16px',
               borderRadius: '30px',
               border: activeTab === cat.id ? '1px solid var(--cyan-main)' : '1px solid var(--border)',
               background: activeTab === cat.id ? 'rgba(56, 189, 248, 0.15)' : 'var(--bg-card)',
               color: activeTab === cat.id ? 'var(--cyan-main)' : 'var(--text-secondary)',
               fontWeight: '600',
-              fontSize: '0.88rem',
+              fontSize: '0.82rem',
               cursor: 'pointer',
               transition: 'all 0.2s ease'
             }}
@@ -79,12 +79,12 @@ export default function Skills() {
       </div>
 
       {/* Skill Progress Bars Grid */}
-      <StaggerContainer key={activeTab} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px', marginBottom: '32px' }}>
+      <StaggerContainer key={activeTab} className="skills-grid" style={{ display: 'grid', gap: '14px', marginBottom: '32px' }}>
         {filteredSkills.map((sk, idx) => (
-          <StaggerItem key={sk.name} className="glass-card" style={{ padding: '20px' }}>
+          <StaggerItem key={sk.name} className="glass-card" style={{ padding: '18px 20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-              <span style={{ fontWeight: '600', fontSize: '0.95rem', color: 'var(--text-primary)' }}>{sk.name}</span>
-              <span style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--cyan-main)' }}>{sk.pct}%</span>
+              <span style={{ fontWeight: '600', fontSize: '0.92rem', color: 'var(--text-primary)' }}>{sk.name}</span>
+              <span style={{ fontWeight: '700', fontSize: '0.88rem', color: 'var(--cyan-main)' }}>{sk.pct}%</span>
             </div>
             <AnimatedProgressBar pct={sk.pct} color={sk.color} />
           </StaggerItem>
@@ -93,31 +93,55 @@ export default function Skills() {
 
 
       {/* Hobbies / Soft Skills Sub-section */}
-      <h3 style={{ fontSize: '1.4rem', fontWeight: '700', marginBottom: '24px', color: 'var(--text-primary)' }}>
+      <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '20px', color: 'var(--text-primary)' }}>
         Pasatiempos & Desarrollo Personal
       </h3>
-      <StaggerContainer style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
+      <StaggerContainer className="hobbies-grid" style={{ display: 'grid', gap: '14px' }}>
         {hobbies.map((hob, idx) => (
-          <StaggerItem key={idx} className="glass-card" style={{ padding: '20px', display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <StaggerItem key={idx} className="glass-card" style={{ padding: '16px 18px', display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{
-              width: '44px',
-              height: '44px',
+              width: '40px',
+              height: '40px',
               borderRadius: '10px',
               background: 'rgba(255,255,255,0.05)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              border: '1px solid var(--border)'
+              border: '1px solid var(--border)',
+              flexShrink: 0
             }}>
               {hob.icon}
             </div>
             <div>
-              <div style={{ fontWeight: '700', fontSize: '0.92rem', color: 'var(--text-primary)' }}>{hob.name}</div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{hob.desc}</div>
+              <div style={{ fontWeight: '700', fontSize: '0.88rem', color: 'var(--text-primary)' }}>{hob.name}</div>
+              <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{hob.desc}</div>
             </div>
           </StaggerItem>
         ))}
       </StaggerContainer>
+
+      {/* Responsive Styles for Skills */}
+      <style>{`
+        .skills-grid {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        .hobbies-grid {
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+        @media (max-width: 540px) {
+          .skills-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .hobbies-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 360px) {
+          .hobbies-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </FadeInSection>
   );
 }

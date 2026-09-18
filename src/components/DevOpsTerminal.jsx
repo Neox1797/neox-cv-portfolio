@@ -184,11 +184,11 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
   };
 
   return (
-    <FadeInSection id="terminal" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="terminal" style={{ padding: '36px 20px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px', textAlign: 'center' }}>
         CLOUDSHELL & DEVOPS INTERACTIVO
       </div>
-      <h2 style={{ fontSize: '2rem', fontWeight: '800', textAlign: 'center', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: '800', textAlign: 'center', marginBottom: '20px' }}>
         Terminal de Comandos Virtual
       </h2>
 
@@ -203,22 +203,23 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
         {/* Terminal Header */}
         <div style={{
           background: '#121722',
-          padding: '12px 18px',
+          padding: '12px 16px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          borderBottom: '1px solid rgba(255,255,255,0.08)'
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          gap: '8px'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ef4444' }}></div>
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#f59e0b' }}></div>
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#10b981' }}></div>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginLeft: '8px', fontFamily: 'JetBrains Mono, monospace' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
+            <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444', flexShrink: 0 }}></div>
+            <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f59e0b', flexShrink: 0 }}></div>
+            <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10b981', flexShrink: 0 }}></div>
+            <span className="terminal-header-title" style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginLeft: '6px', fontFamily: 'JetBrains Mono, monospace', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
               bash - neox@devops-aws:~
             </span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
             <button
               onClick={copyTerminalOutput}
               title="Copiar contenido de terminal"
@@ -236,7 +237,7 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
               }}
             >
               {copied ? <Check size={14} color="var(--emerald-main)" /> : <Copy size={14} />}
-              <span>{copied ? 'Copiado' : 'Copiar Log'}</span>
+              <span className="terminal-btn-text">{copied ? 'Copiado' : 'Copiar'}</span>
             </button>
             <button
               onClick={() => commandHandler('clear')}
@@ -255,19 +256,19 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
               }}
             >
               <RefreshCw size={14} />
-              <span>Clear</span>
+              <span className="terminal-btn-text">Clear</span>
             </button>
           </div>
         </div>
 
         {/* Terminal Body */}
         <div style={{
-          padding: '20px',
+          padding: '16px',
           minHeight: '260px',
           maxHeight: '380px',
           overflowY: 'auto',
           fontFamily: 'JetBrains Mono, monospace',
-          fontSize: '0.85rem',
+          fontSize: '0.82rem',
           lineHeight: '1.6',
           display: 'flex',
           flexDirection: 'column',
@@ -280,7 +281,7 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
 
           {/* Prompt Input Line */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px' }}>
-            <span style={{ color: 'var(--emerald-main)', fontWeight: '700' }}>neox@devops-aws:~$</span>
+            <span className="terminal-prompt" style={{ color: 'var(--emerald-main)', fontWeight: '700', flexShrink: 0 }}>neox@devops-aws:~$</span>
             <input
               type="text"
               value={inputVal}
@@ -294,7 +295,8 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
                 color: 'var(--text-primary)',
                 fontFamily: 'JetBrains Mono, monospace',
                 fontSize: '0.85rem',
-                outline: 'none'
+                outline: 'none',
+                minWidth: '0'
               }}
             />
           </div>
@@ -303,14 +305,14 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
         {/* Terminal Footer Quick Command Buttons */}
         <div style={{
           background: '#0d111a',
-          padding: '10px 18px',
+          padding: '10px 14px',
           borderTop: '1px solid rgba(255,255,255,0.06)',
           display: 'flex',
           alignItems: 'center',
-          gap: '8px',
+          gap: '6px',
           flexWrap: 'wrap'
         }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '600', marginRight: '4px' }}>RÁPIDOS:</span>
+          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: '600', marginRight: '2px' }}>RÁPIDOS:</span>
           {quickCmds.map((cmd) => (
             <button
               key={cmd}
@@ -319,9 +321,9 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
                 background: 'rgba(56, 189, 248, 0.08)',
                 border: '1px solid rgba(56, 189, 248, 0.2)',
                 borderRadius: '6px',
-                padding: '4px 10px',
+                padding: '4px 8px',
                 color: 'var(--cyan-main)',
-                fontSize: '0.75rem',
+                fontSize: '0.72rem',
                 fontFamily: 'JetBrains Mono, monospace',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
@@ -333,19 +335,20 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
             </button>
           ))}
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Presiona Enter para ejecutar</span>
+            <span className="terminal-enter-hint" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Presiona Enter para ejecutar</span>
             <button
               onClick={() => commandHandler(inputVal)}
               style={{
                 background: 'var(--cyan-main)',
                 border: 'none',
                 borderRadius: '4px',
-                width: '24px',
-                height: '24px',
+                width: '26px',
+                height: '26px',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                flexShrink: 0
               }}
             >
               <Play size={12} fill="#000" />
@@ -353,6 +356,14 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
           </div>
         </div>
       </div>
+
+      {/* Responsive Styles for Terminal */}
+      <style>{`
+        @media (max-width: 540px) {
+          .terminal-enter-hint { display: none !important; }
+          .terminal-btn-text { display: none !important; }
+        }
+      `}</style>
     </FadeInSection>
   );
 }

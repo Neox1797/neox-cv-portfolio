@@ -97,18 +97,18 @@ export default function Certifications() {
   const expiredCount = certs.filter((c) => c.status === 'Expirada').length;
 
   return (
-    <FadeInSection id="certifications" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="certifications" style={{ padding: '36px 20px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         ACREDITACIONES OFICIALES
       </div>
       
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-        <h2 style={{ fontSize: '2.2rem', fontWeight: '800', margin: 0 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '14px', marginBottom: '24px' }}>
+        <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: '800', margin: 0 }}>
           Cursos & Certificaciones
         </h2>
 
         {/* Filter Buttons */}
-        <div style={{ display: 'flex', gap: '8px', background: 'var(--bg-card)', padding: '4px', borderRadius: '12px', border: '1px solid var(--border)' }}>
+        <div style={{ display: 'flex', gap: '6px', background: 'var(--bg-card)', padding: '4px', borderRadius: '12px', border: '1px solid var(--border)', flexWrap: 'wrap' }}>
           {[
             { id: 'all', label: `Todas (${certs.length})` },
             { id: 'Vigente', label: `Vigentes (${activeCount})` },
@@ -121,9 +121,9 @@ export default function Certifications() {
                 background: filter === tab.id ? 'var(--cyan-main)' : 'transparent',
                 color: filter === tab.id ? '#ffffff' : 'var(--text-secondary)',
                 border: 'none',
-                padding: '6px 14px',
+                padding: '6px 12px',
                 borderRadius: '8px',
-                fontSize: '0.82rem',
+                fontSize: '0.8rem',
                 fontWeight: '600',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
@@ -135,22 +135,22 @@ export default function Certifications() {
         </div>
       </div>
 
-      <StaggerContainer style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+      <StaggerContainer className="certs-grid" style={{ display: 'grid', gap: '16px' }}>
         {filteredCerts.map((c, idx) => {
           const isVigente = c.status === 'Vigente';
 
           return (
             <StaggerItem key={idx}>
-              <SpotlightCard className="glass-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+              <SpotlightCard className="glass-card" style={{ padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
                 <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', gap: '8px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', gap: '8px', flexWrap: 'wrap' }}>
                     <span style={{
                       padding: '4px 10px',
                       borderRadius: '20px',
                       background: 'rgba(255,255,255,0.06)',
                       color: c.color,
                       border: `1px solid ${c.color}40`,
-                      fontSize: '0.75rem',
+                      fontSize: '0.72rem',
                       fontWeight: '700'
                     }}>
                       {c.badge}
@@ -183,15 +183,15 @@ export default function Certifications() {
                     </span>
                   </div>
 
-                  <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '4px', color: 'var(--text-primary)' }}>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: '800', marginBottom: '4px', color: 'var(--text-primary)' }}>
                     {c.title}
                   </h3>
 
-                  <div style={{ fontSize: '0.88rem', fontWeight: '600', color: 'var(--cyan-main)', marginBottom: '8px' }}>
+                  <div style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--cyan-main)', marginBottom: '6px' }}>
                     {c.institution}
                   </div>
 
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '20px' }}>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '16px' }}>
                     {c.code}
                   </div>
                 </div>
@@ -205,9 +205,9 @@ export default function Certifications() {
                     background: 'rgba(255,255,255,0.05)',
                     border: '1px solid var(--border)',
                     color: 'var(--text-primary)',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    fontSize: '0.85rem',
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    fontSize: '0.82rem',
                     fontWeight: '600',
                     display: 'flex',
                     alignItems: 'center',
@@ -232,6 +232,18 @@ export default function Certifications() {
           );
         })}
       </StaggerContainer>
+
+      {/* Responsive Styles for Certifications */}
+      <style>{`
+        .certs-grid {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        @media (max-width: 540px) {
+          .certs-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </FadeInSection>
   );
 }

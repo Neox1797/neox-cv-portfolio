@@ -20,35 +20,36 @@ export default function About() {
   ];
 
   return (
-    <FadeInSection id="about" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="about" style={{ padding: '36px 20px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         PRESENTACIÓN PROFESIONAL
       </div>
-      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '20px' }}>
         Sobre Mí & Enfoque Técnico
       </h2>
 
       {/* Metrics Row */}
-      <StaggerContainer style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+      <StaggerContainer className="about-metrics-grid" style={{ display: 'grid', gap: '14px', marginBottom: '24px' }}>
         {metrics.map((m, idx) => (
-          <StaggerItem key={idx} className="glass-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <StaggerItem key={idx} className="glass-card" style={{ padding: '18px 20px', display: 'flex', alignItems: 'center', gap: '14px' }}>
             <div style={{
-              width: '50px',
-              height: '50px',
+              width: '46px',
+              height: '46px',
               borderRadius: '12px',
               background: 'rgba(255, 255, 255, 0.05)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              border: '1px solid var(--border)'
+              border: '1px solid var(--border)',
+              flexShrink: 0
             }}>
               {m.icon}
             </div>
             <div>
-              <div style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: 1 }}>
+              <div style={{ fontSize: '1.6rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: 1 }}>
                 {m.value}
               </div>
-              <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
                 {m.label}
               </div>
             </div>
@@ -57,38 +58,60 @@ export default function About() {
       </StaggerContainer>
 
       {/* Bio and Personal Details */}
-      <StaggerContainer style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}>
+      <StaggerContainer className="about-details-grid" style={{ display: 'grid', gap: '24px' }}>
         
         {/* Bio text */}
-        <StaggerItem className="glass-panel" style={{ padding: '32px' }}>
-          <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '16px', color: 'var(--cyan-main)' }}>
+        <StaggerItem className="glass-panel" style={{ padding: '28px' }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '16px', color: 'var(--cyan-main)' }}>
             Perfil de Ingeniería de Software
           </h3>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '16px', lineHeight: '1.7' }}>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '16px', lineHeight: '1.7', fontSize: '0.95rem' }}>
             Soy un profesional enfocado en superar constantes retos técnicos y expandir los horizontes tecnológicos adquiridos en mi formación académica y experiencia corporativa.
           </p>
-          <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}>
+          <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', fontSize: '0.95rem' }}>
             Me destaco por mi capacidad para intervenir en soluciones técnicas críticas, desarrollo backend con Spring Boot/PHP, maquetación ágil frontend en Angular y React, integración de microservicios y soporte continuo con metodología Scrum / Agile.
           </p>
         </StaggerItem>
 
         {/* Quick Details Table */}
-        <StaggerItem className="glass-panel" style={{ padding: '32px' }}>
-          <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '20px', color: 'var(--violet-main)' }}>
+        <StaggerItem className="glass-panel" style={{ padding: '28px' }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '20px', color: 'var(--violet-main)' }}>
             Datos Personales
           </h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {personalData.map((item, idx) => (
-              <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '12px', paddingBottom: '10px', borderBottom: '1px solid var(--border)' }}>
-                <div style={{ color: 'var(--cyan-main)' }}>{item.icon}</div>
-                <div style={{ flex: 1, fontSize: '0.9rem', color: 'var(--text-muted)' }}>{item.label}:</div>
-                <div style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-primary)' }}>{item.val}</div>
+              <div key={idx} style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '6px', paddingBottom: '10px', borderBottom: '1px solid var(--border)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ color: 'var(--cyan-main)', flexShrink: 0 }}>{item.icon}</div>
+                  <span style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>{item.label}:</span>
+                </div>
+                <div style={{ fontSize: '0.88rem', fontWeight: '600', color: 'var(--text-primary)', wordBreak: 'break-word', textAlign: 'right' }}>
+                  {item.val}
+                </div>
               </div>
             ))}
           </div>
         </StaggerItem>
 
       </StaggerContainer>
+
+      {/* Responsive Breakpoint Styles */}
+      <style>{`
+        .about-metrics-grid {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        .about-details-grid {
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        @media (max-width: 500px) {
+          .about-metrics-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .about-details-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </FadeInSection>
   );
 }

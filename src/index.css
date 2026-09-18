@@ -288,6 +288,51 @@ body {
   opacity: 0.55;
 }
 
+/* Global Responsive Helpers & Touch Enhancements */
+@media (max-width: 768px) {
+  /* Prevent iOS Safari auto-zoom on input focus */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+
+  .ambient-orb-1,
+  .ambient-orb-2 {
+    width: 280px;
+    height: 280px;
+    filter: blur(40px);
+    opacity: 0.45;
+  }
+}
+
+@media (max-width: 640px) {
+  section[id], div[id] {
+    scroll-margin-top: 70px;
+  }
+
+  .glass-panel {
+    border-radius: 14px;
+    padding: 20px !important;
+  }
+
+  .glass-card {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .full-width-mobile {
+    width: 100% !important;
+  }
+}
+
+
 
 
 

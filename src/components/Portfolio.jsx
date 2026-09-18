@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, Eye, Layers } from 'lucide-react';
+import { ExternalLink, Eye, Layers, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GithubIcon } from './Icons';
 import { FadeInSection, StaggerContainer, StaggerItem, SpotlightCard } from './MotionWrapper';
@@ -74,16 +74,16 @@ export default function Portfolio() {
   const filteredProjects = filter === 'all' ? projects : projects.filter((p) => p.category === filter);
 
   return (
-    <FadeInSection id="portfolio" style={{ padding: '40px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="portfolio" style={{ padding: '36px 20px', maxWidth: '1100px', margin: '0 auto' }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         PORTAFOLIO DE PROYECTOS
       </div>
-      <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '20px' }}>
         Trabajos & Desarrollos Destacados
       </h2>
 
       {/* Filter Tabs */}
-      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '20px' }}>
+      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '20px' }}>
         {[
           { id: 'all', label: 'Todos los Proyectos' },
           { id: 'frontend', label: 'Frontend & UI' },
@@ -93,13 +93,13 @@ export default function Portfolio() {
             key={tab.id}
             onClick={() => setFilter(tab.id)}
             style={{
-              padding: '8px 18px',
+              padding: '8px 16px',
               borderRadius: '20px',
               border: filter === tab.id ? '1px solid var(--cyan-main)' : '1px solid var(--border)',
               background: filter === tab.id ? 'rgba(56, 189, 248, 0.15)' : 'var(--bg-card)',
               color: filter === tab.id ? 'var(--cyan-main)' : 'var(--text-secondary)',
               fontWeight: '600',
-              fontSize: '0.85rem',
+              fontSize: '0.82rem',
               cursor: 'pointer',
               transition: 'all 0.2s ease'
             }}
@@ -110,13 +110,13 @@ export default function Portfolio() {
       </div>
 
       {/* Projects Grid */}
-      <StaggerContainer key={filter} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '28px' }}>
+      <StaggerContainer key={filter} className="portfolio-grid" style={{ display: 'grid', gap: '20px' }}>
         {filteredProjects.map((p) => (
           <StaggerItem key={p.id}>
-            <SpotlightCard className="glass-card" style={{ overflow: 'hidden', height: '100%' }}>
+            <SpotlightCard className="glass-card" style={{ overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column' }}>
               
               {/* Image Preview Container */}
-              <div style={{ position: 'relative', height: '200px', overflow: 'hidden', background: '#111827' }}>
+              <div style={{ position: 'relative', height: '180px', overflow: 'hidden', background: '#111827' }}>
                 <img
                   src={p.image}
                   alt={p.title}
@@ -150,15 +150,15 @@ export default function Portfolio() {
               </div>
 
               {/* Content Container */}
-              <div style={{ padding: '24px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div>
-                  <h3 style={{ fontSize: '1.15rem', fontWeight: '800', marginBottom: '8px', color: 'var(--text-primary)' }}>
+                  <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '8px', color: 'var(--text-primary)' }}>
                     {p.title}
                   </h3>
                   <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginBottom: '16px', lineHeight: '1.5' }}>
                     {p.description}
                   </p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
                     {p.tags.map((t, idx) => (
                       <span key={idx} className="tech-badge">
                         {t}
@@ -168,7 +168,7 @@ export default function Portfolio() {
                 </div>
 
                 {/* Links */}
-                <div style={{ display: 'flex', gap: '12px', paddingTop: '16px', borderTop: '1px solid var(--border)' }}>
+                <div style={{ display: 'flex', gap: '10px', paddingTop: '14px', borderTop: '1px solid var(--border)' }}>
                   {p.demoUrl !== '#' && (
                     <a
                       href={p.demoUrl}
@@ -182,7 +182,7 @@ export default function Portfolio() {
                         border: '1px solid rgba(56, 189, 248, 0.3)',
                         padding: '8px 12px',
                         borderRadius: '8px',
-                        fontSize: '0.85rem',
+                        fontSize: '0.82rem',
                         fontWeight: '600',
                         display: 'flex',
                         alignItems: 'center',
@@ -208,7 +208,7 @@ export default function Portfolio() {
                         border: '1px solid var(--border)',
                         padding: '8px 12px',
                         borderRadius: '8px',
-                        fontSize: '0.85rem',
+                        fontSize: '0.82rem',
                         fontWeight: '600',
                         display: 'flex',
                         alignItems: 'center',
@@ -241,26 +241,63 @@ export default function Portfolio() {
               position: 'fixed',
               inset: 0,
               zIndex: 2000,
-              background: 'rgba(0,0,0,0.85)',
+              background: 'rgba(0,0,0,0.88)',
               backdropFilter: 'blur(8px)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '24px'
+              padding: '20px'
             }}
           >
-            <motion.img
-              initial={{ scale: 0.82, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.82, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 320 }}
-              src={activeModalImg}
-              alt="Preview"
-              style={{ maxWidth: '90vw', maxHeight: '85vh', borderRadius: '12px', border: '2px solid var(--cyan-main)', boxShadow: '0 20px 50px rgba(0,0,0,0.8)' }}
-            />
+            <div style={{ position: 'relative', maxWidth: '90vw', maxHeight: '85vh' }} onClick={(e) => e.stopPropagation()}>
+              <button
+                onClick={() => setActiveModalImg(null)}
+                title="Cerrar"
+                style={{
+                  position: 'absolute',
+                  top: '-14px',
+                  right: '-14px',
+                  background: 'var(--cyan-main)',
+                  color: '#000',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '32px',
+                  height: '32px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  zIndex: 2001,
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.5)'
+                }}
+              >
+                <X size={18} />
+              </button>
+              <motion.img
+                initial={{ scale: 0.82, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.82, opacity: 0 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 320 }}
+                src={activeModalImg}
+                alt="Preview"
+                style={{ width: '100%', maxHeight: '85vh', borderRadius: '12px', border: '2px solid var(--cyan-main)', boxShadow: '0 20px 50px rgba(0,0,0,0.8)', display: 'block' }}
+              />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Responsive Styles for Portfolio */}
+      <style>{`
+        .portfolio-grid {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        @media (max-width: 540px) {
+          .portfolio-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </FadeInSection>
   );
 }
