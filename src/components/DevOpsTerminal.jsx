@@ -64,12 +64,36 @@ export default function DevOpsTerminal({ onActivateMatrix }) {
         });
         break;
 
+      case 'npx hire-neox --mode=fullstack-ai':
+      case 'npx hire-neox --mode=fullstack-ai --level=senior':
+      case 'npx hire-neox':
+      case 'hire-neox':
+      case 'sudo hire-neox':
+      case 'sudo hire-neox --full-power':
+        newHistory.push({
+          type: 'output',
+          text: `🚀 EJECUTANDO PAQUETE DE CONTRATACIÓN NEOX CORE v2.0...
+==================================================
+  Candidato  : Edgar J. Vargas Montiel
+  Rol        : Fullstack Software Engineer & AI Practitioner
+  Estado     : DISPONIBLE PARA CONTRATACIÓN / PROYECTOS 🟢
+  Stack      : React, Angular, PHP, Java Spring, AWS, Linux, IA
+  Ubicación  : Querétaro, MX (Remoto / Híbrido)
+  Contacto   : edgar.vmontiel@gmail.com | +52 55 8475 2143
+==================================================
+⚡ Cargando interfaz Matrix Rain...`
+        });
+        if (onActivateMatrix) {
+          setTimeout(() => {
+            onActivateMatrix();
+          }, 1200);
+        }
+        break;
+
       case 'matrix':
       case 'blackout':
       case 'dark':
       case 'hack':
-      case 'sudo hire-neox':
-      case 'sudo hire-neox --full-power':
         newHistory.push({
           type: 'output',
           text: `⚡ ACTIVANDO MODO BLACKOUT MATRIX HACKER...
