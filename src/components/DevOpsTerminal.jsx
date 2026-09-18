@@ -266,6 +266,7 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
             <button
               onClick={copyTerminalOutput}
               title="Copiar contenido de terminal"
+              aria-label="Copiar salida de la terminal"
               style={{
                 background: 'var(--icon-box-bg)',
                 border: '1px solid var(--border)',
@@ -279,12 +280,13 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
                 gap: '4px'
               }}
             >
-              {copied ? <Check size={14} color="var(--emerald-main)" /> : <Copy size={14} />}
+              {copied ? <Check size={14} color="var(--emerald-main)" aria-hidden="true" /> : <Copy size={14} aria-hidden="true" />}
               <span className="terminal-btn-text">{copied ? 'Copiado' : 'Copiar'}</span>
             </button>
             <button
               onClick={() => commandHandler('clear')}
               title="Limpiar pantalla"
+              aria-label="Limpiar pantalla de la terminal"
               style={{
                 background: 'var(--icon-box-bg)',
                 border: '1px solid var(--border)',
@@ -298,7 +300,7 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
                 gap: '4px'
               }}
             >
-              <RefreshCw size={14} />
+              <RefreshCw size={14} aria-hidden="true" />
               <span className="terminal-btn-text">Clear</span>
             </button>
           </div>
@@ -326,12 +328,15 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px' }}>
             <span className="terminal-prompt-full" style={{ color: 'var(--emerald-main)', fontWeight: '700', flexShrink: 0 }}>neox@devops-aws:~$</span>
             <span className="terminal-prompt-short" style={{ color: 'var(--emerald-main)', fontWeight: '700', flexShrink: 0, display: 'none' }}>neox:~$</span>
+            <label htmlFor="terminal-command-input" className="sr-only">Escribe un comando para la terminal virtual</label>
             <input
+              id="terminal-command-input"
               type="text"
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Escribe 'help'..."
+              aria-label="Entrada de comandos de terminal"
               style={{
                 flex: 1,
                 background: 'transparent',
@@ -361,6 +366,7 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
             <button
               key={cmd}
               onClick={() => commandHandler(cmd)}
+              aria-label={`Ejecutar comando rápido ${cmd}`}
               style={{
                 background: 'rgba(56, 189, 248, 0.08)',
                 border: '1px solid rgba(56, 189, 248, 0.2)',
@@ -382,6 +388,7 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
             <span className="terminal-enter-hint" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Presiona Enter para ejecutar</span>
             <button
               onClick={() => commandHandler(inputVal)}
+              aria-label="Ejecutar comando escrito"
               style={{
                 background: 'var(--cyan-main)',
                 border: 'none',
@@ -395,7 +402,7 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
                 flexShrink: 0
               }}
             >
-              <Play size={12} fill="#000" />
+              <Play size={12} fill="#000" aria-hidden="true" />
             </button>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ShieldAlert, Terminal, Sparkles } from 'lucide-react';
+import { X, Terminal } from 'lucide-react';
 
 export default function MatrixBlackoutOverlay({ isActive, onClose }) {
   const canvasRef = useRef(null);
@@ -102,6 +102,9 @@ export default function MatrixBlackoutOverlay({ isActive, onClose }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Modo Blackout Matrix interactivo"
           style={{
             position: 'fixed',
             top: 0,

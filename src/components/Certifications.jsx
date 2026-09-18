@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldCheck, ExternalLink, Award, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ExternalLink, CheckCircle2, AlertCircle } from 'lucide-react';
 import { FadeInSection, StaggerContainer, StaggerItem, SpotlightCard } from './MotionWrapper';
 
 export default function Certifications() {
@@ -200,6 +200,7 @@ export default function Certifications() {
                   href={c.verifyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`Verificar certificado ${c.title} emitido por ${c.institution}`}
                   style={{
                     textDecoration: 'none',
                     background: 'var(--icon-box-bg)',
@@ -224,7 +225,7 @@ export default function Certifications() {
                     e.currentTarget.style.color = 'var(--text-primary)';
                   }}
                 >
-                  <ExternalLink size={14} />
+                  <ExternalLink size={14} aria-hidden="true" />
                   Verificar Certificado
                 </a>
               </SpotlightCard>

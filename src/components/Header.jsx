@@ -131,13 +131,14 @@ export default function Header({ themeState, theme, toggleTheme }) {
         </a>
 
         {/* Center Desktop Navigation with Active ScrollSpy Indicator */}
-        <nav style={{ display: 'none', alignItems: 'center', gap: '8px' }} className="desktop-nav">
+        <nav style={{ display: 'none', alignItems: 'center', gap: '8px' }} className="desktop-nav" aria-label="Navegación principal">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
               <a
                 key={link.id}
                 href={link.href}
+                aria-current={isActive ? 'page' : undefined}
                 style={{
                   color: isActive ? 'var(--cyan-main)' : 'var(--text-secondary)',
                   textDecoration: 'none',
@@ -180,6 +181,7 @@ export default function Header({ themeState, theme, toggleTheme }) {
             whileTap={{ scale: 0.96 }}
             onClick={cycleThemeMode}
             title={getThemeTitle()}
+            aria-label={mode === 'auto' ? `Auto (${currentTimeText}) - Cambiar modo de tema` : mode === 'light' ? 'Día - Cambiar modo de tema' : 'Noche - Cambiar modo de tema'}
             style={{
               background: 'var(--bg-card)',
               border: '1px solid var(--border)',
@@ -195,7 +197,7 @@ export default function Header({ themeState, theme, toggleTheme }) {
           >
             {mode === 'auto' && (
               <>
-                <Clock size={15} color="var(--cyan-main)" />
+                <Clock size={15} color="var(--cyan-main)" aria-hidden="true" />
                 <span className="theme-btn-label" style={{ fontSize: '0.75rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '4px' }}>
                   Auto <span style={{ opacity: 0.8 }}>({currentTimeText})</span>
                 </span>
@@ -203,13 +205,13 @@ export default function Header({ themeState, theme, toggleTheme }) {
             )}
             {mode === 'light' && (
               <>
-                <Sun size={15} color="var(--amber-main)" />
+                <Sun size={15} color="var(--amber-main)" aria-hidden="true" />
                 <span className="theme-btn-label" style={{ fontSize: '0.75rem', fontWeight: '600' }}>Día ☀️</span>
               </>
             )}
             {mode === 'dark' && (
               <>
-                <Moon size={15} color="var(--violet-main)" />
+                <Moon size={15} color="var(--violet-main)" aria-hidden="true" />
                 <span className="theme-btn-label" style={{ fontSize: '0.75rem', fontWeight: '600' }}>Noche 🌙</span>
               </>
             )}
@@ -229,9 +231,10 @@ export default function Header({ themeState, theme, toggleTheme }) {
               borderRadius: '8px'
             }}
             className="mobile-toggle"
-            aria-label="Toggle Menu"
+            aria-label="Abrir o cerrar menú principal"
+            aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
           </button>
         </div>
       </div>

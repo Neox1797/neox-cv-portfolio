@@ -1,5 +1,3 @@
-import { createClient } from '@supabase/supabase-js';
-
 // Leer variables de entorno (Vite)
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '';
@@ -10,12 +8,16 @@ export const isSupabaseConfigured = Boolean(
   supabaseUrl !== 'https://tu-proyecto.supabase.co'
 );
 
-if (isSupabaseConfigured) {
-  console.log('⚡ Supabase configurado y listo en:', supabaseUrl);
-} else {
-  console.warn('⚠️ Supabase no configurado aún o faltan llaves en .env');
-}
+let supabaseInstance = null;
 
-export const supabase = isSupabaseConfigured
-  ? createClient(supabaseUrl, supabaseAnonKey)
-  : null;
+export const getSupabase = async () => {
+  if (!isSupabaseConfigured) return null;
+  if (supabaseInstance) return supabaseInstance;
+  try {
+    const { createClient } = await import('@supabase/supabase-js');
+    supabaseInstance = createClient(supabaseUrl, supabaseAnonKey);
+    return supabaseInstance;
+  } catch {
+    return null;
+  }
+};

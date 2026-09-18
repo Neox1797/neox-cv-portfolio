@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from './hooks/useTheme';
 import Header from './components/Header';
@@ -12,11 +12,11 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import EnvironmentBadge from './components/EnvironmentBadge';
-import MatrixBlackoutOverlay from './components/MatrixBlackoutOverlay';
 import { logEnvironmentToConsole } from './utils/envHelper';
-import confetti from 'canvas-confetti';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Analytics } from '@vercel/analytics/react';
+
+const MatrixBlackoutOverlay = lazy(() => import('./components/MatrixBlackoutOverlay'));
 
 export default function App() {
   const themeState = useTheme();
@@ -56,12 +56,18 @@ export default function App() {
     };
   }, []);
 
-  const handleDownloadCV = () => {
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.5 }
-    });
+  const handleDownloadCV = async () => {
+    try {
+      const confettiModule = await import('canvas-confetti');
+      const confetti = confettiModule.default || confettiModule;
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.5 }
+      });
+    } catch {
+      // Fallback silently if confetti fails to load
+    }
 
     // Triggers download or preview of CV PDF
     const link = document.createElement('a');
@@ -93,7 +99,9 @@ export default function App() {
       </main>
       <Footer />
       <EnvironmentBadge />
-      <MatrixBlackoutOverlay isActive={isMatrixActive} onClose={() => setIsMatrixActive(false)} />
+      <Suspense fallback={null}>
+        {isMatrixActive && <MatrixBlackoutOverlay isActive={isMatrixActive} onClose={() => setIsMatrixActive(false)} />}
+      </Suspense>
       <SpeedInsights />
       <Analytics />
     </div>

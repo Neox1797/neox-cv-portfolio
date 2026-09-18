@@ -14,10 +14,7 @@ export function FadeInSection({ children, delay = 0, className = '', style = {},
       viewport={{ once: true, margin: '-30px 0px 0px 0px', amount: 0.05 }}
       transition={{ duration: 0.45, delay, ease: 'easeOut' }}
       className={className}
-      style={{
-        willChange: 'opacity, transform',
-        ...style
-      }}
+      style={style}
     >
       {children}
     </motion.div>

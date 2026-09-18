@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { MessageSquare, Code2, Cloud, Server, Sparkles, Mail, Phone, FileText } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { MessageSquare, Code2, Server, Sparkles, Mail, FileText } from 'lucide-react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { GithubIcon, LinkedinIcon, InstagramIcon } from './Icons';
 import { FadeInSection } from './MotionWrapper';
 import SecretAchievementModal from './SecretAchievementModal';
 
-export default function Hero({ onDownloadCV, onActivateMatrix }) {
+export default function Hero({ onDownloadCV }) {
   const roles = [
     'Ingeniero de Software',
     'Ingeniero de Software & AMS',
@@ -22,6 +22,7 @@ export default function Hero({ onDownloadCV, onActivateMatrix }) {
   const [isAchievementOpen, setIsAchievementOpen] = useState(false);
   const [tapBadgeText, setTapBadgeText] = useState('');
   const [showTapBadge, setShowTapBadge] = useState(false);
+  const tapBadgeTimerRef = useRef(null);
 
   const { scrollY } = useScroll();
   const parallaxY = useTransform(scrollY, [0, 600], [0, 75]);
@@ -39,15 +40,15 @@ export default function Hero({ onDownloadCV, onActivateMatrix }) {
     setTapCount(newCount);
 
     if (typeof window !== 'undefined' && 'navigator' in window && 'vibrate' in navigator) {
-      try { navigator.vibrate(35); } catch (e) {}
+      try { navigator.vibrate(35); } catch { /* Ignore vibration errors */ }
     }
 
     if (newCount < 5) {
       setTapBadgeText(`⚡ ${newCount}/5 toques...`);
       setShowTapBadge(true);
 
-      clearTimeout(window.tapBadgeTimer);
-      window.tapBadgeTimer = setTimeout(() => {
+      if (tapBadgeTimerRef.current) clearTimeout(tapBadgeTimerRef.current);
+      tapBadgeTimerRef.current = setTimeout(() => {
         setShowTapBadge(false);
         setTapCount(0);
       }, 1200);
@@ -58,13 +59,15 @@ export default function Hero({ onDownloadCV, onActivateMatrix }) {
     }
   };
 
-
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
     }, 3200);
-    return () => clearInterval(interval);
-  }, []);
+    return () => {
+      clearInterval(interval);
+      if (tapBadgeTimerRef.current) clearTimeout(tapBadgeTimerRef.current);
+    };
+  }, [roles.length]);
 
   return (
     <section
@@ -240,6 +243,7 @@ export default function Hero({ onDownloadCV, onActivateMatrix }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 title={soc.title}
+                aria-label={`Perfil de ${soc.title}`}
                 style={{
                   color: 'var(--text-secondary)',
                   background: 'var(--bg-card)',
@@ -314,12 +318,23 @@ export default function Hero({ onDownloadCV, onActivateMatrix }) {
           <div
             className="glowing-avatar hero-avatar-frame"
             onClick={handleAvatarTap}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleAvatarTap();
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            aria-label="Avatar de Edgar Vargas. Toca 5 veces para desbloquear logro secreto"
             style={{ position: 'relative', zIndex: 1, cursor: 'pointer', userSelect: 'none', WebkitTapHighlightColor: 'transparent' }}
             title="¡Toca 5 veces rápidamente para desbloquear una sorpresa!"
           >
             <img
               src="/assets/img/me.jpeg"
               alt="Edgar J. Vargas Montiel"
+              fetchpriority="high"
+              decoding="async"
               style={{
                 width: '100%',
                 height: '100%',

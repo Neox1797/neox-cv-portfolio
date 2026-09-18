@@ -10,7 +10,7 @@ export default function Footer() {
     <footer style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border)', padding: '16px 20px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
         
-        <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+        <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
           &copy; {new Date().getFullYear()} <strong style={{ color: 'var(--text-primary)' }}>Edgar J. Vargas</strong> · Software Engineer. Todos los derechos reservados.
         </div>
 

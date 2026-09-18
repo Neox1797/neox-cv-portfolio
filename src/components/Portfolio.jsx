@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ExternalLink, Eye, Layers, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ExternalLink, Eye, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GithubIcon } from './Icons';
 import { FadeInSection, StaggerContainer, StaggerItem, SpotlightCard } from './MotionWrapper';
@@ -7,6 +7,17 @@ import { FadeInSection, StaggerContainer, StaggerItem, SpotlightCard } from './M
 export default function Portfolio() {
   const [filter, setFilter] = useState('all');
   const [activeModalImg, setActiveModalImg] = useState(null);
+
+  useEffect(() => {
+    if (!activeModalImg) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setActiveModalImg(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeModalImg]);
 
   const projects = [
     {
@@ -120,13 +131,16 @@ export default function Portfolio() {
                 <img
                   src={p.image}
                   alt={p.title}
+                  loading="lazy"
+                  decoding="async"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
                   onMouseEnter={(e) => (e.target.style.transform = 'scale(1.08)')}
                   onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
                 />
                 <button
                   onClick={() => setActiveModalImg(p.image)}
-                  title="Ampliar vista previa"
+                  title={`Ampliar vista previa de ${p.title}`}
+                  aria-label={`Ampliar vista previa de ${p.title}`}
                   style={{
                     position: 'absolute',
                     top: '12px',
@@ -145,7 +159,7 @@ export default function Portfolio() {
                     zIndex: 5
                   }}
                 >
-                  <Eye size={18} />
+                  <Eye size={18} aria-hidden="true" />
                 </button>
               </div>
 
@@ -174,6 +188,7 @@ export default function Portfolio() {
                       href={p.demoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`Ver demostración en vivo de ${p.title}`}
                       style={{
                         flex: 1,
                         textDecoration: 'none',
@@ -190,7 +205,7 @@ export default function Portfolio() {
                         gap: '6px'
                       }}
                     >
-                      <ExternalLink size={14} />
+                      <ExternalLink size={14} aria-hidden="true" />
                       Live Demo
                     </a>
                   )}
@@ -200,6 +215,7 @@ export default function Portfolio() {
                       href={p.repoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`Ver código fuente de ${p.title} en GitHub`}
                       style={{
                         flex: 1,
                         textDecoration: 'none',
@@ -216,7 +232,7 @@ export default function Portfolio() {
                         gap: '6px'
                       }}
                     >
-                      <GithubIcon size={14} />
+                      <GithubIcon size={14} aria-hidden="true" />
                       Código
                     </a>
                   )}
@@ -237,6 +253,9 @@ export default function Portfolio() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveModalImg(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Vista previa ampliada de proyecto"
             style={{
               position: 'fixed',
               inset: 0,
@@ -252,7 +271,8 @@ export default function Portfolio() {
             <div style={{ position: 'relative', maxWidth: '90vw', maxHeight: '85vh' }} onClick={(e) => e.stopPropagation()}>
               <button
                 onClick={() => setActiveModalImg(null)}
-                title="Cerrar"
+                title="Cerrar vista previa"
+                aria-label="Cerrar vista previa ampliada"
                 style={{
                   position: 'absolute',
                   top: '-14px',
@@ -271,7 +291,7 @@ export default function Portfolio() {
                   boxShadow: '0 4px 12px rgba(0,0,0,0.5)'
                 }}
               >
-                <X size={18} />
+                <X size={18} aria-hidden="true" />
               </button>
               <motion.img
                 initial={{ scale: 0.82, opacity: 0 }}
@@ -279,7 +299,8 @@ export default function Portfolio() {
                 exit={{ scale: 0.82, opacity: 0 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 320 }}
                 src={activeModalImg}
-                alt="Preview"
+                alt="Vista previa ampliada del proyecto"
+                decoding="async"
                 style={{ width: '100%', maxHeight: '85vh', borderRadius: '12px', border: '2px solid var(--cyan-main)', boxShadow: '0 20px 50px rgba(0,0,0,0.8)', display: 'block' }}
               />
             </div>

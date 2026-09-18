@@ -1,38 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trophy, Sparkles, Terminal, X, Check, ShieldCheck, Cpu, Bot } from 'lucide-react';
+import { Sparkles, Terminal, X, Check, Cpu, Bot } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function SecretAchievementModal({ isOpen, onClose }) {
-  const [copied, setCopied] = React.useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      // Fire confetti burst
-      try {
-        confetti({
-          particleCount: 130,
-          spread: 85,
-          origin: { y: 0.5 },
-          colors: ['#38bdf8', '#10b981', '#a78bfa', '#fbbf24']
-        });
-      } catch (e) {
-        // Fallback if confetti fails
-      }
+    if (!isOpen) return;
 
-      // Haptic vibration feedback on mobile devices
-      if (typeof window !== 'undefined' && 'navigator' in window && 'vibrate' in navigator) {
-        try {
-          navigator.vibrate([100, 50, 100, 50, 200]);
-        } catch (e) {}
-      }
+    document.body.style.overflow = 'hidden';
+    // Fire confetti burst
+    try {
+      confetti({
+        particleCount: 130,
+        spread: 85,
+        origin: { y: 0.5 },
+        colors: ['#38bdf8', '#10b981', '#a78bfa', '#fbbf24']
+      });
+    } catch {
+      // Fallback if confetti fails
     }
+
+    // Haptic vibration feedback on mobile devices
+    if (typeof window !== 'undefined' && 'navigator' in window && 'vibrate' in navigator) {
+      try {
+        navigator.vibrate([100, 50, 100, 50, 200]);
+      } catch { /* Ignore vibration errors */ }
+    }
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
 
     return () => {
       document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   const copySecretCommand = () => {
     navigator.clipboard.writeText('npx hire-neox --mode=fullstack-ai');
@@ -43,21 +51,26 @@ export default function SecretAchievementModal({ isOpen, onClose }) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 10000,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '16px',
-          background: 'rgba(0, 0, 0, 0.75)',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)'
-        }}>
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Modal de logro secreto desbloqueado"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 10000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '16px',
+            background: 'rgba(0, 0, 0, 0.75)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)'
+          }}
+        >
           {/* Backdrop Click to Close */}
           <div
             style={{ position: 'absolute', inset: 0 }}
@@ -99,6 +112,8 @@ export default function SecretAchievementModal({ isOpen, onClose }) {
             {/* Close Button */}
             <button
               onClick={onClose}
+              title="Cerrar modal de logro secreto"
+              aria-label="Cerrar modal de logro secreto"
               style={{
                 position: 'absolute',
                 top: '16px',
@@ -115,7 +130,7 @@ export default function SecretAchievementModal({ isOpen, onClose }) {
                 cursor: 'pointer'
               }}
             >
-              <X size={18} />
+              <X size={18} aria-hidden="true" />
             </button>
 
             {/* Achievement Icon Header */}

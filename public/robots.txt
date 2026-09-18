@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://neoxdevops.atwebpages.com/sitemap.xml

@@ -161,6 +161,16 @@ export default function Experience() {
               {/* Header Bar */}
               <div
                 onClick={() => toggleExpand(idx)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleExpand(idx);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-expanded={!!expandedItems[idx]}
+                aria-label={`Desplegar o colapsar detalles de ${item.role} en ${item.company}`}
                 className="exp-header-bar"
                 style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', gap: '12px' }}
               >
@@ -176,16 +186,20 @@ export default function Experience() {
                 <div className="exp-right-meta" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                   <div className="exp-meta-text" style={{ textAlign: 'right' }}>
                     <div style={{ fontSize: '0.82rem', fontWeight: '600', color: 'var(--emerald-main)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <Calendar size={13} />
+                      <Calendar size={13} aria-hidden="true" />
                       {item.period}
                     </div>
                     <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
-                      <MapPin size={12} />
+                      <MapPin size={12} aria-hidden="true" />
                       {item.location}
                     </div>
                   </div>
-                  <button style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '4px' }}>
-                    {expandedItems[idx] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                  <button
+                    aria-label={expandedItems[idx] ? "Colapsar experiencia" : "Desplegar experiencia"}
+                    tabIndex={-1}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '4px' }}
+                  >
+                    {expandedItems[idx] ? <ChevronUp size={20} aria-hidden="true" /> : <ChevronDown size={20} aria-hidden="true" />}
                   </button>
                 </div>
               </div>

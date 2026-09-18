@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, MessageSquare, Globe, CheckCircle2, Copy, ExternalLink, ShieldAlert, Database, Loader2, Clock, Building2, Briefcase, Sparkles } from 'lucide-react';
-import confetti from 'canvas-confetti';
-import { supabase, isSupabaseConfigured } from '../supabaseClient';
+import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, Copy, ExternalLink, ShieldAlert, Database, Loader2, Clock, Building2, Briefcase, Sparkles } from 'lucide-react';
+import { getSupabase, isSupabaseConfigured } from '../supabaseClient';
 import { LinkedinIcon } from './Icons';
 import { FadeInSection, StaggerContainer, StaggerItem } from './MotionWrapper';
 
@@ -38,12 +37,20 @@ export default function Contact() {
     setLoading(true);
     setErrorMsg('');
 
-    // Trigger celebratory confetti
-    confetti({
-      particleCount: 80,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
+    // Trigger celebratory confetti dynamically
+    try {
+      const confettiModule = await import('canvas-confetti');
+      const confetti = confettiModule.default || confettiModule;
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    } catch {
+      // Ignore confetti load error
+    }
+
+    const supabase = await getSupabase();
 
     if (isSupabaseConfigured && supabase) {
       try {
@@ -132,10 +139,11 @@ export default function Contact() {
               </div>
               <button
                 onClick={copyEmailToClipboard}
-                title="Copiar correo"
+                title="Copiar correo electrónico"
+                aria-label="Copiar correo electrónico al portapapeles"
                 style={{ background: 'none', border: 'none', color: 'var(--cyan-main)', cursor: 'pointer', padding: '4px', flexShrink: 0 }}
               >
-                {copiedEmail ? <CheckCircle2 size={18} color="var(--emerald-main)" /> : <Copy size={18} />}
+                {copiedEmail ? <CheckCircle2 size={18} color="var(--emerald-main)" aria-hidden="true" /> : <Copy size={18} aria-hidden="true" />}
               </button>
             </div>
 
@@ -153,7 +161,7 @@ export default function Contact() {
               }}
             >
               <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--emerald-main)', flexShrink: 0 }}>
-                <Phone size={18} />
+                <Phone size={18} aria-hidden="true" />
               </div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Teléfono Directo</div>
@@ -166,6 +174,7 @@ export default function Contact() {
               href="https://www.linkedin.com/in/edgar-vargas-465437200"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Perfil profesional de LinkedIn"
               style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'inherit', transition: 'all 0.2s ease' }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = 'var(--cyan-main)';
@@ -177,19 +186,19 @@ export default function Contact() {
               }}
             >
               <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(56, 189, 248, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cyan-main)', flexShrink: 0 }}>
-                <LinkedinIcon size={18} />
+                <LinkedinIcon size={18} aria-hidden="true" />
               </div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Red Profesional</div>
                 <div style={{ fontWeight: '700', fontSize: '0.88rem', color: 'var(--text-primary)' }}>LinkedIn / Edgar Vargas</div>
               </div>
-              <ExternalLink size={16} color="var(--text-muted)" style={{ flexShrink: 0 }} />
+              <ExternalLink size={16} color="var(--text-muted)" style={{ flexShrink: 0 }} aria-hidden="true" />
             </a>
 
             {/* Location Card */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', borderRadius: '12px', background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
               <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(139, 92, 246, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--violet-main)', flexShrink: 0 }}>
-                <MapPin size={18} />
+                <MapPin size={18} aria-hidden="true" />
               </div>
               <div>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Residencia</div>
@@ -204,6 +213,7 @@ export default function Contact() {
             href="https://wa.me/+525584752143?text=Hola%20Edgar,%20vi%20tu%20portafolio%20y%20me%20gustaria%20platicar%20contigo"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Enviar mensaje por WhatsApp directo"
             style={{
               textDecoration: 'none',
               background: '#25D366',
@@ -220,7 +230,7 @@ export default function Contact() {
               boxShadow: '0 4px 15px rgba(37, 211, 102, 0.3)'
             }}
           >
-            <MessageSquare size={18} />
+            <MessageSquare size={18} aria-hidden="true" />
             <span>Enviar WhatsApp Directo</span>
           </a>
         </StaggerItem>
@@ -290,12 +300,14 @@ export default function Contact() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
+                <label htmlFor="contact-name" style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
                   Tu Nombre *
                 </label>
                 <input
+                  id="contact-name"
                   type="text"
                   required
+                  aria-required="true"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Ej. María González"
@@ -312,12 +324,14 @@ export default function Contact() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
+                <label htmlFor="contact-email" style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
                   Tu Correo Electrónico *
                 </label>
                 <input
+                  id="contact-email"
                   type="email"
                   required
+                  aria-required="true"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="ejemplo@empresa.com"
@@ -334,10 +348,11 @@ export default function Contact() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
+                <label htmlFor="contact-subject" style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
                   Asunto del Mensaje
                 </label>
                 <input
+                  id="contact-subject"
                   type="text"
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
@@ -355,11 +370,13 @@ export default function Contact() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
+                <label htmlFor="contact-message" style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
                   Mensaje *
                 </label>
                 <textarea
+                  id="contact-message"
                   required
+                  aria-required="true"
                   rows={4}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
