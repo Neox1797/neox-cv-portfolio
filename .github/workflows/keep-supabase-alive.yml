@@ -1,0 +1,25 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    # Se ejecuta automáticamente cada 3 días a las 12:00 UTC (evita la pausa de 7 días de Supabase)
+    - cron: '0 12 */3 * *'
+  workflow_dispatch: # Permite disparo manual desde el tab Actions de GitHub
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send keep-alive HTTP Ping to Supabase REST API
+        run: |
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "apikey: sb_publishable_w-g0iNW1Uj85MHVbwLY-0A_E5pqARyY" \
+            "https://ygukbilrtdeltdnphwjz.supabase.co/rest/v1/")
+          
+          echo "Supabase Response Status Code: $HTTP_STATUS"
+          
+          if [ "$HTTP_STATUS" -eq 200 ] || [ "$HTTP_STATUS" -eq 204 ]; then
+            echo "⚡ Supabase está activo y respondiendo correctamente."
+          else
+            echo "⚠️ Supabase respondió con código $HTTP_STATUS"
+          fi
