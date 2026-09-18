@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, ArrowDown, Code2, Cloud, Server, Sparkles, Mail, Phone, FileText } from 'lucide-react';
+import { MessageSquare, Code2, Cloud, Server, Sparkles, Mail, Phone, FileText } from 'lucide-react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { GithubIcon, LinkedinIcon, InstagramIcon } from './Icons';
 import { FadeInSection } from './MotionWrapper';
@@ -328,70 +328,17 @@ export default function Hero({ onDownloadCV }) {
       </FadeInSection>
 
 
-      {/* Scroll Down Indicator */}
-      <motion.a
-        href="#about"
-        className="scroll-down-indicator"
-        style={{
-          position: 'absolute',
-          bottom: '24px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          color: 'var(--text-secondary)',
-          textDecoration: 'none',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '6px',
-          fontSize: '0.75rem',
-          fontWeight: '600',
-          letterSpacing: '0.3px',
-          zIndex: 10,
-          transition: 'color 0.2s ease'
-        }}
-        whileHover={{ y: 3 }}
-      >
-        <span>Desliza para explorar</span>
-        <div style={{
-          width: '32px',
-          height: '32px',
-          borderRadius: '50%',
-          background: 'var(--bg-card)',
-          border: '1px solid var(--border-highlight)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: 'var(--shadow-card)'
-        }}>
-          <ArrowDown size={15} color="var(--cyan-main)" className="bounce-arrow" />
-        </div>
-      </motion.a>
-
       {/* Responsive & Animation Styles for Hero */}
       <style>{`
         .hero-avatar-frame {
           width: 280px;
           height: 280px;
         }
-        @keyframes bounceArrow {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(4px); }
-        }
-        .bounce-arrow {
-          animation: bounceArrow 1.8s ease-in-out infinite;
-        }
         @media (max-width: 880px) {
           #hero {
             padding-top: 90px !important;
             padding-bottom: 50px !important;
             min-height: auto !important;
-          }
-          .scroll-down-indicator {
-            position: relative !important;
-            bottom: auto !important;
-            left: auto !important;
-            transform: none !important;
-            margin-top: 32px;
           }
         }
         @media (max-width: 480px) {
@@ -407,9 +354,6 @@ export default function Hero({ onDownloadCV }) {
           }
           .hero-feature-badge {
             padding: 6px 10px !important;
-          }
-          .scroll-down-indicator {
-            display: none !important;
           }
         }
       `}</style>

@@ -281,7 +281,8 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
 
           {/* Prompt Input Line */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px' }}>
-            <span className="terminal-prompt" style={{ color: 'var(--emerald-main)', fontWeight: '700', flexShrink: 0 }}>neox@devops-aws:~$</span>
+            <span className="terminal-prompt-full" style={{ color: 'var(--emerald-main)', fontWeight: '700', flexShrink: 0 }}>neox@devops-aws:~$</span>
+            <span className="terminal-prompt-short" style={{ color: 'var(--emerald-main)', fontWeight: '700', flexShrink: 0, display: 'none' }}>neox:~$</span>
             <input
               type="text"
               value={inputVal}
@@ -362,6 +363,10 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
         @media (max-width: 540px) {
           .terminal-enter-hint { display: none !important; }
           .terminal-btn-text { display: none !important; }
+        }
+        @media (max-width: 480px) {
+          .terminal-prompt-full { display: none !important; }
+          .terminal-prompt-short { display: inline !important; }
         }
       `}</style>
     </FadeInSection>
