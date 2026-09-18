@@ -405,7 +405,6 @@ export default function Hero({ onDownloadCV, onActivateMatrix }) {
       <SecretAchievementModal
         isOpen={isAchievementOpen}
         onClose={() => setIsAchievementOpen(false)}
-        onActivateMatrix={onActivateMatrix}
       />
 
       {/* Responsive & Animation Styles for Hero */}

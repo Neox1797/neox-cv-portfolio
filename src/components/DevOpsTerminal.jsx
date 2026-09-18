@@ -64,9 +64,10 @@ export default function DevOpsTerminal({ onActivateMatrix }) {
       setHistory(newHistory);
       setInputVal('');
       if (onActivateMatrix) {
+        // Wait 6.5s so typewriter effect prints full candidate card and user can read it
         setTimeout(() => {
           onActivateMatrix();
-        }, 1200);
+        }, 6500);
       }
       return;
     }

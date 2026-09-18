@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Trophy, Sparkles, Terminal, X, Check, ShieldCheck, Cpu, Bot } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
-export default function SecretAchievementModal({ isOpen, onClose, onActivateMatrix }) {
+export default function SecretAchievementModal({ isOpen, onClose }) {
   const [copied, setCopied] = React.useState(false);
 
   useEffect(() => {
@@ -38,13 +38,6 @@ export default function SecretAchievementModal({ isOpen, onClose, onActivateMatr
     navigator.clipboard.writeText('npx hire-neox --mode=fullstack-ai');
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
-  };
-
-  const handleTriggerMatrix = () => {
-    onClose();
-    if (onActivateMatrix) {
-      onActivateMatrix();
-    }
   };
 
   return (
@@ -195,28 +188,6 @@ export default function SecretAchievementModal({ isOpen, onClose, onActivateMatr
 
             {/* Action Buttons */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <button
-                onClick={handleTriggerMatrix}
-                style={{
-                  width: '100%',
-                  padding: '12px',
-                  borderRadius: '12px',
-                  background: 'linear-gradient(135deg, var(--emerald-main), #047857)',
-                  color: '#ffffff',
-                  border: 'none',
-                  fontWeight: '700',
-                  fontSize: '0.9rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px',
-                  cursor: 'pointer',
-                  boxShadow: '0 8px 20px rgba(16, 185, 129, 0.35)'
-                }}
-              >
-                <span>🕶️ Activar Modo Blackout / Matrix Rain</span>
-              </button>
-
               <button
                 onClick={copySecretCommand}
                 style={{
