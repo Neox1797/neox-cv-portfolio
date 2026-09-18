@@ -9,25 +9,24 @@ on:
 jobs:
   ping-supabase:
     runs-on: ubuntu-latest
+    environment: Production
     steps:
       - name: Send keep-alive HTTP Ping to Supabase Table
         run: |
           SUPABASE_URL="${{ secrets.SUPABASE_URL }}"
           SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}"
 
-          echo "🔍 Diagnosticando lectura de Secrets..."
+          echo "🔍 Diagnosticando lectura de Secrets en Environment 'Production'..."
           echo "Longitud de SUPABASE_URL: ${#SUPABASE_URL}"
           echo "Longitud de SUPABASE_ANON_KEY: ${#SUPABASE_ANON_KEY}"
 
           if [ -z "$SUPABASE_URL" ]; then
-            echo "❌ Error: El Secret SUPABASE_URL no fue detectado o está vacío."
-            echo "Revisa en GitHub: Settings -> Secrets and variables -> Actions -> Repository secrets (debe llamarse EXACTAMENTE 'SUPABASE_URL')."
+            echo "❌ Error: El Secret SUPABASE_URL no fue detectado en el Environment Production."
             exit 1
           fi
 
           if [ -z "$SUPABASE_ANON_KEY" ]; then
-            echo "❌ Error: El Secret SUPABASE_ANON_KEY no fue detectado o está vacío."
-            echo "Revisa en GitHub: Settings -> Secrets and variables -> Actions -> Repository secrets (debe llamarse EXACTAMENTE 'SUPABASE_ANON_KEY')."
+            echo "❌ Error: El Secret SUPABASE_ANON_KEY no fue detectado en el Environment Production."
             exit 1
           fi
 
