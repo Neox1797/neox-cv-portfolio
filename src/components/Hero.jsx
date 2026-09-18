@@ -3,6 +3,7 @@ import { MessageSquare, Code2, Cloud, Server, Sparkles, Mail, Phone, FileText } 
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { GithubIcon, LinkedinIcon, InstagramIcon } from './Icons';
 import { FadeInSection } from './MotionWrapper';
+import SecretAchievementModal from './SecretAchievementModal';
 
 export default function Hero({ onDownloadCV }) {
   const roles = [
@@ -15,10 +16,47 @@ export default function Hero({ onDownloadCV }) {
 
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
 
+  // Multi-tap Easter Egg State
+  const [tapCount, setTapCount] = useState(0);
+  const [lastTapTime, setLastTapTime] = useState(0);
+  const [isAchievementOpen, setIsAchievementOpen] = useState(false);
+  const [tapBadgeText, setTapBadgeText] = useState('');
+  const [showTapBadge, setShowTapBadge] = useState(false);
+
   const { scrollY } = useScroll();
   const parallaxY = useTransform(scrollY, [0, 600], [0, 75]);
   const parallaxYRight = useTransform(scrollY, [0, 600], [0, 110]);
   const parallaxOpacity = useTransform(scrollY, [0, 500], [1, 0.55]);
+
+  const handleAvatarTap = () => {
+    const now = Date.now();
+    let newCount = 1;
+    if (now - lastTapTime < 500) {
+      newCount = tapCount + 1;
+    }
+
+    setLastTapTime(now);
+    setTapCount(newCount);
+
+    if (typeof window !== 'undefined' && 'navigator' in window && 'vibrate' in navigator) {
+      try { navigator.vibrate(35); } catch (e) {}
+    }
+
+    if (newCount < 5) {
+      setTapBadgeText(`⚡ ${newCount}/5 toques...`);
+      setShowTapBadge(true);
+
+      clearTimeout(window.tapBadgeTimer);
+      window.tapBadgeTimer = setTimeout(() => {
+        setShowTapBadge(false);
+        setTapCount(0);
+      }, 1200);
+    } else {
+      setShowTapBadge(false);
+      setTapCount(0);
+      setIsAchievementOpen(true);
+    }
+  };
 
 
   useEffect(() => {
@@ -273,7 +311,12 @@ export default function Hero({ onDownloadCV }) {
           </div>
 
           {/* Main Avatar Frame */}
-          <div className="glowing-avatar hero-avatar-frame" style={{ position: 'relative', zIndex: 1 }}>
+          <div
+            className="glowing-avatar hero-avatar-frame"
+            onClick={handleAvatarTap}
+            style={{ position: 'relative', zIndex: 1, cursor: 'pointer', userSelect: 'none', WebkitTapHighlightColor: 'transparent' }}
+            title="¡Toca 5 veces rápidamente para desbloquear una sorpresa!"
+          >
             <img
               src="/assets/img/me.jpeg"
               alt="Edgar J. Vargas Montiel"
@@ -287,6 +330,37 @@ export default function Hero({ onDownloadCV }) {
                 display: 'block'
               }}
             />
+
+            {/* Tap Count Feedback Badge */}
+            <AnimatePresence>
+              {showTapBadge && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5, y: 0 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.5, y: -10 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    zIndex: 10,
+                    background: 'rgba(16, 185, 129, 0.92)',
+                    color: '#ffffff',
+                    border: '2px solid #ffffff',
+                    padding: '8px 16px',
+                    borderRadius: '24px',
+                    fontSize: '0.85rem',
+                    fontWeight: '800',
+                    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(16, 185, 129, 0.6)',
+                    pointerEvents: 'none',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  {tapBadgeText}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Bottom-Right Floating Feature Badge */}
@@ -327,6 +401,11 @@ export default function Hero({ onDownloadCV }) {
 
       </FadeInSection>
 
+      {/* Secret Achievement Easter Egg Modal */}
+      <SecretAchievementModal
+        isOpen={isAchievementOpen}
+        onClose={() => setIsAchievementOpen(false)}
+      />
 
       {/* Responsive & Animation Styles for Hero */}
       <style>{`
