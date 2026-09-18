@@ -9,6 +9,7 @@ on:
 jobs:
   ping-supabase:
     runs-on: ubuntu-latest
+    environment: Production
     steps:
       - name: Send keep-alive HTTP Ping to Supabase Table
         env:
@@ -20,12 +21,12 @@ jobs:
           echo "Longitud de SUPABASE_ANON_KEY: ${#SUPABASE_ANON_KEY}"
 
           if [ -z "$SUPABASE_URL" ]; then
-            echo "❌ Error: El Secret SUPABASE_URL no fue detectado."
+            echo "❌ Error: El Secret SUPABASE_URL no fue detectado en el Environment Production."
             exit 1
           fi
 
           if [ -z "$SUPABASE_ANON_KEY" ]; then
-            echo "❌ Error: El Secret SUPABASE_ANON_KEY no fue detectado."
+            echo "❌ Error: El Secret SUPABASE_ANON_KEY no fue detectado en el Environment Production."
             exit 1
           fi
 
