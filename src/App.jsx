@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from './hooks/useTheme';
 import Header from './components/Header';
@@ -12,6 +12,7 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import EnvironmentBadge from './components/EnvironmentBadge';
+import MatrixBlackoutOverlay from './components/MatrixBlackoutOverlay';
 import { logEnvironmentToConsole } from './utils/envHelper';
 import confetti from 'canvas-confetti';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -19,6 +20,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
   const themeState = useTheme();
+  const [isMatrixActive, setIsMatrixActive] = useState(false);
 
   const { scrollY } = useScroll();
   const orbY1 = useTransform(scrollY, [0, 3000], [0, 180]);
@@ -80,9 +82,9 @@ export default function App() {
       <Header themeState={themeState} onDownloadCV={handleDownloadCV} />
 
       <main style={{ flex: 1, position: 'relative', zIndex: 1 }}>
-        <Hero onDownloadCV={handleDownloadCV} />
+        <Hero onDownloadCV={handleDownloadCV} onActivateMatrix={() => setIsMatrixActive(true)} />
         <About />
-        <DevOpsTerminal />
+        <DevOpsTerminal onActivateMatrix={() => setIsMatrixActive(true)} />
         <Skills />
         <Experience />
         <Portfolio />
@@ -91,6 +93,7 @@ export default function App() {
       </main>
       <Footer />
       <EnvironmentBadge />
+      <MatrixBlackoutOverlay isActive={isMatrixActive} onClose={() => setIsMatrixActive(false)} />
       <SpeedInsights />
       <Analytics />
     </div>

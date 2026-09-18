@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Play, RefreshCw, Copy, Check } from 'lucide-react';
 import { FadeInSection } from './MotionWrapper';
 import { getEnvironmentInfo } from '../utils/envHelper';
-import MatrixBlackoutOverlay from './MatrixBlackoutOverlay';
 
 function TypewriterLine({ text, type }) {
   const [displayedText, setDisplayedText] = useState(type === 'input' ? text : '');
@@ -35,7 +34,7 @@ function TypewriterLine({ text, type }) {
   );
 }
 
-export default function DevOpsTerminal() {
+export default function DevOpsTerminal({ onActivateMatrix }) {
 
   const [history, setHistory] = useState([
     { type: 'output', text: '⚡ Bienvenido a la consola interactiva de Edgar J. Vargas (DevOps & Software Engineer)' },
@@ -43,7 +42,6 @@ export default function DevOpsTerminal() {
   ]);
   const [inputVal, setInputVal] = useState('');
   const [copied, setCopied] = useState(false);
-  const [isMatrixActive, setIsMatrixActive] = useState(false);
 
   const commandHandler = (cmdStr) => {
     const cleanCmd = cmdStr.trim().toLowerCase();
@@ -55,7 +53,6 @@ export default function DevOpsTerminal() {
           type: 'output',
           text: `Comandos disponibles:
   • help         : Muestra esta ayuda
-  • matrix / dark: Activa el modo Blackout / Matrix Rain full screen 🕶️
   • env          : Diagnóstico del entorno activo (Local / Develop / Master)
   • about        : Resumen profesional de Edgar
   • skills       : Habilidades principales (AWS, Linux, Angular, Spring)
@@ -80,7 +77,9 @@ export default function DevOpsTerminal() {
 🟢 Sobrescribiendo interfaz global... [OK]
 Presiona ESC o haz clic en el botón de la pantalla para restaurar el sitio.`
         });
-        setIsMatrixActive(true);
+        if (onActivateMatrix) {
+          onActivateMatrix();
+        }
         break;
 
       case 'env':
@@ -193,7 +192,7 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
     }
   };
 
-  const quickCmds = ['help', 'matrix 🕶️', 'env', 'about', 'skills', 'exp', 'projects', 'certs', 'contact', 'clear'];
+  const quickCmds = ['help', 'env', 'about', 'skills', 'exp', 'projects', 'certs', 'contact', 'clear'];
 
   const copyTerminalOutput = () => {
     const textToCopy = history.map(h => h.text).join('\n');
@@ -376,12 +375,6 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
           </div>
         </div>
       </div>
-
-      {/* Matrix Blackout Fullscreen Overlay */}
-      <MatrixBlackoutOverlay
-        isActive={isMatrixActive}
-        onClose={() => setIsMatrixActive(false)}
-      />
 
       {/* Responsive Styles for Terminal */}
       <style>{`

@@ -5,7 +5,7 @@ import { GithubIcon, LinkedinIcon, InstagramIcon } from './Icons';
 import { FadeInSection } from './MotionWrapper';
 import SecretAchievementModal from './SecretAchievementModal';
 
-export default function Hero({ onDownloadCV }) {
+export default function Hero({ onDownloadCV, onActivateMatrix }) {
   const roles = [
     'Ingeniero de Software',
     'Ingeniero de Software & AMS',
@@ -405,6 +405,7 @@ export default function Hero({ onDownloadCV }) {
       <SecretAchievementModal
         isOpen={isAchievementOpen}
         onClose={() => setIsAchievementOpen(false)}
+        onActivateMatrix={onActivateMatrix}
       />
 
       {/* Responsive & Animation Styles for Hero */}
