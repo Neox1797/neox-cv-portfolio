@@ -10,16 +10,18 @@ jobs:
   ping-supabase:
     runs-on: ubuntu-latest
     steps:
-      - name: Send keep-alive HTTP Ping to Supabase REST API
+      - name: Send keep-alive HTTP Ping to Supabase Table
         run: |
           HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            -H "apikey: sb_publishable_w-g0iNW1Uj85MHVbwLY-0A_E5pqARyY" \
-            "https://ygukbilrtdeltdnphwjz.supabase.co/rest/v1/")
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/contact_messages?select=id&limit=1")
           
           echo "Supabase Response Status Code: $HTTP_STATUS"
           
           if [ "$HTTP_STATUS" -eq 200 ] || [ "$HTTP_STATUS" -eq 204 ]; then
-            echo "⚡ Supabase está activo y respondiendo correctamente."
+            echo "⚡ Supabase está activo y respondiendo correctamente (HTTP $HTTP_STATUS)."
           else
-            echo "⚠️ Supabase respondió con código $HTTP_STATUS"
+            echo "⚠️ Advertencia: Supabase respondió con código HTTP $HTTP_STATUS"
+            exit 1
           fi
