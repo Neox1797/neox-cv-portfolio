@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Play, RefreshCw, Copy, Check } from 'lucide-react';
 import { FadeInSection } from './MotionWrapper';
 import { getEnvironmentInfo } from '../utils/envHelper';
+import MatrixBlackoutOverlay from './MatrixBlackoutOverlay';
 
 function TypewriterLine({ text, type }) {
   const [displayedText, setDisplayedText] = useState(type === 'input' ? text : '');
@@ -42,6 +43,7 @@ export default function DevOpsTerminal() {
   ]);
   const [inputVal, setInputVal] = useState('');
   const [copied, setCopied] = useState(false);
+  const [isMatrixActive, setIsMatrixActive] = useState(false);
 
   const commandHandler = (cmdStr) => {
     const cleanCmd = cmdStr.trim().toLowerCase();
@@ -53,6 +55,7 @@ export default function DevOpsTerminal() {
           type: 'output',
           text: `Comandos disponibles:
   • help         : Muestra esta ayuda
+  • matrix / dark: Activa el modo Blackout / Matrix Rain full screen 🕶️
   • env          : Diagnóstico del entorno activo (Local / Develop / Master)
   • about        : Resumen profesional de Edgar
   • skills       : Habilidades principales (AWS, Linux, Angular, Spring)
@@ -62,6 +65,22 @@ export default function DevOpsTerminal() {
   • contact      : Datos de contacto directo
   • clear        : Limpiar la pantalla`
         });
+        break;
+
+      case 'matrix':
+      case 'blackout':
+      case 'dark':
+      case 'hack':
+      case 'sudo hire-neox':
+      case 'sudo hire-neox --full-power':
+        newHistory.push({
+          type: 'output',
+          text: `⚡ ACTIVANDO MODO BLACKOUT MATRIX HACKER...
+🟢 Conectando con servidor seguro... [OK]
+🟢 Sobrescribiendo interfaz global... [OK]
+Presiona ESC o haz clic en el botón de la pantalla para restaurar el sitio.`
+        });
+        setIsMatrixActive(true);
         break;
 
       case 'env':
@@ -174,7 +193,7 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
     }
   };
 
-  const quickCmds = ['help', 'env', 'about', 'skills', 'exp', 'projects', 'certs', 'contact', 'clear'];
+  const quickCmds = ['help', 'matrix 🕶️', 'env', 'about', 'skills', 'exp', 'projects', 'certs', 'contact', 'clear'];
 
   const copyTerminalOutput = () => {
     const textToCopy = history.map(h => h.text).join('\n');
@@ -357,6 +376,12 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
           </div>
         </div>
       </div>
+
+      {/* Matrix Blackout Fullscreen Overlay */}
+      <MatrixBlackoutOverlay
+        isActive={isMatrixActive}
+        onClose={() => setIsMatrixActive(false)}
+      />
 
       {/* Responsive Styles for Terminal */}
       <style>{`
