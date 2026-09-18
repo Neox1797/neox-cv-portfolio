@@ -29,8 +29,29 @@ export default function App() {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
-    window.scrollTo(0, 0);
+
+    const resetScroll = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    };
+
+    resetScroll();
+
+    // Ensure hash links don't hold scroll position on refresh
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+
+    window.addEventListener('beforeunload', resetScroll);
+    const frameId = requestAnimationFrame(resetScroll);
+    const timer = setTimeout(resetScroll, 100);
+
     logEnvironmentToConsole();
+
+    return () => {
+      window.removeEventListener('beforeunload', resetScroll);
+      cancelAnimationFrame(frameId);
+      clearTimeout(timer);
+    };
   }, []);
 
   const handleDownloadCV = () => {
