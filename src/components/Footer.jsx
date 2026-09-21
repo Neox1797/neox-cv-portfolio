@@ -7,16 +7,17 @@ export default function Footer() {
   };
 
   return (
-    <footer style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border)', padding: '16px 20px' }}>
-      <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+    <footer style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border)', padding: '14px 16px' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
         
-        <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+        <div style={{ fontSize: 'clamp(0.68rem, 2.5vw, 0.82rem)', color: 'var(--text-secondary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           &copy; {new Date().getFullYear()} <strong style={{ color: 'var(--text-primary)' }}>Edgar J. Vargas</strong> · Software Engineer. Todos los derechos reservados.
         </div>
 
         <button
           onClick={scrollToTop}
           title="Volver arriba"
+          aria-label="Volver arriba"
           style={{
             width: '32px',
             height: '32px',
@@ -29,17 +30,18 @@ export default function Footer() {
             alignItems: 'center',
             justifyContent: 'center',
             transition: 'all 0.2s ease',
-            marginLeft: 'auto'
+            flexShrink: 0
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = 'var(--cyan-main)';
-            e.currentTarget.style.color = 'var(--cyan-main)';
+            e.currentTarget.style.borderColor = 'var(--indigo-main)';
+            e.currentTarget.style.color = 'var(--indigo-main)';
+            e.currentTarget.style.transform = 'translateY(-2px)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.borderColor = 'var(--border)';
             e.currentTarget.style.color = 'var(--text-secondary)';
+            e.currentTarget.style.transform = 'translateY(0)';
           }}
-          aria-label="Volver arriba"
         >
           <ArrowUp size={15} />
         </button>

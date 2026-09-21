@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageSquare, Code2, Server, Sparkles, Mail, FileText } from 'lucide-react';
+import { MessageSquare, Code2, Server, Mail, FileText } from 'lucide-react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { GithubIcon, LinkedinIcon, InstagramIcon } from './Icons';
 import { FadeInSection } from './MotionWrapper';
@@ -89,11 +89,7 @@ export default function Hero({ onDownloadCV }) {
         <motion.div style={{ flex: '1 1 300px', y: parallaxY, opacity: parallaxOpacity, width: '100%' }}>
 
           
-          {/* Badge */}
-          <div className="eyebrow-tag">
-            <Sparkles size={14} />
-            <span>Portafolio Profesional & CV Virtual</span>
-          </div>
+
 
           <h1 style={{ fontSize: 'clamp(1.75rem, 5.5vw, 3.8rem)', fontWeight: '800', lineHeight: 1.15, marginBottom: '16px' }}>
             Hola, soy <span className="gradient-text-cyan-violet">Edgar J. Vargas</span>
