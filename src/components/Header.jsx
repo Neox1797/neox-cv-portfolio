@@ -74,9 +74,9 @@ export default function Header({ themeState, theme, toggleTheme }) {
         right: 0,
         zIndex: 1000,
         backgroundColor: isScrolled ? 'var(--nav-bg)' : 'transparent',
-        backdropFilter: isScrolled ? 'blur(16px)' : 'none',
-        WebkitBackdropFilter: isScrolled ? 'blur(16px)' : 'none',
-        borderBottom: isScrolled ? '1px solid var(--border)' : '1px solid transparent',
+        backdropFilter: isScrolled ? 'var(--glass-blur)' : 'none',
+        WebkitBackdropFilter: isScrolled ? 'var(--glass-blur)' : 'none',
+        borderBottom: isScrolled ? '1px solid var(--glass-border)' : '1px solid transparent',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         padding: isScrolled ? '6px 20px' : '10px 20px',
         boxShadow: isScrolled ? 'var(--shadow-card)' : 'none'

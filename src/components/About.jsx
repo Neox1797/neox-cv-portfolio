@@ -20,7 +20,7 @@ export default function About() {
   ];
 
   return (
-    <FadeInSection id="about" style={{ padding: '48px 16px 32px', maxWidth: '1100px', margin: '0 auto' }}>
+    <FadeInSection id="about" style={{ padding: '60px 20px 40px', maxWidth: '1100px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
       <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
         PRESENTACIÓN PROFESIONAL
       </div>

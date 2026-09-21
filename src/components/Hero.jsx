@@ -25,9 +25,9 @@ export default function Hero({ onDownloadCV }) {
   const tapBadgeTimerRef = useRef(null);
 
   const { scrollY } = useScroll();
-  const parallaxY = useTransform(scrollY, [0, 600], [0, 75]);
-  const parallaxYRight = useTransform(scrollY, [0, 600], [0, 110]);
-  const parallaxOpacity = useTransform(scrollY, [0, 500], [1, 0.55]);
+  const parallaxY = useTransform(scrollY, [0, 600], [0, -35]);
+  const parallaxYRight = useTransform(scrollY, [0, 600], [0, -50]);
+  const parallaxOpacity = useTransform(scrollY, [0, 500], [1, 0.4]);
 
   const handleAvatarTap = () => {
     const now = Date.now();
@@ -77,9 +77,10 @@ export default function Hero({ onDownloadCV }) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '90px 20px 36px',
+        padding: '110px 20px 60px',
         position: 'relative',
-        background: 'var(--hero-radial)'
+        background: 'var(--hero-radial)',
+        overflow: 'hidden'
       }}
     >
       <FadeInSection style={{ maxWidth: '1100px', width: '100%', display: 'flex', flexWrap: 'wrap-reverse', alignItems: 'center', justifyContent: 'space-between', gap: '36px' }}>

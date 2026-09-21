@@ -238,6 +238,8 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
       {/* Terminal Container */}
       <div style={{
         background: 'var(--terminal-bg)',
+        backdropFilter: 'var(--glass-blur)',
+        WebkitBackdropFilter: 'var(--glass-blur)',
         borderRadius: '16px',
         border: '1px solid var(--terminal-border)',
         boxShadow: 'var(--shadow-card)',
