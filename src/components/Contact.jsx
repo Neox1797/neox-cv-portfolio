@@ -108,10 +108,10 @@ export default function Contact() {
 
   return (
     <FadeInSection id="contact" style={{ padding: '36px 20px 50px', maxWidth: '1100px', margin: '0 auto' }}>
-      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
+      <div className="eyebrow-tag">
         CANALES DIRECTOS Y MENSAJERÍA
       </div>
-      <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '24px' }}>
         Información de Contacto
       </h2>
 

@@ -90,35 +90,56 @@ export function HoverCard({ children, className = '', style = {}, onClick }) {
 }
 
 /**
- * SpotlightCard: Interactive card wrapper where a subtle radial spotlight gradient follows the user's cursor.
+ * SpotlightCard & SpatialTiltCard:
+ * Antigravity UI Design Expert Skill Compliant.
+ * Interactive 3D spatial depth card where subtle perspective tilt, weightlessness elevation,
+ * soft drop shadows, and a radial spotlight follow the user's cursor.
  */
-export function SpotlightCard({ children, className = '', style = {}, onClick }) {
+export function SpotlightCard({ children, className = '', style = {}, onClick, glowColor = 'rgba(255, 255, 255, 0.05)' }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0, translateZ: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    });
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    // Subtle 3D tilt (max 5deg)
+    const rotateX = ((y - centerY) / centerY) * -5;
+    const rotateY = ((x - centerX) / centerX) * 5;
+
+    setMousePos({ x, y });
+    setTilt({ rotateX, rotateY, translateZ: 8 });
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setTilt({ rotateX: 0, rotateY: 0, translateZ: 0 });
   };
 
   return (
     <motion.div
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ y: -4, transition: { duration: 0.2, ease: 'easeOut' } }}
+      onMouseLeave={handleMouseLeave}
       className={className}
       onClick={onClick}
       style={{
         position: 'relative',
-        overflow: 'hidden',
+        transformStyle: 'preserve-3d',
+        perspective: '1000px',
+        transform: `perspective(1000px) rotateX(${tilt.rotateX.toFixed(2)}deg) rotateY(${tilt.rotateY.toFixed(2)}deg) translateZ(${tilt.translateZ}px)`,
+        transition: isHovered ? 'transform 0.12s ease-out' : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+        willChange: 'transform',
+        boxShadow: isHovered
+          ? '0 16px 36px -8px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3)'
+          : 'var(--shadow-card)',
         ...style
       }}
     >
-
       {/* Spotlight Radial Overlay */}
       {isHovered && (
         <div
@@ -126,19 +147,21 @@ export function SpotlightCard({ children, className = '', style = {}, onClick })
             pointerEvents: 'none',
             position: 'absolute',
             inset: 0,
-            background: `radial-gradient(350px circle at ${mousePos.x}px ${mousePos.y}px, rgba(56, 189, 248, 0.14), transparent 80%)`,
+            background: `radial-gradient(380px circle at ${mousePos.x}px ${mousePos.y}px, ${glowColor}, transparent 80%)`,
             borderRadius: 'inherit',
             transition: 'opacity 0.2s ease',
             zIndex: 1
           }}
         />
       )}
-      <div style={{ position: 'relative', zIndex: 2, height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ position: 'relative', zIndex: 2, height: '100%', width: '100%', display: 'flex', flexDirection: 'column', transformStyle: 'preserve-3d' }}>
         {children}
       </div>
     </motion.div>
   );
 }
+
+export const SpatialTiltCard = SpotlightCard;
 
 /**
  * AnimatedProgressBar: Fills smoothly from 0 to percentage when scrolled into view.

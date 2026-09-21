@@ -21,10 +21,10 @@ export default function About() {
 
   return (
     <FadeInSection id="about" style={{ padding: '60px 20px 40px', maxWidth: '1100px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
-      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
+      <div className="eyebrow-tag">
         PRESENTACIÓN PROFESIONAL
       </div>
-      <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '24px' }}>
         Sobre Mí & Enfoque Técnico
       </h2>
 
@@ -46,7 +46,7 @@ export default function About() {
               {m.icon}
             </div>
             <div>
-              <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: 1.1 }}>
+              <div className="tabular-nums" style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: 1.1 }}>
                 {m.value}
               </div>
               <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', marginTop: '4px', lineHeight: 1.3 }}>

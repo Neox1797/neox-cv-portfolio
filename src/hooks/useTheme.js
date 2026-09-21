@@ -40,18 +40,33 @@ export function useTheme() {
     return isDayTime ? 'light' : 'dark';
   }, []);
 
-  // Update theme & attribute on HTML root
+  // Update theme & attribute on HTML root with Native View Transitions API support
   useEffect(() => {
     const calculatedTheme = computeEffectiveTheme(mode);
     setEffectiveTheme(calculatedTheme);
-    document.documentElement.setAttribute('data-theme', calculatedTheme);
-    document.documentElement.setAttribute('data-theme-mode', mode);
+
+    const updateDOM = () => {
+      document.documentElement.setAttribute('data-theme', calculatedTheme);
+      document.documentElement.setAttribute('data-theme-mode', mode);
+    };
+
+    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
+      document.startViewTransition(updateDOM);
+    } else {
+      updateDOM();
+    }
 
     // Periodically update time & theme every 30 seconds
     const interval = setInterval(() => {
       const updatedTheme = computeEffectiveTheme(mode);
       setEffectiveTheme(updatedTheme);
-      document.documentElement.setAttribute('data-theme', updatedTheme);
+      if (typeof document !== 'undefined' && 'startViewTransition' in document) {
+        document.startViewTransition(() => {
+          document.documentElement.setAttribute('data-theme', updatedTheme);
+        });
+      } else {
+        document.documentElement.setAttribute('data-theme', updatedTheme);
+      }
     }, 30000);
 
     return () => clearInterval(interval);

@@ -98,7 +98,7 @@ export default function Certifications() {
 
   return (
     <FadeInSection id="certifications" style={{ padding: '36px 20px', maxWidth: '1100px', margin: '0 auto' }}>
-      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
+      <div className="eyebrow-tag">
         ACREDITACIONES OFICIALES
       </div>
       

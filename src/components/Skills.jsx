@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Code, Server, Cloud, Database, Heart, BookOpen, Music, Shield, Dumbbell, Plane, Cpu } from 'lucide-react';
+import { BookOpen, Music, Shield, Dumbbell, Plane, Cpu } from 'lucide-react';
 import { FadeInSection, StaggerContainer, StaggerItem, AnimatedProgressBar } from './MotionWrapper';
 
 export default function Skills() {
@@ -14,25 +14,25 @@ export default function Skills() {
   ];
 
   const skillItems = [
-    { name: 'HTML5 / CSS3', category: 'frontend', pct: 85, color: '#e34f26' },
-    { name: 'JavaScript (ES6+)', category: 'frontend', pct: 75, color: '#f7df1e' },
-    { name: 'Angular Framework', category: 'frontend', pct: 80, color: '#dd0031' },
-    { name: 'React.js', category: 'frontend', pct: 65, color: '#61dafb' },
-    { name: 'Bootstrap / CSS UI', category: 'frontend', pct: 85, color: '#7952b3' },
+    { name: 'HTML5 / CSS3', category: 'frontend', pct: 85, color: '#ea580c' },
+    { name: 'JavaScript (ES6+)', category: 'frontend', pct: 75, color: '#d97706' },
+    { name: 'Angular Framework', category: 'frontend', pct: 80, color: '#dc2626' },
+    { name: 'React.js', category: 'frontend', pct: 65, color: '#4f46e5' },
+    { name: 'Bootstrap / CSS UI', category: 'frontend', pct: 85, color: '#7c3aed' },
 
-    { name: 'PHP / Laravel Ecosystem', category: 'backend', pct: 70, color: '#777bb4' },
-    { name: 'Java / Spring Boot', category: 'backend', pct: 60, color: '#007396' },
-    { name: 'Node.js / Express APIs', category: 'backend', pct: 65, color: '#339933' },
-    { name: 'COBOL II Mainframe', category: 'backend', pct: 50, color: '#005596' },
+    { name: 'PHP / Laravel Ecosystem', category: 'backend', pct: 70, color: '#6366f1' },
+    { name: 'Java / Spring Boot', category: 'backend', pct: 60, color: '#2563eb' },
+    { name: 'Node.js / Express APIs', category: 'backend', pct: 65, color: '#059669' },
+    { name: 'COBOL II Mainframe', category: 'backend', pct: 50, color: '#1e40af' },
 
-    { name: 'AWS Cloud (EC2, S3, CodeCommit)', category: 'cloud', pct: 75, color: '#ff9900' },
-    { name: 'Linux Red Hat / Ubuntu', category: 'cloud', pct: 80, color: '#e95420' },
-    { name: 'Apache Tomcat Supervisor', category: 'cloud', pct: 70, color: '#f8dc75' },
-    { name: 'CI/CD Automated Pipelines', category: 'cloud', pct: 70, color: '#38bdf8' },
+    { name: 'AWS Cloud (EC2, S3, CodeCommit)', category: 'cloud', pct: 75, color: '#d97706' },
+    { name: 'Linux Red Hat / Ubuntu', category: 'cloud', pct: 80, color: '#c2410c' },
+    { name: 'Apache Tomcat Supervisor', category: 'cloud', pct: 70, color: '#b45309' },
+    { name: 'CI/CD Automated Pipelines', category: 'cloud', pct: 70, color: '#4338ca' },
 
-    { name: 'SQL / MySQL / MariaDB', category: 'db', pct: 80, color: '#00758f' },
-    { name: 'PostgreSQL', category: 'db', pct: 65, color: '#336791' },
-    { name: 'Git & GitHub Version Control', category: 'db', pct: 85, color: '#f05032' },
+    { name: 'SQL / MySQL / MariaDB', category: 'db', pct: 80, color: '#1d4ed8' },
+    { name: 'PostgreSQL', category: 'db', pct: 65, color: '#2563eb' },
+    { name: 'Git & GitHub Version Control', category: 'db', pct: 85, color: '#c2410c' },
   ];
 
   const hobbies = [
@@ -48,10 +48,10 @@ export default function Skills() {
 
   return (
     <FadeInSection id="skills" style={{ padding: '36px 20px', maxWidth: '1100px', margin: '0 auto' }}>
-      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
+      <div className="eyebrow-tag">
         DOMINIO TÉCNICO Y PASATIEMPOS
       </div>
-      <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '24px' }}>
         Matriz de Habilidades & Stack
       </h2>
 
@@ -80,11 +80,11 @@ export default function Skills() {
 
       {/* Skill Progress Bars Grid */}
       <StaggerContainer key={activeTab} className="skills-grid" style={{ display: 'grid', gap: '14px', marginBottom: '32px' }}>
-        {filteredSkills.map((sk, idx) => (
+        {filteredSkills.map((sk) => (
           <StaggerItem key={sk.name} className="glass-card" style={{ padding: '18px 20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
               <span style={{ fontWeight: '600', fontSize: '0.92rem', color: 'var(--text-primary)' }}>{sk.name}</span>
-              <span style={{ fontWeight: '700', fontSize: '0.88rem', color: 'var(--cyan-main)' }}>{sk.pct}%</span>
+              <span className="tabular-nums" style={{ fontWeight: '700', fontSize: '0.88rem', color: 'var(--cyan-main)' }}>{sk.pct}%</span>
             </div>
             <AnimatedProgressBar pct={sk.pct} color={sk.color} />
           </StaggerItem>

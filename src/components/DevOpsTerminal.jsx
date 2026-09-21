@@ -228,10 +228,12 @@ Especialidades: Mantenimiento e integración de microservicios, AWS Linux, Sprin
 
   return (
     <FadeInSection id="terminal" style={{ padding: '36px 20px', maxWidth: '1100px', margin: '0 auto' }}>
-      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px', textAlign: 'center' }}>
-        CLOUDSHELL & DEVOPS INTERACTIVO
+      <div style={{ textAlign: 'center', marginBottom: '8px' }}>
+        <div className="eyebrow-tag">
+          CLOUDSHELL & DEVOPS INTERACTIVO
+        </div>
       </div>
-      <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: '800', textAlign: 'center', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: '800', textAlign: 'center', marginBottom: '24px' }}>
         Terminal de Comandos Virtual
       </h2>
 

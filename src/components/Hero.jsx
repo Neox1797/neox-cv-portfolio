@@ -90,20 +90,8 @@ export default function Hero({ onDownloadCV }) {
 
           
           {/* Badge */}
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '6px 14px',
-            borderRadius: '30px',
-            background: 'rgba(56, 189, 248, 0.1)',
-            border: '1px solid rgba(56, 189, 248, 0.3)',
-            color: 'var(--cyan-main)',
-            fontSize: '0.85rem',
-            fontWeight: '600',
-            marginBottom: '20px'
-          }}>
-            <Sparkles size={16} />
+          <div className="eyebrow-tag">
+            <Sparkles size={14} />
             <span>Portafolio Profesional & CV Virtual</span>
           </div>
 
@@ -142,38 +130,47 @@ export default function Hero({ onDownloadCV }) {
             Ingeniero en Sistemas Computacionales enfocado en desarrollo web integral (PHP, Angular, Java Spring, React), integración de microservicios y soluciones tecnológicas de Software & AMS. Apasionado por resolver problemas complejos y mejorar la eficiencia tecnológica de las organizaciones.
           </p>
 
-          {/* Action CTA Buttons */}
-          <div className="hero-cta-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '40px' }}>
+          {/* Action CTA Buttons (High-End Nested Button-in-Button Architecture) */}
+          <div className="hero-cta-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginBottom: '40px' }}>
             <button
               onClick={onDownloadCV}
               className="hero-btn"
               style={{
-                background: 'linear-gradient(135deg, var(--cyan-main), var(--violet-main))',
+                background: 'var(--cyan-main)',
                 color: '#ffffff',
                 border: 'none',
-                padding: '12px 22px',
-                borderRadius: '12px',
-                fontWeight: '700',
-                fontSize: '0.9rem',
+                padding: '8px 10px 8px 20px',
+                borderRadius: '30px',
+                fontWeight: '600',
+                fontSize: '0.88rem',
                 cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '12px',
+                boxShadow: '0 8px 24px -4px rgba(0, 0, 0, 0.3)',
+                transition: 'all 0.4s cubic-bezier(0.32, 0.72, 0, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+              }}
+            >
+              <span>Descargar CV PDF</span>
+              <span style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                background: 'rgba(255, 255, 255, 0.2)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '8px',
-                boxShadow: '0 4px 15px var(--cyan-glow)',
-                transition: 'transform 0.2s ease, boxShadow 0.2s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 6px 20px var(--cyan-glow)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 4px 15px var(--cyan-glow)';
-              }}
-            >
-              <FileText size={18} />
-              <span>Descargar CV PDF</span>
+                flexShrink: 0
+              }}>
+                <FileText size={16} color="#ffffff" />
+              </span>
             </button>
 
             <a
@@ -183,24 +180,41 @@ export default function Hero({ onDownloadCV }) {
               className="hero-btn"
               style={{
                 textDecoration: 'none',
-                background: 'linear-gradient(135deg, #25D366, #128C7E)',
-                color: '#ffffff',
-                padding: '12px 22px',
-                borderRadius: '12px',
-                fontWeight: '700',
-                fontSize: '0.9rem',
+                background: 'rgba(37, 211, 102, 0.12)',
+                color: '#25D366',
+                border: '1px solid rgba(37, 211, 102, 0.3)',
+                padding: '8px 10px 8px 20px',
+                borderRadius: '30px',
+                fontWeight: '600',
+                fontSize: '0.88rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '12px',
+                transition: 'all 0.4s cubic-bezier(0.32, 0.72, 0, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
+                e.currentTarget.style.background = 'rgba(37, 211, 102, 0.2)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.background = 'rgba(37, 211, 102, 0.12)';
+              }}
+            >
+              <span>WhatsApp</span>
+              <span style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                background: 'rgba(37, 211, 102, 0.2)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '8px',
-                boxShadow: '0 4px 15px rgba(37, 211, 102, 0.3)',
-                transition: 'transform 0.2s ease'
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-2px)')}
-              onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(0)')}
-            >
-              <MessageSquare size={18} />
-              <span>WhatsApp</span>
+                flexShrink: 0
+              }}>
+                <MessageSquare size={16} color="#25D366" />
+              </span>
             </a>
 
             <a
@@ -208,24 +222,41 @@ export default function Hero({ onDownloadCV }) {
               className="hero-btn"
               style={{
                 textDecoration: 'none',
-                background: 'var(--bg-card)',
+                background: 'var(--glass-bg)',
                 color: 'var(--text-primary)',
-                border: '1px solid var(--border-highlight)',
-                padding: '12px 20px',
-                borderRadius: '12px',
+                border: '1px solid var(--border)',
+                padding: '8px 10px 8px 20px',
+                borderRadius: '30px',
                 fontWeight: '600',
-                fontSize: '0.9rem',
+                fontSize: '0.88rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '12px',
+                transition: 'all 0.4s cubic-bezier(0.32, 0.72, 0, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
+                e.currentTarget.style.borderColor = 'var(--border-highlight)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.borderColor = 'var(--border)';
+              }}
+            >
+              <span>Terminal Cloud</span>
+              <span style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                background: 'var(--icon-box-bg)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '8px',
-                transition: 'all 0.2s ease'
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-card-hover)')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--bg-card)')}
-            >
-              <Server size={18} color="var(--cyan-main)" />
-              <span>Terminal Cloud</span>
+                flexShrink: 0
+              }}>
+                <Server size={16} color="var(--cyan-main)" />
+              </span>
             </a>
           </div>
 
@@ -287,7 +318,7 @@ export default function Hero({ onDownloadCV }) {
             margin: '0 auto',
             y: parallaxYRight
           }}
-          className="desktop-avatar-parallax"
+          className="desktop-avatar-parallax weightless-float"
         >
           {/* Ambient soft glow backdrop */}
           <div className="avatar-ambient-glow" />

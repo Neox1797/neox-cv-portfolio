@@ -86,10 +86,10 @@ export default function Portfolio() {
 
   return (
     <FadeInSection id="portfolio" style={{ padding: '36px 20px', maxWidth: '1100px', margin: '0 auto' }}>
-      <div style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', color: 'var(--cyan-main)', fontWeight: '700', marginBottom: '6px' }}>
+      <div className="eyebrow-tag">
         PORTAFOLIO DE PROYECTOS
       </div>
-      <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: '800', marginBottom: '24px' }}>
         Trabajos & Desarrollos Destacados
       </h2>
 
