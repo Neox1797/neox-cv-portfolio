@@ -428,7 +428,7 @@ export default function Contact() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
           <Sparkles size={18} color="var(--cyan-main)" />
           <h3 style={{ fontSize: '1.1rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-            Ficha de Disponibilidad para Reclutadores & TI
+            Disponibilidad Laboral & Modalidad
           </h3>
         </div>
 
